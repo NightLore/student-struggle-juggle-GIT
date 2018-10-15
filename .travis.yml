@@ -1,0 +1,11 @@
+language: java
+jdk: 
+  - oraclejdk8
+addons:
+  sonarcloud:
+    organization: "nightlore-github"
+    token: 
+      secure: caa8cd4103ce1e95ca92027266f617602cb15445
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
