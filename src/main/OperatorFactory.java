@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class OperatorFactory {
 	public class Adder implements Operator
 	{
-		@Override
 		public double compute(double input1, double input2) {
 			return input1 + input2;
 		}
@@ -13,7 +12,6 @@ public class OperatorFactory {
 	
 	public class Subtractor implements Operator
 	{
-		@Override
 		public double compute(double input1, double input2) {
 			return input1 - input2;
 		}
@@ -21,7 +19,6 @@ public class OperatorFactory {
 	
 	public class Multiplier implements Operator
 	{
-		@Override
 		public double compute(double input1, double input2) {
 			return input1 * input2;
 		}
@@ -30,7 +27,6 @@ public class OperatorFactory {
 	
 	public class Divider implements Operator
 	{
-		@Override
 		public double compute(double input1, double input2) {
 			try {
 				return input1 / input2;
@@ -44,7 +40,6 @@ public class OperatorFactory {
 	
 	public class NullOperator implements Operator
 	{
-		@Override
 		public double compute(double input1, double input2) {
 			return 0;
 		}
