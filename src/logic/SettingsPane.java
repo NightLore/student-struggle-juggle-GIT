@@ -7,9 +7,12 @@ import javafx.scene.layout.VBox;
 
 public class SettingsPane extends UpdatablePane {
 
-	public SettingsPane(Button backButton) {
+	private ScreenType prevScreen;
+	public SettingsPane(SceneManager scenes) {
 		Label label = new Label("Settings");
 		
+		Button backButton = new Button("Back");
+		backButton.setOnAction(e -> scenes.switchTo(prevScreen));
 		VBox layout = new VBox();
 		layout.setAlignment(Pos.CENTER);
 		layout.setSpacing(10);
@@ -19,8 +22,8 @@ public class SettingsPane extends UpdatablePane {
 	}
 
 	@Override
-	public void update() {
-		
+	public void update(ScreenType prevScreen) {
+		this.prevScreen = prevScreen;
 	}
 
 }

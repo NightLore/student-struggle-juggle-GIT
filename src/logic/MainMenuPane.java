@@ -14,8 +14,8 @@ public class MainMenuPane extends UpdatablePane {
 			new Button("Scoreboard"),
 			new Button("Quit Game")
 		};
-		buttons[0].setOnAction(e -> scenes.switchToSettings(ev -> scenes.switchToMainMenu()));
-		buttons[1].setOnAction(e -> scenes.switchToScoreboard());
+		buttons[0].setOnAction(e -> scenes.switchTo(ScreenType.SETTINGS));
+		buttons[1].setOnAction(e -> scenes.switchTo(ScreenType.SCOREBOARD));
 		buttons[2].setOnAction(e -> System.exit(0));
 		
 		VBox layout = new VBox();
@@ -31,7 +31,7 @@ public class MainMenuPane extends UpdatablePane {
 	}
 
 	@Override
-	public void update() {
+	public void update(ScreenType prevScreen) {
 		
 	}
 

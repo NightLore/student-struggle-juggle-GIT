@@ -1,38 +1,30 @@
 package logic;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import java.util.EnumMap;
+
 import javafx.stage.Stage;
 
 public class SceneManager {
 
 	private Stage window;
-	private Screen mainMenu, settings, scoreboard; // credits, game;
-	private Button settingsBackButton;
+	private EnumMap<ScreenType, Screen> screens;
+	private ScreenType currentScreen;
 	
 	public SceneManager(Stage primaryStage, double width, double height) {
 		this.window = primaryStage;
-		settingsBackButton = new Button("Back");
 		
-		SceneFactory factory = new SceneFactory(width, height);
-		mainMenu = factory.createMainMenuScene(this);
-		settings = factory.createSettingsScene(settingsBackButton);
-		scoreboard = factory.createScoreboardScene(this);
+		screens = new EnumMap<ScreenType, Screen>(ScreenType.class);
+		SceneFactory factory = new SceneFactory(this, width, height);
+		for (ScreenType type : ScreenType.values()) 
+		{
+			screens.put(type, factory.createScene(type));
+		}
 	}
 	
-	public void switchToMainMenu() {
-		mainMenu.displayOn(window);
-	}
-	
-	public void switchToSettings(EventHandler<ActionEvent> back) {
-		settingsBackButton.setOnAction(back);
-		settings.displayOn(window);
-	}
-	
-	public void switchToScoreboard() {
-		scoreboard.displayOn(window);
+	public void switchTo(ScreenType type) {
+		screens.get(type).displayOn(window, currentScreen);
+		System.out.println(currentScreen);
+		currentScreen = type;
 	}
 
 }

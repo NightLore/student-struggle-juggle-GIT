@@ -11,7 +11,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneManager sceneManager = new SceneManager(primaryStage, 500, 500);
-		sceneManager.switchToMainMenu();
+		sceneManager.switchTo(ScreenType.MAINMENU);
 		primaryStage.setTitle("Struggle Juggle");
 		primaryStage.show();
 	}

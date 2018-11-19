@@ -7,5 +7,5 @@ public abstract class UpdatablePane extends BorderPane {
 	public UpdatablePane() {
 	}
 
-	public abstract void update();
+	public abstract void update(ScreenType prevScreen);
 }

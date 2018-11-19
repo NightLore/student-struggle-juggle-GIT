@@ -22,7 +22,7 @@ public class ScoreboardPane extends UpdatablePane {
 		buttonPane.setPadding(new Insets(10));
 
 		Button back = new Button("Back to Main Menu");
-		back.setOnAction(e -> scenes.switchToMainMenu());
+		back.setOnAction(e -> scenes.switchTo(ScreenType.MAINMENU));
 		buttonPane.getChildren().add(back);
 		
 		setTop(labelPane);
@@ -31,7 +31,7 @@ public class ScoreboardPane extends UpdatablePane {
 	}
 
 	@Override
-	public void update() {
+	public void update(ScreenType prevScreen) {
 		
 	}
 
