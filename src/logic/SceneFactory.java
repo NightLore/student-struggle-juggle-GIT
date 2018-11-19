@@ -1,5 +1,10 @@
 package logic;
 
+import logic.Screens.MainMenuPane;
+import logic.Screens.ScoreboardPane;
+import logic.Screens.SettingsPane;
+import logic.Screens.UpdatablePane;
+
 public class SceneFactory {
 	
 	private SceneManager scenes;

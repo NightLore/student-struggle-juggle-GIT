@@ -1,6 +1,7 @@
-package logic;
+package logic.Screens;
 
 import javafx.scene.layout.BorderPane;
+import logic.ScreenType;
 
 public abstract class UpdatablePane extends BorderPane {
 

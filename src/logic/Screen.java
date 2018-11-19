@@ -2,6 +2,7 @@ package logic;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import logic.Screens.UpdatablePane;
 
 public class Screen {
 	
