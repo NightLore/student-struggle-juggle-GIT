@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class SceneManager {
 
 	private Stage window;
-	private Scene mainMenu, settings, scoreboard; // credits, game;
+	private Screen mainMenu, settings, scoreboard; // credits, game;
 	private Button settingsBackButton;
 	
 	public SceneManager(Stage primaryStage, double width, double height) {
@@ -23,16 +23,16 @@ public class SceneManager {
 	}
 	
 	public void switchToMainMenu() {
-		window.setScene(mainMenu);
+		mainMenu.displayOn(window);
 	}
 	
 	public void switchToSettings(EventHandler<ActionEvent> back) {
 		settingsBackButton.setOnAction(back);
-		window.setScene(settings);
+		settings.displayOn(window);
 	}
 	
 	public void switchToScoreboard() {
-		window.setScene(scoreboard);
+		scoreboard.displayOn(window);
 	}
 
 }

@@ -5,14 +5,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class SettingsPane extends VBox {
+public class SettingsPane extends UpdatablePane {
 
 	public SettingsPane(Button backButton) {
 		Label label = new Label("Settings");
 		
-		setAlignment(Pos.CENTER);
-		setSpacing(10);
-		getChildren().addAll(label, backButton);
+		VBox layout = new VBox();
+		layout.setAlignment(Pos.CENTER);
+		layout.setSpacing(10);
+		layout.getChildren().addAll(label, backButton);
+		
+		setCenter(layout);
+	}
+
+	@Override
+	public void update() {
+		
 	}
 
 }

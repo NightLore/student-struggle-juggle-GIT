@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class MainMenuPane extends VBox {
+public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(SceneManager scenes) {
 		Label label = new Label("Main Menu");
@@ -18,13 +18,21 @@ public class MainMenuPane extends VBox {
 		buttons[1].setOnAction(e -> scenes.switchToScoreboard());
 		buttons[2].setOnAction(e -> System.exit(0));
 		
-		setAlignment(Pos.CENTER);
-		setSpacing(10);
-		getChildren().add(label);
+		VBox layout = new VBox();
+		layout.setAlignment(Pos.CENTER);
+		layout.setSpacing(10);
+		layout.getChildren().add(label);
 		for (Button b : buttons)
 		{
-			getChildren().add(b);
+			layout.getChildren().add(b);
 		}
+		
+		setCenter(layout);
+	}
+
+	@Override
+	public void update() {
+		
 	}
 
 }

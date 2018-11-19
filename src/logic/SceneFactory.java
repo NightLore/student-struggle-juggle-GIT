@@ -1,6 +1,5 @@
 package logic;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 public class SceneFactory {
@@ -14,18 +13,18 @@ public class SceneFactory {
 		this.height = height;
 	}
 	
-	public Scene createMainMenuScene(SceneManager scenes)
+	public Screen createMainMenuScene(SceneManager scenes)
 	{
-		return new Scene(new MainMenuPane(scenes), width, height);
+		return new Screen(new MainMenuPane(scenes), width, height);
 	}
 	
-	public Scene createSettingsScene(Button backButton)
+	public Screen createSettingsScene(Button backButton)
 	{
-		return new Scene(new SettingsPane(backButton), width, height);
+		return new Screen(new SettingsPane(backButton), width, height);
 	}
 	
-	public Scene createScoreboardScene(SceneManager scenes)
+	public Screen createScoreboardScene(SceneManager scenes)
 	{
-		return new Scene(new ScoreboardPane(scenes), width, height);
+		return new Screen(new ScoreboardPane(scenes), width, height);
 	}
 }
