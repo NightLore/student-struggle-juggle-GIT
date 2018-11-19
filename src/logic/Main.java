@@ -4,16 +4,14 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 
-	private SceneFactory sceneFactory;
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		sceneFactory = new SceneFactory(primaryStage, 500, 500);
-		primaryStage.setScene(sceneFactory.getMainMenuScene());
+		SceneManager sceneManager = new SceneManager(primaryStage, 500, 500);
+		sceneManager.switchToMainMenu();
 		primaryStage.setTitle("Struggle Juggle");
 		primaryStage.show();
 	}
