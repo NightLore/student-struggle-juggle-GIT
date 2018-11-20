@@ -14,7 +14,6 @@ public class Main extends Application{
 		sceneManager.switchTo(ScreenType.MAINMENU);
 		primaryStage.setTitle("Struggle Juggle");
 		primaryStage.show();
-		System.out.println("Test");
 	}
 	
 }

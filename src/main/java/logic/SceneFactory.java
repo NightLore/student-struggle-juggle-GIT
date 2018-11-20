@@ -1,9 +1,9 @@
 package logic;
 
-import logic.Screens.MainMenuPane;
-import logic.Screens.ScoreboardPane;
-import logic.Screens.SettingsPane;
-import logic.Screens.UpdatablePane;
+import logic.screens.MainMenuPane;
+import logic.screens.ScoreboardPane;
+import logic.screens.SettingsPane;
+import logic.screens.UpdatablePane;
 
 public class SceneFactory {
 	

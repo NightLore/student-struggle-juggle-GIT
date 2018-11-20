@@ -1,4 +1,4 @@
-package logic.Screens;
+package logic.screens;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

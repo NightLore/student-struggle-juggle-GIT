@@ -1,4 +1,4 @@
-package logic.Screens;
+package logic.screens;
 
 import javafx.scene.layout.BorderPane;
 import logic.ScreenType;

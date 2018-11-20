@@ -1,4 +1,4 @@
-package logic.Screens;
+package logic.screens;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,7 +34,7 @@ public class ScoreboardPane extends UpdatablePane {
 
 	@Override
 	public void update(ScreenType prevScreen) {
-		
+		// Empty as this screen does not need to update any elements when shown
 	}
 
 }
