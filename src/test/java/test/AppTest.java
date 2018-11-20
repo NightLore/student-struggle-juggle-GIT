@@ -1,11 +1,8 @@
 package test;
 
-import javafx.stage.Stage;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import logic.SceneManager;
-import logic.ScreenType;
 
 /**
  * Unit test for simple App.
