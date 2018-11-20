@@ -14,10 +14,6 @@ public class Screen {
 		this.scene = new Scene(layout, width, height);
 	}
 	
-	public Scene getScene() {
-		return scene;
-	}
-	
 	public void displayOn(Stage window, ScreenType prevScreen) {
 		layout.update(prevScreen);
 		window.setScene(scene);
