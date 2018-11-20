@@ -36,9 +36,6 @@ public class AppTest
      */
     public void testApp()
     {
-    	Stage stage = new Stage();
-    	SceneManager manager = new SceneManager(stage, 0, 0);
-    	manager.switchTo(ScreenType.MAINMENU);
         assertTrue(true);
     }
 }
