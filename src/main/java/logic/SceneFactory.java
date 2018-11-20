@@ -31,15 +31,6 @@ public class SceneFactory {
 			case SCOREBOARD:
 				layout = new ScoreboardPane(scenes);
 				break;
-//			case GAME:
-//				layout = new MainMenuPane(scenes);
-//				break;
-//			case PAUSE:
-//				layout = new MainMenuPane(scenes);
-//				break;
-//			case CREDITS:
-//				layout = new MainMenuPane(scenes);
-//				break;
 			default:
 				layout = new MainMenuPane(scenes);
 				break;

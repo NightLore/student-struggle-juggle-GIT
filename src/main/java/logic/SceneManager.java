@@ -13,7 +13,7 @@ public class SceneManager {
 	public SceneManager(Stage primaryStage, double width, double height) {
 		this.window = primaryStage;
 		
-		screens = new EnumMap<ScreenType, Screen>(ScreenType.class);
+		screens = new EnumMap<>(ScreenType.class);
 		SceneFactory factory = new SceneFactory(this, width, height);
 		for (ScreenType type : ScreenType.values()) 
 		{
@@ -23,7 +23,6 @@ public class SceneManager {
 	
 	public void switchTo(ScreenType type) {
 		screens.get(type).displayOn(window, currentScreen);
-		System.out.println(currentScreen);
 		currentScreen = type;
 	}
 
