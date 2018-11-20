@@ -1,4 +1,4 @@
-package nightlore_github.StudentStruggleJuggle;
+package logic;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
