@@ -5,20 +5,20 @@ import logic.screens.ScoreboardPane;
 import logic.screens.SettingsPane;
 import logic.screens.UpdatablePane;
 
-public class SceneFactory {
+public class ScreenFactory {
 	
-	private SceneManager scenes;
+	private ScreenManager scenes;
 	private double width;
 	private double height;
 	
-	public SceneFactory(SceneManager scenes, double width, double height)
+	public ScreenFactory(ScreenManager scenes, double width, double height)
 	{
 		this.scenes = scenes;
 		this.width = width;
 		this.height = height;
 	}
 	
-	public Screen createScene(ScreenType type) {
+	public Screen createScreen(ScreenType type) {
 		UpdatablePane layout;
 		switch (type)
 		{

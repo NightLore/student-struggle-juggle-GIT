@@ -4,13 +4,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import logic.SceneManager;
+import logic.ScreenManager;
 import logic.ScreenType;
 
 public class SettingsPane extends UpdatablePane {
 
 	private ScreenType prevScreen;
-	public SettingsPane(SceneManager scenes) {
+	public SettingsPane(ScreenManager scenes) {
 		Label label = new Label("Settings");
 		
 		Button backButton = new Button("Back");

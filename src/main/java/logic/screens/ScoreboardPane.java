@@ -6,12 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import logic.SceneManager;
+import logic.ScreenManager;
 import logic.ScreenType;
 
 public class ScoreboardPane extends UpdatablePane {
 
-	public ScoreboardPane(SceneManager scenes) {
+	public ScoreboardPane(ScreenManager scenes) {
 		VBox labelPane = new VBox();
 		labelPane.setAlignment(Pos.CENTER);
 		labelPane.setPadding(new Insets(10));
