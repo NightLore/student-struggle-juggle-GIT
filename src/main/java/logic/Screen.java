@@ -15,7 +15,7 @@ public class Screen {
 	}
 	
 	public void displayOn(Stage window, ScreenType prevScreen) {
-		layout.update(prevScreen);
+		layout.onShow(prevScreen);
 		window.setScene(scene);
 	}
 }

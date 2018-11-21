@@ -47,7 +47,7 @@ public class ScoreboardPane extends UpdatablePane {
 	}
 
 	@Override
-	public void update(ScreenType prevScreen) {
+	public void onShow(ScreenType prevScreen) {
 		updateTable(this.scores); // intended to update with actual scores
 	}
 	

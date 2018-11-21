@@ -24,7 +24,7 @@ public class SettingsPane extends UpdatablePane {
 	}
 
 	@Override
-	public void update(ScreenType prevScreen) {
+	public void onShow(ScreenType prevScreen) {
 		this.prevScreen = prevScreen;
 	}
 
