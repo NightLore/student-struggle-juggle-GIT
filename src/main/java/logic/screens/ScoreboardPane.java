@@ -1,6 +1,7 @@
 package logic.screens;
 
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.geometry.Insets;
@@ -17,9 +18,17 @@ import logic.ScreenType;
 public class ScoreboardPane extends UpdatablePane {
 	
 	public static final int MAXSCORES = 10;
+
+	// default scores -- replace with actual scores
+	private static final List<Score> scores = new LinkedList<Score>();
+	{
+		scores.add(new Score("CheatingCat", 13));
+		scores.add(new Score("KillerKris", 10));
+		scores.add(new Score("BoringBob", 5));
+		scores.add(new Score("LyingLeon", 3));
+	}
 	
-	private List<Score> scores;
-	private GridPane table;
+	private Label[][] labels;
 
 	public ScoreboardPane(ScreenManager scenes) {
 		VBox labelPane = new VBox();
@@ -30,47 +39,44 @@ public class ScoreboardPane extends UpdatablePane {
 		VBox buttonPane = new VBox();
 		buttonPane.setAlignment(Pos.CENTER);
 		buttonPane.setPadding(new Insets(10));
+		
+		GridPane table = new GridPane();
+		table.setAlignment(Pos.CENTER);
+		table.setStyle("-fx-grid-lines-visible: true");
+		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+		table.setPadding(new Insets(10, 10, 10, 10));
+		
+		labels = new Label[2][MAXSCORES];
+		for (int i = 0; i < MAXSCORES; i++)
+		{
+			labels[0][i] = new Label();
+			labels[1][i] = new Label();
+			table.add(setDefaults(labels[0][i]), 0, i);
+			table.add(setDefaults(labels[1][i]), 1, i);
+		}
 
 		Button back = new Button("Back to Main Menu");
 		back.setOnAction(e -> scenes.switchTo(ScreenType.MAINMENU));
 		buttonPane.getChildren().add(back);
 		
 		setTop(labelPane);
+		setCenter(table);
 		setBottom(buttonPane);
-		
-		// default scores -- replace with actual scores
-		scores = new ArrayList<Score>();
-		scores.add(new Score("CheatingCat", 13));
-		scores.add(new Score("KillerKris", 10));
-		scores.add(new Score("BoringBob", 5));
-		scores.add(new Score("LyingLeon", 3));
 	}
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
-		updateTable(this.scores); // intended to update with actual scores
+		updateTable(scores); // intended to update with actual scores
 	}
 	
 	private void updateTable(List<Score> scores) {
-		table = new GridPane();
-		table.setAlignment(Pos.CENTER);
-		table.setStyle("-fx-grid-lines-visible: true");
-		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-		table.setPadding(new Insets(10, 10, 10, 10));
-		
-		int i;
-		for (i = 0; i < MAXSCORES && i < scores.size(); i++)
+		Iterator<Score> iterator = scores.iterator();
+		for (int i = 0; i < MAXSCORES && iterator.hasNext(); i++)
 		{
-			table.add(setDefaults(new Label(scores.get(i).getName())), 0, i);
-			table.add(setDefaults(new Label("" + scores.get(i).value())), 1, i);
+			Score score = iterator.next();
+			labels[0][i].setText(score.getName());
+			labels[1][i].setText("" + score.value());
 		}
-		while (i < MAXSCORES)
-		{
-			table.add(setDefaults(new Label("")), 0, i);
-			i++;
-		}
-		
-		setCenter(table);
 	}
 	
 	private Label setDefaults(Label label) {
