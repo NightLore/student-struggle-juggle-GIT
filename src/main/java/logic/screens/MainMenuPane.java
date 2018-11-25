@@ -1,35 +1,54 @@
 package logic.screens;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.ScreenManager;
 import logic.ScreenType;
-
 public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(ScreenManager scenes) {
-		Label label = new Label("Main Menu");
-		Button[] buttons = new Button[] {
-			new Button("Settings"),
-			new Button("Scoreboard"),
-			new Button("Quit Game")
-		};
-		buttons[0].setOnAction(e -> scenes.switchTo(ScreenType.SETTINGS));
-		buttons[1].setOnAction(e -> scenes.switchTo(ScreenType.SCOREBOARD));
-		buttons[2].setOnAction(e -> System.exit(0));
+		StackPane layout = new StackPane();
+		layout.setStyle("-fx-background-image: url('images/MenuPlainBackground.jpg')");
+		ImageView startImage = new ImageView(new Image("file:images/StartButton.png"));
+		ImageView settingImage = new ImageView(new Image("file:images/SettingsButton.png"));
+		ImageView scoreImage = new ImageView(new Image("file:images/ScoreButton.png"));
+		ImageView quitImage = new ImageView(new Image("file:images/QuitButton.png"));
 		
-		VBox layout = new VBox();
-		layout.setAlignment(Pos.CENTER);
-		layout.setSpacing(10);
-		layout.getChildren().add(label);
-		for (Button b : buttons)
-		{
-			layout.getChildren().add(b);
-		}
+		Button buttonStart = new Button("", startImage);
+		Button buttonSettings = new Button("",settingImage);
+		Button buttonScores = new Button("",scoreImage);
+		Button buttonQuit = new Button("",quitImage);
 		
+		buttonStart.setOnAction(e -> scenes.switchTo(ScreenType.GAME));
+		buttonSettings.setOnAction(e -> scenes.switchTo(ScreenType.SETTINGS));
+		buttonScores.setOnAction(e -> scenes.switchTo(ScreenType.SCOREBOARD));
+		buttonQuit.setOnAction(e -> System.exit(0));
+		
+		VBox buttonBox = new VBox();
+		buttonBox.setAlignment(Pos.CENTER);
+		buttonBox.setSpacing(10);
+		buttonBox.getChildren().addAll(buttonStart, buttonSettings,buttonScores,buttonQuit);
+		
+		layout.getChildren().addAll(buttonBox);
 		setCenter(layout);
+		
+//	    Button button = new Button("",imageView);
+//	    button.setStyle("-fx-base: coral;");
+//	    button.setContentDisplay(ContentDisplay.TOP);
+//	    button.setOnAction(new EventHandler<ActionEvent>() {
+//	      @Override public void handle(ActionEvent event) {
+//	        response.setText("I love you too!");
+//	      }
+//	    });
+//
+//	    final VBox layout = new VBox(10);
+//	    layout.setAlignment(Pos.CENTER);
+//	    layout.getChildren().addAll(button, response);
+//	    //layout.setStyle("-fx-background-color: cornsilk; -fx-padding: 10; -fx-font-size: 20;");
+//	    setCenter(layout);
 	}
 
 	@Override
