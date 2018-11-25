@@ -35,20 +35,6 @@ public class MainMenuPane extends UpdatablePane {
 		layout.getChildren().addAll(buttonBox);
 		setCenter(layout);
 		
-//	    Button button = new Button("",imageView);
-//	    button.setStyle("-fx-base: coral;");
-//	    button.setContentDisplay(ContentDisplay.TOP);
-//	    button.setOnAction(new EventHandler<ActionEvent>() {
-//	      @Override public void handle(ActionEvent event) {
-//	        response.setText("I love you too!");
-//	      }
-//	    });
-//
-//	    final VBox layout = new VBox(10);
-//	    layout.setAlignment(Pos.CENTER);
-//	    layout.getChildren().addAll(button, response);
-//	    //layout.setStyle("-fx-background-color: cornsilk; -fx-padding: 10; -fx-font-size: 20;");
-//	    setCenter(layout);
 	}
 
 	@Override
