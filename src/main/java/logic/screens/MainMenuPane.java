@@ -1,35 +1,50 @@
 package logic.screens;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.ScreenManager;
 import logic.ScreenType;
-
 public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(ScreenManager scenes) {
-		Label label = new Label("Main Menu");
-		Button[] buttons = new Button[] {
-			new Button("Settings"),
-			new Button("Scoreboard"),
-			new Button("Quit Game")
-		};
-		buttons[0].setOnAction(e -> scenes.switchTo(ScreenType.SETTINGS));
-		buttons[1].setOnAction(e -> scenes.switchTo(ScreenType.SCOREBOARD));
-		buttons[2].setOnAction(e -> System.exit(0));
+		StackPane layout = new StackPane();
+	
+		Image bg = new Image(this.getClass().getResource("/MenuPlainBackground.jpg").toExternalForm());
+		layout.setBackground(new Background(new BackgroundImage(bg, 
+				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
+				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
+		ImageView titleImage = new ImageView (new Image("file:images/CenterAlignedlogo.png"));
+		ImageView startImage = new ImageView(new Image("file:images/StartButton.png"));
+		ImageView settingImage = new ImageView(new Image("file:images/SettingsButton.png"));
+		ImageView scoreImage = new ImageView(new Image("file:images/ScoreButton.png"));
+		ImageView quitImage = new ImageView(new Image("file:images/QuitButton.png"));
 		
-		VBox layout = new VBox();
-		layout.setAlignment(Pos.CENTER);
-		layout.setSpacing(10);
-		layout.getChildren().add(label);
-		for (Button b : buttons)
-		{
-			layout.getChildren().add(b);
-		}
+		Button buttonStart = new Button("", startImage);
+		Button buttonSettings = new Button("",settingImage);
+		Button buttonScores = new Button("",scoreImage);
+		Button buttonQuit = new Button("",quitImage);
 		
+		buttonStart.setOnAction(e -> scenes.switchTo(ScreenType.GAME));
+		buttonSettings.setOnAction(e -> scenes.switchTo(ScreenType.SETTINGS));
+		buttonScores.setOnAction(e -> scenes.switchTo(ScreenType.SCOREBOARD));
+		buttonQuit.setOnAction(e -> System.exit(0));
+		
+		VBox buttonBox = new VBox();
+		buttonBox.setAlignment(Pos.CENTER);
+		buttonBox.setSpacing(10);
+		buttonBox.getChildren().addAll(titleImage, buttonStart, buttonSettings,buttonScores,buttonQuit);
+		
+		layout.getChildren().addAll(buttonBox);
 		setCenter(layout);
+		
 	}
 
 	@Override
