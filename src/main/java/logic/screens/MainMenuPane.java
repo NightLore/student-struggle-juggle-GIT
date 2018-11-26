@@ -8,6 +8,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.ScreenManager;
@@ -16,12 +17,16 @@ public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(ScreenManager scenes) {
 		StackPane layout = new StackPane();
-	
-		Image bg = new Image(this.getClass().getResource("/MenuPlainBackground.jpg").toExternalForm());
+		HBox leftToRight = new HBox();
+		
+		Image bg = new Image(this.getClass().getResource("/MenuPlainBackground.jpg").toExternalForm(), 1366,768, true, true);
 		layout.setBackground(new Background(new BackgroundImage(bg, 
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
 				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
-		ImageView titleImage = new ImageView (new Image("file:images/CenterAlignedlogo.png"));
+		ImageView leftGif = new ImageView (new Image ("file:images/person.gif"));
+		ImageView rightGif = new ImageView (new Image ("file:images/Books!.gif"));
+		ImageView titleGif = new ImageView (new Image("file:images/Logo.gif"));
+		
 		ImageView startImage = new ImageView(new Image("file:images/StartButton.png"));
 		ImageView settingImage = new ImageView(new Image("file:images/SettingsButton.png"));
 		ImageView scoreImage = new ImageView(new Image("file:images/ScoreButton.png"));
@@ -40,9 +45,12 @@ public class MainMenuPane extends UpdatablePane {
 		VBox buttonBox = new VBox();
 		buttonBox.setAlignment(Pos.CENTER);
 		buttonBox.setSpacing(10);
-		buttonBox.getChildren().addAll(titleImage, buttonStart, buttonSettings,buttonScores,buttonQuit);
+		buttonBox.getChildren().addAll(titleGif, buttonStart, buttonSettings,buttonScores,buttonQuit);
 		
-		layout.getChildren().addAll(buttonBox);
+		leftToRight.setAlignment(Pos.CENTER);
+		leftToRight.getChildren().addAll(leftGif,buttonBox, rightGif);
+		
+		layout.getChildren().addAll(leftToRight);
 		setCenter(layout);
 		
 	}
