@@ -9,4 +9,9 @@ public abstract class UpdatablePane extends BorderPane {
 	}
 
 	public abstract void onShow(ScreenType prevScreen);
+	
+	public void setBackground()
+	{
+		
+	}
 }

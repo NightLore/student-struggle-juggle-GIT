@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -53,9 +54,12 @@ public class ScoreboardPane extends UpdatablePane {
 		back.setOnAction(e -> scenes.switchTo(ScreenType.MAINMENU));
 		buttonPane.getChildren().add(back);
 		
-		setTop(labelPane);
-		setCenter(table);
-		setBottom(buttonPane);
+		BorderPane layout = new BorderPane();
+		layout.setTop(labelPane);
+		layout.setCenter(table);
+		layout.setBottom(buttonPane);
+		
+		setCenter(layout);
 
 		// default values to be removed
 		scores = new LinkedList<>();
