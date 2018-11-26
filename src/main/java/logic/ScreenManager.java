@@ -12,7 +12,7 @@ public class ScreenManager {
 	
 	public ScreenManager(Stage primaryStage, double width, double height) {
 		this.window = primaryStage;
-		
+
 		screens = new EnumMap<>(ScreenType.class);
 		ScreenFactory factory = new ScreenFactory(this, width, height);
 		for (ScreenType type : ScreenType.values()) 

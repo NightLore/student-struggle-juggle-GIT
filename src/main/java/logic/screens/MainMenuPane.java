@@ -16,8 +16,10 @@ public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(ScreenManager scenes) {
 		StackPane layout = new StackPane();
-	
-		Image bg = new Image(this.getClass().getResource("/MenuPlainBackground.jpg").toExternalForm());
+
+		//Refactor to use the theme manager
+		Image bg = new Image(this.getClass().getResource("./MenuPlainBackground.jpg").toExternalForm());
+
 		layout.setBackground(new Background(new BackgroundImage(bg, 
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
 				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
