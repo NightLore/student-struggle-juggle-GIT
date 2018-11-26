@@ -20,7 +20,7 @@ public class SettingsPane extends UpdatablePane {
 		layout.setSpacing(10);
 		layout.getChildren().addAll(label, backButton);
 		
-		setCenter(layout);
+		getChildren().add(layout);
 	}
 
 	@Override

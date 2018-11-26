@@ -59,7 +59,7 @@ public class ScoreboardPane extends UpdatablePane {
 		layout.setCenter(table);
 		layout.setBottom(buttonPane);
 		
-		setCenter(layout);
+		getChildren().add(layout);
 
 		// default values to be removed
 		scores = new LinkedList<>();

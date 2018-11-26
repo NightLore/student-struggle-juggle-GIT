@@ -9,18 +9,16 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.ScreenManager;
 import logic.ScreenType;
 public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(ScreenManager scenes) {
-		StackPane layout = new StackPane();
 		HBox leftToRight = new HBox();
 		
 		Image bg = new Image(this.getClass().getResource("/MenuPlainBackground.jpg").toExternalForm(), 1366,768, true, true);
-		layout.setBackground(new Background(new BackgroundImage(bg, 
+		setBackground(new Background(new BackgroundImage(bg, 
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
 				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
 		ImageView leftGif = new ImageView (new Image ("file:images/person.gif"));
@@ -50,8 +48,7 @@ public class MainMenuPane extends UpdatablePane {
 		leftToRight.setAlignment(Pos.CENTER);
 		leftToRight.getChildren().addAll(leftGif,buttonBox, rightGif);
 		
-		layout.getChildren().addAll(leftToRight);
-		setCenter(layout);
+		getChildren().addAll(leftToRight);
 		
 	}
 
