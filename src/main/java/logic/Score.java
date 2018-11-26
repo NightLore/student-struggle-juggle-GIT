@@ -3,11 +3,11 @@ package logic;
 public class Score {
 
 	private String name;
-	private int score;
+	private int value;
 
-	public Score(String name, int score) {
+	public Score(String name, int value) {
 		this.name = name;
-		this.score = score;
+		this.value = value;
 	}
 
 	public String getName() {
@@ -15,7 +15,7 @@ public class Score {
 	}
 
 	public int value() {
-		return score;
+		return value;
 	}
 
 }
