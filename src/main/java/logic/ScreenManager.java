@@ -3,14 +3,17 @@ package logic;
 import java.util.EnumMap;
 
 import javafx.stage.Stage;
+import logic.themes.ThemeManager;
 
 public class ScreenManager {
 
 	private Stage window;
 	private EnumMap<ScreenType, Screen> screens;
 	private ScreenType currentScreen;
-	
-	public ScreenManager(Stage primaryStage, double width, double height) {
+
+    private static ThemeManager themes;
+
+    public ScreenManager(Stage primaryStage, double width, double height) {
 		this.window = primaryStage;
 
 		screens = new EnumMap<>(ScreenType.class);
@@ -25,5 +28,9 @@ public class ScreenManager {
 		screens.get(type).displayOn(window, currentScreen);
 		currentScreen = type;
 	}
+
+	public static ThemeManager getThemeManager(){
+        return themes;
+    }
 
 }

@@ -7,6 +7,8 @@ import javafx.scene.shape.Circle;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Object class which holds the themes that are loaded into the system
@@ -21,10 +23,7 @@ public class Theme {
     //Defined Variables
     private int imageSize = 128;
 
-    //Indices 0-4 = game sprite objects
-    private Image[] images = new Image[5];
-    private String name = null;
-    private Color paddleColor = null;
+    Map<String, Image> map = new HashMap<String, Image>();
 
     //TODO define other colors (i.e. different parts of the game screen, what colors are borders etc...
     private Color mainColor = null;
@@ -34,18 +33,10 @@ public class Theme {
      *
      * @param name - Takes in string representing path to folder of themes.
      *             Folders should be formatted as such:
-     *                  <name>/00.jpg
-     *                  <name>/01.jpg
-     *                  <name>/02.jpg
-     *                  <name>/03.jpg
-     *                  <name>/04.jpg
      */
     public Theme(String name) throws FileNotFoundException {
         //TODO redefine images.length as a parameter somewhere
-        for (int i = 0;i<images.length;i++ ){
-            FileInputStream file = new FileInputStream("./"+name+"/"+i+".jpg");
-            images[i] = new Image(file,imageSize,imageSize,true,true);
-        }
+
         this.name = name;
         //TODO add wrapper for reading .properties file
         //this.paddleColor = paddleColor;
@@ -68,5 +59,9 @@ public class Theme {
 
     public String getName(){
         return name;
+    }
+
+    public Image getAsset(String str) {
+        return map.get(str);
     }
 }

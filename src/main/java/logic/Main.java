@@ -4,7 +4,6 @@ import javafx.stage.Stage;
 import logic.themes.ThemeManager;
 
 public class Main extends Application{
-    public static ThemeManager themes = new ThemeManager();
 
 	public static void main(String[] args) {
 		launch(args);
