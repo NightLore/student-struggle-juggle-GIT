@@ -20,7 +20,7 @@ public class ScoreboardPane extends UpdatablePane {
 	public static final int MAXSCORES = 10;
 
 	// default scores -- replace with actual scores
-	private static List<Score> scores;
+	private List<Score> scores;
 	
 	private Label[][] labels;
 
@@ -57,7 +57,7 @@ public class ScoreboardPane extends UpdatablePane {
 		setCenter(table);
 		setBottom(buttonPane);
 
-		// TODO: default values to be removed
+		// default values to be removed
 		scores = new LinkedList<>();
 		scores.add(new Score("CheatingCat", 13));
 		scores.add(new Score("KillerKris", 10));
@@ -67,7 +67,7 @@ public class ScoreboardPane extends UpdatablePane {
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
-		updateTable(scores); // TODO: intended to update with actual scores
+		updateTable(scores); // intended to update with actual scores
 	}
 	
 	private void updateTable(List<Score> scores) {
