@@ -3,6 +3,11 @@ package logic.screens;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import logic.ScreenManager;
@@ -11,7 +16,12 @@ public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(ScreenManager scenes) {
 		StackPane layout = new StackPane();
-		layout.setStyle("-fx-background-image: url('images/MenuPlainBackground.jpg')");
+	
+		Image bg = new Image(this.getClass().getResource("/MenuPlainBackground.jpg").toExternalForm());
+		layout.setBackground(new Background(new BackgroundImage(bg, 
+				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
+				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
+		ImageView titleImage = new ImageView (new Image("file:images/CenterAlignedlogo.png"));
 		ImageView startImage = new ImageView(new Image("file:images/StartButton.png"));
 		ImageView settingImage = new ImageView(new Image("file:images/SettingsButton.png"));
 		ImageView scoreImage = new ImageView(new Image("file:images/ScoreButton.png"));
@@ -30,7 +40,7 @@ public class MainMenuPane extends UpdatablePane {
 		VBox buttonBox = new VBox();
 		buttonBox.setAlignment(Pos.CENTER);
 		buttonBox.setSpacing(10);
-		buttonBox.getChildren().addAll(buttonStart, buttonSettings,buttonScores,buttonQuit);
+		buttonBox.getChildren().addAll(titleImage, buttonStart, buttonSettings,buttonScores,buttonQuit);
 		
 		layout.getChildren().addAll(buttonBox);
 		setCenter(layout);
