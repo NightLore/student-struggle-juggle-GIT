@@ -37,7 +37,7 @@ public class Theme {
     public Theme(String name) throws FileNotFoundException {
         //TODO redefine images.length as a parameter somewhere
 
-        this.name = name;
+        //this.name = name;
         //TODO add wrapper for reading .properties file
         //this.paddleColor = paddleColor;
     }
@@ -50,15 +50,15 @@ public class Theme {
      * @return image object
      */
     public Image getIcon(int i){
-        return images[i];
+        return null;
     }
 
     public Color getPaddleColor(){
-        return paddleColor;
+        return null;
     }
 
     public String getName(){
-        return name;
+        return null;
     }
 
     public Image getAsset(String str) {
