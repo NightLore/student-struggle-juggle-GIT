@@ -35,7 +35,14 @@ public class Theme {
      *             Folders should be formatted as such:
      */
     public Theme(String name) throws FileNotFoundException {
-        //TODO redefine images.length as a parameter somewhere
+        //TODO optimize importing
+        map.put("bg",new Image(new FileInputStream("./"+name+"/backgrounds/"+"MenuPlainBackground"+".jpg")));
+        map.put("titleImage",new Image(new FileInputStream("./"+name+"/title/"+"titleImage"+".png")));
+        map.put("startImage",new Image(new FileInputStream("./"+name+"/buttons/"+"StartButton"+".png")));
+        map.put("settingImage",new Image(new FileInputStream("./"+name+"/buttons/"+"SettingsButton"+".png")));
+        map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/"+"ScoreButton"+".png")));
+        map.put("quitImage",new Image(new FileInputStream("./"+name+"/buttons/"+"QuitButton"+".png")));
+
 
         //this.name = name;
         //TODO add wrapper for reading .properties file

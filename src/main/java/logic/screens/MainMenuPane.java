@@ -14,7 +14,6 @@ import logic.Screen;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
-import sun.applet.Main;
 
 public class MainMenuPane extends UpdatablePane {
 
@@ -24,7 +23,6 @@ public class MainMenuPane extends UpdatablePane {
         Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
 
         //Refactor to use the theme manager
-		//Image bg = new Image(this.getClass().getResource("./MenuPlainBackground.jpg").toExternalForm());
         Image bg = currentTheme.getAsset("bg");
 
 		layout.setBackground(new Background(new BackgroundImage(bg,
@@ -32,10 +30,10 @@ public class MainMenuPane extends UpdatablePane {
 				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
 
 		ImageView titleImage = new ImageView (currentTheme.getAsset("titleImage"));
-		ImageView startImage = new ImageView(new Image("file:images/StartButton.png"));
-		ImageView settingImage = new ImageView(new Image("file:images/SettingsButton.png"));
-		ImageView scoreImage = new ImageView(new Image("file:images/ScoreButton.png"));
-		ImageView quitImage = new ImageView(new Image("file:images/QuitButton.png"));
+		ImageView startImage = new ImageView(currentTheme.getAsset("startImage"));
+		ImageView settingImage = new ImageView(currentTheme.getAsset("settingImage"));
+		ImageView scoreImage = new ImageView(currentTheme.getAsset("scoreImage"));
+		ImageView quitImage = new ImageView(currentTheme.getAsset("quitImage"));
 		
 		Button buttonStart = new Button("", startImage);
 		Button buttonSettings = new Button("",settingImage);

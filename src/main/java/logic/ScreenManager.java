@@ -11,7 +11,7 @@ public class ScreenManager {
 	private EnumMap<ScreenType, Screen> screens;
 	private ScreenType currentScreen;
 
-    private static ThemeManager themes;
+    private static ThemeManager themes = new ThemeManager();
 
     public ScreenManager(Stage primaryStage, double width, double height) {
 		this.window = primaryStage;
