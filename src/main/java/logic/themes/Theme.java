@@ -36,17 +36,20 @@ public class Theme {
      */
     public Theme(String name) throws FileNotFoundException {
         //TODO optimize importing
+
+        //Backgrounds
         map.put("bg",new Image(new FileInputStream("./"+name+"/backgrounds/"+"MenuPlainBackground"+".jpg")));
-        map.put("titleImage",new Image(new FileInputStream("./"+name+"/title/"+"titleImage"+".png")));
-        map.put("startImage",new Image(new FileInputStream("./"+name+"/buttons/"+"StartButton"+".png")));
-        map.put("settingImage",new Image(new FileInputStream("./"+name+"/buttons/"+"SettingsButton"+".png")));
-        map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/"+"ScoreButton"+".png")));
-        map.put("quitImage",new Image(new FileInputStream("./"+name+"/buttons/"+"QuitButton"+".png")));
 
+        String path = "/buttons/";
+        map.put("startImage",new Image(new FileInputStream("./"+name+path+"StartButton"+".png")));
+        map.put("settingImage",new Image(new FileInputStream("./"+name+path+"SettingsButton"+".png")));
+        map.put("scoreImage",new Image(new FileInputStream("./"+name+path+"ScoreButton"+".png")));
+        map.put("quitImage",new Image(new FileInputStream("./"+name+path+"QuitButton"+".png")));
 
-        //this.name = name;
-        //TODO add wrapper for reading .properties file
-        //this.paddleColor = paddleColor;
+        path = "/animations/";
+        map.put("leftGif", new Image(new FileInputStream("./"+name+path+"person.gif")));
+        map.put("rightGif", new Image(new FileInputStream("./"+name+path+"Books!.gif")));
+        map.put("titleGif", new Image(new FileInputStream("./"+name+path+"Logo.gif")));
     }
 
     /**
