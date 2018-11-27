@@ -1,8 +1,9 @@
 package logic.screens;
 
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +22,7 @@ public class ScoreboardPane extends UpdatablePane {
 	public static final int MAXSCORES = 10;
 
 	// default scores -- replace with actual scores
-	private List<Score> scores;
+	private Set<Score> scores;
 	
 	private Label[][] labels;
 
@@ -65,11 +66,11 @@ public class ScoreboardPane extends UpdatablePane {
 		getChildren().add(layout);
 
 		// default values to be removed
-		scores = new LinkedList<>();
+		scores = new TreeSet<>();
+		scores.add(new Score("LyingLeon", 3));
 		scores.add(new Score("CheatingCat", 13));
 		scores.add(new Score("KillerKris", 10));
 		scores.add(new Score("BoringBob", 5));
-		scores.add(new Score("LyingLeon", 3));
 	}
 
 	@Override
@@ -77,7 +78,7 @@ public class ScoreboardPane extends UpdatablePane {
 		updateTable(scores); // intended to update with actual scores
 	}
 	
-	private void updateTable(List<Score> scores) {
+	private void updateTable(Collection<Score> scores) {
 		Iterator<Score> iterator = scores.iterator();
 		for (int i = 0; i < MAXSCORES && iterator.hasNext(); i++)
 		{
