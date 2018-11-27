@@ -1,8 +1,5 @@
 package logic.themes;
 
-import javafx.scene.paint.Color;
-import logic.themes.Theme;
-
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;

@@ -2,11 +2,9 @@ package logic.themes;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,15 +16,7 @@ import java.util.Map;
  */
 public class Theme {
 
-    //TODO amount of images necessary for game, i.e. how many sprites, paddle color, etc...
-
-    //Defined Variables
-    private int imageSize = 128;
-
-    Map<String, Image> map = new HashMap<String, Image>();
-
-    //TODO define other colors (i.e. different parts of the game screen, what colors are borders etc...
-    private Color mainColor = null;
+    private Map<String, Image> map = new HashMap<>();
 
     /**
      * Constructs a Theme object
@@ -34,7 +24,7 @@ public class Theme {
      * @param name - Takes in string representing path to folder of themes.
      *             Folders should be formatted as such:
      */
-    public Theme(String name) throws FileNotFoundException {
+    Theme(String name) throws FileNotFoundException {
         //TODO optimize importing
 
         //Backgrounds
