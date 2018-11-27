@@ -11,6 +11,7 @@ public class SettingsPane extends UpdatablePane {
 
 	private ScreenType prevScreen;
 	public SettingsPane(ScreenManager scenes) {
+		super(scenes);
 		Label label = new Label("Settings");
 		
 		Button backButton = new Button("Back");

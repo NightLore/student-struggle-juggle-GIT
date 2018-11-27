@@ -26,6 +26,7 @@ public class ScoreboardPane extends UpdatablePane {
 	private Label[][] labels;
 
 	public ScoreboardPane(ScreenManager scenes) {
+		super(scenes);
 		VBox labelPane = new VBox();
 		labelPane.setAlignment(Pos.CENTER);
 		labelPane.setPadding(new Insets(10));
@@ -35,11 +36,13 @@ public class ScoreboardPane extends UpdatablePane {
 		buttonPane.setAlignment(Pos.CENTER);
 		buttonPane.setPadding(new Insets(10));
 		
+		BorderPane center = new BorderPane();
+		center.setPadding(new Insets(10, 50, 10, 50));
 		GridPane table = new GridPane();
 		table.setAlignment(Pos.CENTER);
-		table.setStyle("-fx-grid-lines-visible: true");
+		table.setStyle("-fx-background-color: #FFFFFF; -fx-grid-lines-visible: true");
 		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-		table.setPadding(new Insets(10, 10, 10, 10));
+		center.setCenter(table);
 		
 		labels = new Label[2][MAXSCORES];
 		for (int i = 0; i < MAXSCORES; i++)
@@ -56,7 +59,7 @@ public class ScoreboardPane extends UpdatablePane {
 		
 		BorderPane layout = new BorderPane();
 		layout.setTop(labelPane);
-		layout.setCenter(table);
+		layout.setCenter(center);
 		layout.setBottom(buttonPane);
 		
 		getChildren().add(layout);

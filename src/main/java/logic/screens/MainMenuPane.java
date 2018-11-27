@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
-import logic.Screen;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
@@ -12,15 +11,10 @@ import logic.themes.Theme;
 public class MainMenuPane extends UpdatablePane {
 
 	public MainMenuPane(ScreenManager scenes) {
+		super(scenes);
 		HBox leftToRight = new HBox();
 
         Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
-
-        Image bg = currentTheme.getAsset("bg");
-
-		setBackground(new Background(new BackgroundImage(bg,
-				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
 
 		ImageView leftGif = new ImageView (currentTheme.getAsset("leftGif"));
 		ImageView rightGif = new ImageView (currentTheme.getAsset("rightGif"));
