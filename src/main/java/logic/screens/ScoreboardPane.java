@@ -25,8 +25,8 @@ public class ScoreboardPane extends UpdatablePane {
 	
 	private Label[][] labels;
 
-	public ScoreboardPane(ScreenManager scenes) {
-		super(scenes);
+	public ScoreboardPane(ScreenManager screens) {
+		super(screens);
 		VBox labelPane = new VBox();
 		labelPane.setAlignment(Pos.CENTER);
 		labelPane.setPadding(new Insets(10));
@@ -54,7 +54,7 @@ public class ScoreboardPane extends UpdatablePane {
 		}
 
 		Button back = new Button("Back to Main Menu");
-		back.setOnAction(e -> scenes.switchTo(ScreenType.MAINMENU));
+		back.setOnAction(e -> screens.switchTo(ScreenType.MAINMENU));
 		buttonPane.getChildren().add(back);
 		
 		BorderPane layout = new BorderPane();

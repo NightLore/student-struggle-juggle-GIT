@@ -10,8 +10,8 @@ import logic.themes.Theme;
 
 public class MainMenuPane extends UpdatablePane {
 
-	public MainMenuPane(ScreenManager scenes) {
-		super(scenes);
+	public MainMenuPane(ScreenManager screens) {
+		super(screens);
 		HBox leftToRight = new HBox();
 
         Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
@@ -31,9 +31,9 @@ public class MainMenuPane extends UpdatablePane {
 		Button buttonScores = new Button("",scoreImage);
 		Button buttonQuit = new Button("",quitImage);
 
-		buttonStart.setOnAction(e -> scenes.switchTo(ScreenType.GAME));
-		buttonSettings.setOnAction(e -> scenes.switchTo(ScreenType.SETTINGS));
-		buttonScores.setOnAction(e -> scenes.switchTo(ScreenType.SCOREBOARD));
+		buttonStart.setOnAction(e -> screens.switchTo(ScreenType.GAME));
+		buttonSettings.setOnAction(e -> screens.switchTo(ScreenType.SETTINGS));
+		buttonScores.setOnAction(e -> screens.switchTo(ScreenType.SCOREBOARD));
 		buttonQuit.setOnAction(e -> System.exit(0));
 
 		VBox buttonBox = new VBox();
