@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Objects;
+
 public class Score implements Comparable<Score> {
 
 	private String name;
@@ -24,6 +26,22 @@ public class Score implements Comparable<Score> {
 		if (comparison == 0)
 			comparison = this.getName().compareTo(score.getName());
 		return comparison;
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof Score)
+		{
+			return this.compareTo((Score)obj) == 0;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(this.getName(), this.value());
 	}
 
 }

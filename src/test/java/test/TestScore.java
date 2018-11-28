@@ -13,7 +13,7 @@ import logic.Score;
 public class TestScore {
 	
 	@Test
-	public void testCompareDifferentScores()
+	public void testCompareTo()
 	{
 		Score score1 = new Score("test", 5);
 		Score score2 = new Score("test2", 3);
@@ -21,10 +21,10 @@ public class TestScore {
 	}
 	
 	@Test
-	public void testCompareSameScores()
+	public void testEquals()
 	{
 		Score score1 = new Score("test", 4);
 		Score score2 = new Score("test", 4);
-		assertTrue(score1.compareTo(score2) == 0);
+		assertTrue(score1.equals(score2));
 	}
 }
