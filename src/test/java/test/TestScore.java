@@ -6,17 +6,25 @@ import org.junit.jupiter.api.Test;
 
 import logic.Score;
 
+/**
+ * @author Nathan Lui
+ * Unit test suite for Score class tests
+ */
 public class TestScore {
 	
 	@Test
 	public void testCompareDifferentScores()
 	{
-		assertTrue(new Score("test", 5).compareTo(new Score("test2", 3)) < 0);
+		Score score1 = new Score("test", 5);
+		Score score2 = new Score("test2", 3);
+		assertTrue(score1.compareTo(score2) < 0);
 	}
 	
 	@Test
 	public void testCompareSameScores()
 	{
-		assertTrue(new Score("test", 4).compareTo(new Score("test", 4)) == 0);
+		Score score1 = new Score("test", 4);
+		Score score2 = new Score("test", 4);
+		assertTrue(score1.compareTo(score2) == 0);
 	}
 }
