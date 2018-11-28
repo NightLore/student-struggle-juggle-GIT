@@ -20,20 +20,10 @@ public class Score implements Comparable<Score> {
 
 	@Override
 	public int compareTo(Score score) {
-		int comparison = new Integer(score.value()).compareTo(this.value());
+		int comparison = Integer.compare(score.value(), this.value());
 		if (comparison == 0)
 			comparison = this.getName().compareTo(score.getName());
 		return comparison;
-	}
-	
-	@Override
-	public boolean equals(Object o)
-	{
-		if (o instanceof Score)
-		{
-			return this.compareTo((Score)o) == 0;
-		}
-		return false;
 	}
 
 }
