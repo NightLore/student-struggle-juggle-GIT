@@ -1,6 +1,7 @@
 package logic;
 
 import logic.screens.CreditsPane;
+import logic.screens.GamePane;
 import logic.screens.MainMenuPane;
 import logic.screens.ScoreboardPane;
 import logic.screens.SettingsPane;
@@ -34,6 +35,9 @@ public class ScreenFactory {
 				break;
 			case CREDITS:
 				layout = new CreditsPane(scenes);
+				break;
+			case GAME:
+				layout = new GamePane(scenes);
 				break;
 			default:
 				layout = new MainMenuPane(scenes);
