@@ -45,7 +45,7 @@ public class JuggleObject
 	// reflect off the floor of the scene
 	public void checkReflection_floor(int frameHeight, double energyLossRatio)
 	{
-    	if (posY + radius >= frameHeight)
+    	if ( (posY + radius >= frameHeight) && (posY - radius <= frameHeight) )
     	{
     		// ensure the object is not trapped in or past a reflection surface
     		posY = (frameHeight - radius);
