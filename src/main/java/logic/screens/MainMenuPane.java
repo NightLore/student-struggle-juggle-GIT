@@ -4,23 +4,17 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
-import logic.Screen;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
 
 public class MainMenuPane extends UpdatablePane {
 
-	public MainMenuPane(ScreenManager scenes) {
+	public MainMenuPane(ScreenManager screens) {
+		super(screens);
 		HBox leftToRight = new HBox();
 
         Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
-
-        Image bg = currentTheme.getAsset("bg");
-
-		setBackground(new Background(new BackgroundImage(bg,
-				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, true))));
 
 		ImageView leftGif = new ImageView (currentTheme.getAsset("leftGif"));
 		ImageView rightGif = new ImageView (currentTheme.getAsset("rightGif"));
@@ -37,9 +31,9 @@ public class MainMenuPane extends UpdatablePane {
 		Button buttonScores = new Button("",scoreImage);
 		Button buttonQuit = new Button("",quitImage);
 
-		buttonStart.setOnAction(e -> scenes.switchTo(ScreenType.GAME));
-		buttonSettings.setOnAction(e -> scenes.switchTo(ScreenType.SETTINGS));
-		buttonScores.setOnAction(e -> scenes.switchTo(ScreenType.SCOREBOARD));
+		buttonStart.setOnAction(e -> screens.switchTo(ScreenType.GAME));
+		buttonSettings.setOnAction(e -> screens.switchTo(ScreenType.SETTINGS));
+		buttonScores.setOnAction(e -> screens.switchTo(ScreenType.SCOREBOARD));
 		buttonQuit.setOnAction(e -> System.exit(0));
 
 		VBox buttonBox = new VBox();

@@ -1,8 +1,9 @@
 package logic.screens;
 
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,11 +22,12 @@ public class ScoreboardPane extends UpdatablePane {
 	public static final int MAXSCORES = 10;
 
 	// default scores -- replace with actual scores
-	private List<Score> scores;
+	private Set<Score> scores;
 	
 	private Label[][] labels;
 
-	public ScoreboardPane(ScreenManager scenes) {
+	public ScoreboardPane(ScreenManager screens) {
+		super(screens);
 		VBox labelPane = new VBox();
 		labelPane.setAlignment(Pos.CENTER);
 		labelPane.setPadding(new Insets(10));
@@ -35,11 +37,13 @@ public class ScoreboardPane extends UpdatablePane {
 		buttonPane.setAlignment(Pos.CENTER);
 		buttonPane.setPadding(new Insets(10));
 		
+		BorderPane center = new BorderPane();
+		center.setPadding(new Insets(10, 50, 10, 50));
 		GridPane table = new GridPane();
 		table.setAlignment(Pos.CENTER);
-		table.setStyle("-fx-grid-lines-visible: true");
+		table.setStyle("-fx-background-color: #FFFFFF; -fx-grid-lines-visible: true");
 		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-		table.setPadding(new Insets(10, 10, 10, 10));
+		center.setCenter(table);
 		
 		labels = new Label[2][MAXSCORES];
 		for (int i = 0; i < MAXSCORES; i++)
@@ -51,22 +55,22 @@ public class ScoreboardPane extends UpdatablePane {
 		}
 
 		Button back = new Button("Back to Main Menu");
-		back.setOnAction(e -> scenes.switchTo(ScreenType.MAINMENU));
+		back.setOnAction(e -> screens.switchTo(ScreenType.MAINMENU));
 		buttonPane.getChildren().add(back);
 		
 		BorderPane layout = new BorderPane();
 		layout.setTop(labelPane);
-		layout.setCenter(table);
+		layout.setCenter(center);
 		layout.setBottom(buttonPane);
 		
 		getChildren().add(layout);
 
 		// default values to be removed
-		scores = new LinkedList<>();
+		scores = new TreeSet<>();
+		scores.add(new Score("LyingLeon", 3));
 		scores.add(new Score("CheatingCat", 13));
 		scores.add(new Score("KillerKris", 10));
 		scores.add(new Score("BoringBob", 5));
-		scores.add(new Score("LyingLeon", 3));
 	}
 
 	@Override
@@ -74,7 +78,7 @@ public class ScoreboardPane extends UpdatablePane {
 		updateTable(scores); // intended to update with actual scores
 	}
 	
-	private void updateTable(List<Score> scores) {
+	private void updateTable(Collection<Score> scores) {
 		Iterator<Score> iterator = scores.iterator();
 		for (int i = 0; i < MAXSCORES && iterator.hasNext(); i++)
 		{

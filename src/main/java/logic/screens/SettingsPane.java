@@ -10,22 +10,27 @@ import logic.ScreenType;
 public class SettingsPane extends UpdatablePane {
 
 	private ScreenType prevScreen;
-	public SettingsPane(ScreenManager scenes) {
+	public SettingsPane(ScreenManager screens) {
+		super(screens);
 		Label label = new Label("Settings");
 		
+		Button creditsButton = new Button("Credits");
+		creditsButton.setOnAction(e -> screens.switchTo(ScreenType.CREDITS));
+		
 		Button backButton = new Button("Back");
-		backButton.setOnAction(e -> scenes.switchTo(prevScreen));
+		backButton.setOnAction(e -> screens.switchTo(prevScreen));
 		VBox layout = new VBox();
 		layout.setAlignment(Pos.CENTER);
 		layout.setSpacing(10);
-		layout.getChildren().addAll(label, backButton);
+		layout.getChildren().addAll(label, creditsButton, backButton);
 		
 		getChildren().add(layout);
 	}
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
-		this.prevScreen = prevScreen;
+		if (prevScreen != ScreenType.CREDITS)
+			this.prevScreen = prevScreen;
 	}
 
 }

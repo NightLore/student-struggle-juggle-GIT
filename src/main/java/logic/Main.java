@@ -1,7 +1,6 @@
 package logic;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import logic.themes.ThemeManager;
 
 public class Main extends Application{
 
