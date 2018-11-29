@@ -31,37 +31,32 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	
 	// counts time passed since newest juggle item was created
 	private double juggleSpawnTimer = 0.0;
-    
-    private Canvas canvas;
 
     // extendible list to hold juggle objects
-    private Vector<JuggleObject> juggleObjects = new Vector<JuggleObject>();
+    private Vector<JuggleObject> juggleObjects;
     
     private Random randomNumberGenerator = new Random();
-    private GraphicsContext gc;
-    
-    private Image tempJuggleIamge = new Image( "https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png?attachment" );
-    private Image tempPaddleIamge = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
  
 	
 	// paddle position
-	double paddlePosX;
-	double paddleRadius= 250;
+	private double paddlePosX;
+	private double paddleRadius= 250;
 	
 	// max number of juggle items allowed
 	private static final int maxJuggleObjectCount = 6;
+	
+	private AnimationTimer gameLoop;
 
 	public GamePane(ScreenManager screens) {
 		super(screens);
-		canvas = new Canvas(frameWidth, frameHeight);
-		
+		Canvas canvas = new Canvas(frameWidth, frameHeight);
         getChildren().add( canvas );
-	}
+        
+        Image tempJuggleImage = new Image( "https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png?attachment" );
+        Image tempPaddleImage = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
 
-	@Override
-	public void onShow(ScreenType prevScreen) {
-		gc = canvas.getGraphicsContext2D();
-        new AnimationTimer()
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gameLoop = new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
@@ -103,11 +98,11 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
             	for (int i = 0; i < juggleObjects.size(); i++)
             	{
                     // Draw juggle object
-                    gc.drawImage( tempJuggleIamge, 
+                    gc.drawImage( tempJuggleImage, 
                     	0,
                     	0,
-                    	tempJuggleIamge.getWidth(),
-                    	tempJuggleIamge.getHeight(),
+                    	tempJuggleImage.getWidth(),
+                    	tempJuggleImage.getHeight(),
                     	juggleObjects.get(i).getPosX() - juggleObjects.get(i).getRadius(),
                     	juggleObjects.get(i).getPosY() - juggleObjects.get(i).getRadius(),
                     	juggleObjects.get(i).getRadius() * 2.0,
@@ -115,11 +110,11 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
             	}
             	
             	// Draw paddle object
-                gc.drawImage( tempPaddleIamge, 
+                gc.drawImage( tempPaddleImage, 
                 	0,
                 	0,
-                	tempPaddleIamge.getWidth(),
-                	tempPaddleIamge.getHeight(),
+                	tempPaddleImage.getWidth(),
+                	tempPaddleImage.getHeight(),
                 	paddlePosX - paddleRadius,
                 	frameHeight - 5,
                 	paddleRadius * 2.0,
@@ -128,7 +123,13 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
             	//draw background color
                 gc.setFill( Color.BLUE );
             }
-        }.start();
+        };
+	}
+
+	@Override
+	public void onShow(ScreenType prevScreen) {
+	    juggleObjects = new Vector<JuggleObject>();
+        gameLoop.start();
 	}
 
 	@Override
