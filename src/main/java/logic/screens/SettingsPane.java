@@ -27,13 +27,10 @@ public class SettingsPane extends UpdatablePane {
 	public SettingsPane(ScreenManager screens) {
 		super(screens);
 		//Font settingsFont = Font.font("",FontWeight.BOLD, 36);
-		Font settingsFont = Font.loadFont(
-			      SettingsPane.class.getResource("./Font/EraserDust.ttf").toExternalForm(), 
-			      10
-			    );
-		
 		Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
-		
+
+		Font settingsFont = currentTheme.getSettingsFont();
+
 		Text header = new Text("Settings");
 		header.setFill(Color.WHITESMOKE);
 		//header.setStyle("-fx-font: 30 Helvetica");
