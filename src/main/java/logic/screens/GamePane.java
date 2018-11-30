@@ -22,8 +22,8 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	private static final double forceOfGravity = (9.8 / 1000000l);
 	
 	// variables for tracking the scene dimensions
-	private static final int frameWidth = 1280;
-	private static final int frameHeight = 800;
+	private static final int frameWidth = 1366;
+	private static final int frameHeight = 768;
 	
 	// frametime keeps track of the time between draw calls (basically how long has it been since I drew the last frame)
 	private long frametime_nanoSeconds = 0;
