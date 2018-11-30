@@ -35,7 +35,8 @@ public class Theme {
         map.put("settingImage",new Image(new FileInputStream("./"+name+path+"SettingsButton"+".png")));
         map.put("scoreImage",new Image(new FileInputStream("./"+name+path+"ScoreButton"+".png")));
         map.put("quitImage",new Image(new FileInputStream("./"+name+path+"QuitButton"+".png")));
-
+        map.put("backImage",new Image(new FileInputStream("./"+name+path+"BackButton"+".png")));
+        
         path = "/animations/";
         map.put("leftGif", new Image(new FileInputStream("./"+name+path+"person.gif")));
         map.put("rightGif", new Image(new FileInputStream("./"+name+path+"Books!.gif")));
