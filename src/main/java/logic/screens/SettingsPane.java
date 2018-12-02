@@ -11,7 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import logic.ScreenManager;
 import logic.ScreenType;
@@ -26,15 +25,15 @@ public class SettingsPane extends UpdatablePane {
 	
 	public SettingsPane(ScreenManager screens) {
 		super(screens);
-		//Font settingsFont = Font.font("",FontWeight.BOLD, 36);
+		
 		Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
 
 		Font settingsFont = currentTheme.getSettingsFont();
-
+		Font headerFont = currentTheme.getHeaderFont();
+		
 		Text header = new Text("Settings");
 		header.setFill(Color.WHITESMOKE);
-		//header.setStyle("-fx-font: 30 Helvetica");
-		header.setFont(Font.font("Helvetica", FontWeight.BOLD, 50));
+		header.setFont(headerFont);
 		Slider volume = new Slider();
 		Text volLabel = new Text("Vol: ");
 		volLabel.setFont(settingsFont);
@@ -87,7 +86,9 @@ public class SettingsPane extends UpdatablePane {
 		themeButton.setOnAction(e -> System.out.println("themeButton clicked"));
 		
 		ImageView backImage = new ImageView(currentTheme.getAsset("backImage"));
-		Button creditsButton = new Button("Credits");
+		ImageView creditsImage = new ImageView(currentTheme.getAsset("creditsImage"));
+		
+		Button creditsButton = new Button("", creditsImage);
 		creditsButton.setOnAction(e -> screens.switchTo(ScreenType.CREDITS));
 		
 		Button backButton = new Button("",backImage);
