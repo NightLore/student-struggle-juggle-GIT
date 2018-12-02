@@ -39,18 +39,22 @@ public class Theme {
         map.put("quitImage",new Image(new FileInputStream("./"+name+path+"QuitButton"+".png")));
         map.put("backImage",new Image(new FileInputStream("./"+name+path+"BackButton"+".png")));
         map.put("creditsImage",new Image(new FileInputStream("./"+name+path+"CreditsButton"+".png")));
-        
+
+        path = "/images/";
+        map.put("credits", new Image(new FileInputStream("./"+name+path+"Credits"+".png")));
+
         path = "/animations/";
         map.put("leftGif", new Image(new FileInputStream("./"+name+path+"person.gif")));
         map.put("rightGif", new Image(new FileInputStream("./"+name+path+"Books!.gif")));
         map.put("titleGif", new Image(new FileInputStream("./"+name+path+"Logo.gif")));
 
-        settingsFont = Font.loadFont(
-                new FileInputStream("./Font/EraserDust.ttf"),
+        path = "/Font/"
+;        settingsFont = Font.loadFont(
+                new FileInputStream("./"+name+path+"EraserDust.ttf"),
                 36
         );
         headerFont = Font.loadFont(
-        		new FileInputStream("./Font/EraserDust.ttf"),
+        		new FileInputStream("./"+name+path+"EraserDust.ttf"),
                 50
         );
     }

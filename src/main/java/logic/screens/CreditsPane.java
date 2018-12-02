@@ -24,7 +24,7 @@ public class CreditsPane extends UpdatablePane {
 		header.setFill(Color.WHITESMOKE);
 		header.setFont(headerFont);
 		
-		ImageView credits = new ImageView(new Image("/Credits.png"));
+		ImageView credits = new ImageView(currentTheme.getAsset("credits"));
 		ImageView backImage = new ImageView(currentTheme.getAsset("backImage"));
 		Button backButton = new Button("",backImage);
 		backButton.setOnAction(e -> screens.switchTo(ScreenType.SETTINGS));
