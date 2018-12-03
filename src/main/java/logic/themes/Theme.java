@@ -6,9 +6,10 @@ import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +24,7 @@ public class Theme {
     private static final String GAME_PATH = "/gameObjects/";
 
     private Map<String, Image> map = new HashMap<>();
-    private ArrayList<Image> gameObjects = new ArrayList<>();
+    private List<Image> gameObjects = new LinkedList<>();
     private Font settingsFont;
     private Font headerFont;
     /**
@@ -98,12 +99,10 @@ public class Theme {
     	return headerFont;
     }
 
-    public boolean hasNextImage(){
-        return gameObjects.isEmpty();
-    }
-
     public Image getNextObject() {
-        return gameObjects.remove(0);
+        Image next = gameObjects.remove(0);
+        gameObjects.add(next);
+        return next;
     }
 
     public void resetGameObject(Image image) {
