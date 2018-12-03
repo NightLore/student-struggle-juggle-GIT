@@ -108,7 +108,8 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
             
             if (juggleObjects.get(i).getPosY() > (frameHeight * 2))
             {
-                juggleObjects.remove(i);
+				ScreenManager.getThemeManager().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
+				juggleObjects.remove(i);
             }
         }
 	}
@@ -135,11 +136,11 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
         for (JuggleObject j : juggleObjects)
         {
             // Draw juggle object
-            gc.drawImage( tempJuggleImage, 
+            gc.drawImage( j.getImage(),
                 0,
                 0,
-                tempJuggleImage.getWidth(),
-                tempJuggleImage.getHeight(),
+					j.getImage().getWidth(),
+					j.getImage().getHeight(),
                 j.getPosX() - j.getRadius(),
                 j.getPosY() - j.getRadius(),
                 j.getRadius() * 2.0,
@@ -172,7 +173,7 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
         randSpeedX = ( random.nextDouble() * (0.001) - (0.001/2.0) );
         randSpeedY = ( random.nextDouble() * (0.001) - (0.001/2.0) );
         
-        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY);
+        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY,ScreenManager.getThemeManager().getActiveTheme().getNextObject());
 	}
     
     public void paddleCollisions(JuggleObject currentJuggleObject, double paddlePosX, double paddleRadius)
