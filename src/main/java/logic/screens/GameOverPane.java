@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import logic.GameInfo;
+import logic.Score;
 import logic.ScreenManager;
 import logic.ScreenType;
 
@@ -26,7 +28,7 @@ public class GameOverPane extends UpdatablePane{
         HBox buttonBox = new HBox();
         buttonBox.setSpacing(10);
         Button saveButton = new Button("Save score");
-        // not implemented yet
+        saveButton.setOnAction(e -> GameInfo.getInstance().getScores().add(new Score(name.getText(), GameInfo.getInstance().getScore())));
         Button backButton = new Button("Back to Main Menu");
         backButton.setOnAction(e -> screens.switchTo(ScreenType.MAINMENU));
         buttonBox.getChildren().addAll(saveButton, backButton);
