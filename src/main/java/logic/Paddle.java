@@ -34,20 +34,20 @@ public class Paddle {
             h );
     }
 
-    public double getPaddlePosX() {
+    public double getX() {
         return x;
     }
 
-    public void setPaddlePosX(double paddlePosX) {
-        this.x = paddlePosX;
+    public void setX(double x) {
+        this.x = x;
     }
 
-    public double getPaddleRadius() {
+    public double getRadius() {
         return radius;
     }
 
-    public void setPaddleRadius(double paddleRadius) {
-        this.radius = paddleRadius;
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 
 }

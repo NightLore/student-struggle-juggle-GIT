@@ -77,7 +77,7 @@ public class Game {
     
     public void updatePaddle(double mouseX)
     {
-        paddle.setPaddlePosX(mouseX);      
+        paddle.setX(mouseX);      
         
         // check if enough time has passed or if the max item count is reached
         if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS))
@@ -110,7 +110,7 @@ public class Game {
         for (int i = 0; i < juggleObjects.size(); i++)
         {
             circleCollisions(juggleObjects, i, frameDiffMilliseconds);
-            paddleCollisions(juggleObjects.get(i), paddle.getPaddlePosX(), paddle.getPaddleRadius());
+            paddleCollisions(juggleObjects.get(i), paddle.getX(), paddle.getRadius());
             juggleObjects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
         }
     }
