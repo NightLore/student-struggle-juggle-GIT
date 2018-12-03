@@ -2,6 +2,7 @@ package logic.screens;
 
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import logic.Game;
 import logic.ScreenManager;
@@ -14,7 +15,9 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	public GamePane(ScreenManager screens) {
 		super(screens);
 		Canvas canvas = new Canvas(Game.FRAME_WIDTH, Game.FRAME_HEIGHT);
-        getChildren().add( canvas );
+		Button pauseButton = new Button("PAUSE");
+		pauseButton.setOnAction(e -> screens.switchTo(ScreenType.PAUSE));
+        getChildren().addAll( canvas, pauseButton );
         game = new Game(canvas);
 	}
 

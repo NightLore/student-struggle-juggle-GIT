@@ -1,21 +1,23 @@
 package logic;
 
 import logic.screens.CreditsPane;
+import logic.screens.GameOverPane;
 import logic.screens.GamePane;
 import logic.screens.MainMenuPane;
+import logic.screens.PausePane;
 import logic.screens.ScoreboardPane;
 import logic.screens.SettingsPane;
 import logic.screens.UpdatablePane;
 
 public class ScreenFactory {
 	
-	private ScreenManager scenes;
+	private ScreenManager screens;
 	private double width;
 	private double height;
 	
-	public ScreenFactory(ScreenManager scenes, double width, double height)
+	public ScreenFactory(ScreenManager screens, double width, double height)
 	{
-		this.scenes = scenes;
+		this.screens = screens;
 		this.width = width;
 		this.height = height;
 	}
@@ -25,22 +27,28 @@ public class ScreenFactory {
 		switch (type)
 		{
 			case MAINMENU:
-				layout = new MainMenuPane(scenes);
+				layout = new MainMenuPane(screens);
 				break;
 			case SETTINGS:
-				layout = new SettingsPane(scenes);
+				layout = new SettingsPane(screens);
 				break;
 			case SCOREBOARD:
-				layout = new ScoreboardPane(scenes);
+				layout = new ScoreboardPane(screens);
 				break;
 			case CREDITS:
-				layout = new CreditsPane(scenes);
+				layout = new CreditsPane(screens);
 				break;
 			case GAME:
-				layout = new GamePane(scenes);
+				layout = new GamePane(screens);
 				break;
+			case PAUSE:
+			    layout = new PausePane(screens);
+			    break;
+			case GAMEOVER:
+			    layout = new GameOverPane(screens);
+			    break;
 			default:
-				layout = new MainMenuPane(scenes);
+				layout = new MainMenuPane(screens);
 				break;
 		}
 		
