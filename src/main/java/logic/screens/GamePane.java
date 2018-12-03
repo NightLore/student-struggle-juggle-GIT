@@ -162,14 +162,12 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	
 	public JuggleObject createRandomJuggleObject()
 	{
-        double randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY;
-        
-        randPosX = ( random.nextDouble() * (FRAME_WIDTH/2.0) + (FRAME_WIDTH/4.0) );
-        randPosY = ( random.nextDouble() * (FRAME_HEIGHT/2.0) + (FRAME_HEIGHT/4.0) );
-        randRadius = ( random.nextDouble() * (75.0) + (25.0) );
-        randMass = ( Math.PI * Math.pow(randRadius, 2.0) );
-        randSpeedX = ( random.nextDouble() * (0.001) - (0.001/2.0) );
-        randSpeedY = ( random.nextDouble() * (0.001) - (0.001/2.0) );
+        double randPosX = ( random.nextDouble() * (FRAME_WIDTH/2.0) + (FRAME_WIDTH/4.0) );
+        double randPosY = ( random.nextDouble() * (FRAME_HEIGHT/2.0) + (FRAME_HEIGHT/4.0) );
+        double randRadius = ( random.nextDouble() * (75.0) + (25.0) );
+        double randMass = ( Math.PI * Math.pow(randRadius, 2.0) );
+        double randSpeedX = ( random.nextDouble() * (0.001) - (0.001/2.0) );
+        double randSpeedY = ( random.nextDouble() * (0.001) - (0.001/2.0) );
         
         return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY,ScreenManager.getThemeManager().getActiveTheme().getNextObject());
 	}
