@@ -105,6 +105,7 @@ public class Game {
             {
                 ThemeManager.getInstance().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
                 juggleObjects.remove(i);
+                info.decrementLives();
             }
         }
     }
@@ -124,8 +125,10 @@ public class Game {
     {
         if ( (currentJuggleObject.getPosX() >= (paddlePosX - paddleRadius)) && (currentJuggleObject.getPosX() <= (paddlePosX + paddleRadius)) )
         {
-            currentJuggleObject.checkReflectionFloor(FRAME_HEIGHT, ENERGY_LOSS_RATIO);
-            info.incrementScore();
+            if (currentJuggleObject.checkReflectionFloor(FRAME_HEIGHT, ENERGY_LOSS_RATIO))
+            {
+                info.incrementScore();
+            }
         }
     }
     
