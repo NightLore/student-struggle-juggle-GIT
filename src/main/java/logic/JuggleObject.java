@@ -82,6 +82,41 @@ public class JuggleObject
     	}
 	}
 	
+	public boolean checkCollision(JuggleObject j, double frameDiffMilliseconds)
+	{
+        double radius2 = j.getRadius();
+        double posX2 = j.getPosX();
+        double posY2 = j.getPosY();
+        double mass2 = j.getMass();
+        double speedX2 = j.getSpeedX();
+        double speedY2 = j.getSpeedY();
+        
+        double radiusSumSquare = Math.pow((radius + radius2), 2.0);
+        double distance = (Math.pow((posX2 - posX), 2.0) + Math.pow((posY2 - posY), 2.0));
+        
+        if (distance <= radiusSumSquare)
+        {
+            double newSpeedX1 = (speedX * (mass - mass2) + (2.0 * mass2 * speedX2)) / (mass + mass2);
+            double newSpeedY1 = (speedY * (mass - mass2) + (2.0 * mass2 * speedY2)) / (mass + mass2);
+            
+            double newSpeedX2 = (speedX2 * (mass2 - mass) + (2.0 * mass * speedX)) / (mass + mass2);
+            double newSpeedY2 = (speedY2 * (mass2 - mass) + (2.0 * mass * speedY)) / (mass + mass2);
+            
+            setSpeedX(newSpeedX1);
+            setSpeedY(newSpeedY1);
+            
+            j.setSpeedX(newSpeedX2);
+            j.setSpeedY(newSpeedY2);
+            
+            setPosX(posX + (newSpeedX1 * frameDiffMilliseconds));
+            setPosY(posY + (newSpeedY1 * frameDiffMilliseconds));
+            
+            j.setPosX(posX2 + (newSpeedX2 * frameDiffMilliseconds));
+            j.setPosY(posY2 + (newSpeedY2 * frameDiffMilliseconds));
+        }
+	    return false;
+	}
+	
 	public void draw(GraphicsContext gc)
 	{
         // Draw juggle object

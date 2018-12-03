@@ -140,50 +140,14 @@ public class Game {
     
     public void circleCollisions(List<JuggleObject> juggleObjects, int currentIndex, double frameDiffMilliseconds)
     {
-        JuggleObject current = juggleObjects.get(currentIndex); 
-        double radius1 = current.getRadius();
-        double posX1 = current.getPosX();
-        double posY1 = current.getPosY();
-        double mass1 = current.getMass();
-        double speedX1 = current.getSpeedX();
-        double speedY1 = current.getSpeedY();
+        JuggleObject current = juggleObjects.get(currentIndex);
         
         for (int i = 0; i < juggleObjects.size(); i++)
         {
-            JuggleObject object = juggleObjects.get(i);
             // skip check for collisions with ourself
             if (i != currentIndex)
             {
-                double radius2 = object.getRadius();
-                double posX2 = object.getPosX();
-                double posY2 = object.getPosY();
-                double mass2 = object.getMass();
-                double speedX2 = object.getSpeedX();
-                double speedY2 = object.getSpeedY();
-                
-                double radiusSumSquare = Math.pow((radius1 + radius2), 2.0);
-                double distance = (Math.pow((posX2 - posX1), 2.0) + Math.pow((posY2 - posY1), 2.0));
-                
-                if (distance <= radiusSumSquare)
-                {
-                    double newSpeedX1 = (speedX1 * (mass1 - mass2) + (2.0 * mass2 * speedX2)) / (mass1 + mass2);
-                    double newSpeedY1 = (speedY1 * (mass1 - mass2) + (2.0 * mass2 * speedY2)) / (mass1 + mass2);
-                    
-                    double newSpeedX2 = (speedX2 * (mass2 - mass1) + (2.0 * mass1 * speedX1)) / (mass1 + mass2);
-                    double newSpeedY2 = (speedY2 * (mass2 - mass1) + (2.0 * mass1 * speedY1)) / (mass1 + mass2);
-                    
-                    current.setSpeedX(newSpeedX1);
-                    current.setSpeedY(newSpeedY1);
-                    
-                    object.setSpeedX(newSpeedX2);
-                    object.setSpeedY(newSpeedY2);
-                    
-                    current.setPosX(posX1 + (newSpeedX1 * frameDiffMilliseconds));
-                    current.setPosY(posY1 + (newSpeedY1 * frameDiffMilliseconds));
-                    
-                    object.setPosX(posX2 + (newSpeedX2 * frameDiffMilliseconds));
-                    object.setPosY(posY2 + (newSpeedY2 * frameDiffMilliseconds));
-                }
+                current.checkCollision(juggleObjects.get(i), frameDiffMilliseconds);
             }
         }
     }
