@@ -52,8 +52,8 @@ public class Game {
                 // update spawn timer
                 juggleSpawnTimer += frameDiffMilliseconds;
                 
-                updateAll();
-                checkCollisions();
+                updateAll(juggleObjects);
+                checkCollisions(juggleObjects);
                 
                 drawCanvas(canvas.getGraphicsContext2D());
             }
@@ -92,18 +92,19 @@ public class Game {
         }
     }
     
-    public void updateAll()
+    public void updateAll(List<JuggleObject> objects)
     {
         // for each juggle object update it's position and speed
-        for (int i = 0; i < juggleObjects.size(); i++)
+        for (int i = 0; i < objects.size(); i++)
         {
             //**********************************************************************************
             // Update positions, speeds, etc... using physics
-            juggleObjects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
+            objects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
             
-            if (juggleObjects.get(i).getPosY() > (FRAME_HEIGHT * 2)) {
-                ThemeManager.getInstance().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
-                juggleObjects.remove(i);
+            if (objects.get(i).getPosY() > (FRAME_HEIGHT * 2))
+            {
+                ThemeManager.getInstance().getActiveTheme().resetGameObject(objects.get(i).getImage());
+                objects.remove(i);
                 info.decrementLives();
                 if (info.getNumLives() <= 0)
                 {
@@ -113,17 +114,17 @@ public class Game {
         }
     }
     
-    public void checkCollisions()
+    public void checkCollisions(List<JuggleObject> objects)
     {
         // for each juggle object compute collisions
-        for (int i = 0; i < juggleObjects.size(); i++)
+        for (int i = 0; i < objects.size(); i++)
         {
-            circleCollisions(juggleObjects, i, frameDiffMilliseconds);
-            if (paddle.collidesWith(juggleObjects.get(i), FRAME_HEIGHT, ENERGY_LOSS_RATIO))
+            circleCollisions(objects, i, frameDiffMilliseconds);
+            if (paddle.collidesWith(objects.get(i), FRAME_HEIGHT, ENERGY_LOSS_RATIO))
             {
                 info.incrementScore();
             }
-            juggleObjects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
+            objects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
         }
     }
     
