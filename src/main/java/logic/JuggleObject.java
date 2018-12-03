@@ -52,7 +52,7 @@ public class JuggleObject
 	}
 	
 	// reflect off the floor of the scene
-	public void checkReflectionFloor(int frameHeight, double energyLossRatio)
+	public boolean checkReflectionFloor(int frameHeight, double energyLossRatio)
 	{
     	if ( (posY + radius >= frameHeight) && (posY - radius <= frameHeight) )
     	{
@@ -60,11 +60,13 @@ public class JuggleObject
     		posY = (frameHeight - radius);
     		// reflect speed, reducing it by a constant factor
     		speedY = (0.0 - Math.abs(energyLossRatio * speedY));
+    		return true;
     	}
+    	return false;
 	}
 	
 	// reflect off the walls of the scene
-	public void checkReflectionWalls(int frameWidth, double energyLossRatio)
+	public boolean checkReflectionWalls(int frameWidth, double energyLossRatio)
 	{
 		if (posX + radius >= frameWidth)
     	{
@@ -72,6 +74,7 @@ public class JuggleObject
     		posX = (frameWidth - radius);
     		// reflect speed, reducing it by a constant factor
     		speedX = (0.0 - Math.abs(energyLossRatio * speedX));
+    		return true;
     	}
     	if (posX - radius <= 0)
     	{
@@ -79,7 +82,9 @@ public class JuggleObject
     		posX = (0 + radius);
     		// reflect speed, reducing it by a constant factor
     		speedX = (0.0 + Math.abs(energyLossRatio * speedX));
+            return true;
     	}
+        return false;
 	}
 	
 	public boolean checkCollision(JuggleObject j, double frameDiffMilliseconds)
