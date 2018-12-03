@@ -106,6 +106,10 @@ public class Game {
                 ThemeManager.getInstance().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
                 juggleObjects.remove(i);
                 info.decrementLives();
+                if (info.getNumLives() <= 0)
+                {
+                    
+                }
             }
         }
     }
@@ -116,19 +120,11 @@ public class Game {
         for (int i = 0; i < juggleObjects.size(); i++)
         {
             circleCollisions(juggleObjects, i, frameDiffMilliseconds);
-            paddleCollisions(juggleObjects.get(i), paddle.getX(), paddle.getRadius());
-            juggleObjects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
-        }
-    }
-    
-    public void paddleCollisions(JuggleObject currentJuggleObject, double paddlePosX, double paddleRadius)
-    {
-        if ( (currentJuggleObject.getPosX() >= (paddlePosX - paddleRadius)) && (currentJuggleObject.getPosX() <= (paddlePosX + paddleRadius)) )
-        {
-            if (currentJuggleObject.checkReflectionFloor(FRAME_HEIGHT, ENERGY_LOSS_RATIO))
+            if (paddle.collidesWith(juggleObjects.get(i), FRAME_HEIGHT, ENERGY_LOSS_RATIO))
             {
                 info.incrementScore();
             }
+            juggleObjects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
         }
     }
     

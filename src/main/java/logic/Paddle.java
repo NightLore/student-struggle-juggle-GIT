@@ -33,6 +33,18 @@ public class Paddle {
             radius * 2.0,
             h );
     }
+    
+    public boolean collidesWith(JuggleObject j, int frameHeight, double energyLossRatio)
+    {
+        if ( (j.getPosX() >= (x - radius)) && (j.getPosX() <= (x + radius)) )
+        {
+            if (j.checkReflectionFloor(frameHeight, energyLossRatio))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public double getX() {
         return x;

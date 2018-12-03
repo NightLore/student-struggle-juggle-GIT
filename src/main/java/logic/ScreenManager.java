@@ -20,7 +20,7 @@ public class ScreenManager {
 			screens.put(type, factory.createScreen(type));
 		}
 	}
-	
+
 	public void switchTo(ScreenType type) {
 		screens.get(type).displayOn(window, currentScreen);
 		currentScreen = type;
