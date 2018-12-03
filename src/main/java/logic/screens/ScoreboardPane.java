@@ -2,8 +2,6 @@ package logic.screens;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import logic.GameInfo;
 import logic.Score;
 import logic.ScreenManager;
 import logic.ScreenType;
@@ -20,9 +19,6 @@ import logic.ScreenType;
 public class ScoreboardPane extends UpdatablePane {
 	
 	public static final int MAXSCORES = 10;
-
-	// default scores -- replace with actual scores
-	private Set<Score> scores;
 	
 	private Label[][] labels;
 
@@ -64,18 +60,11 @@ public class ScoreboardPane extends UpdatablePane {
 		layout.setBottom(buttonPane);
 		
 		getChildren().add(layout);
-
-		// default values to be removed
-		scores = new TreeSet<>();
-		scores.add(new Score("LyingLeon", 3));
-		scores.add(new Score("CheatingCat", 13));
-		scores.add(new Score("KillerKris", 10));
-		scores.add(new Score("BoringBob", 5));
 	}
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
-		updateTable(scores); // intended to update with actual scores
+		updateTable(GameInfo.getInstance().getScores()); // intended to update with actual scores
 	}
 	
 	private void updateTable(Collection<Score> scores) {
