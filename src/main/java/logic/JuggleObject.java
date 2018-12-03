@@ -17,7 +17,7 @@ public class JuggleObject
         double randSpeedX = RANDOM.nextDouble() * (0.001) - (0.001/2.0);
         double randSpeedY = RANDOM.nextDouble() * (0.001) - (0.001/2.0);
         
-        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY,ScreenManager.getThemeManager().getActiveTheme().getNextObject());
+        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY, image);
     }
 	// *******************************************************************************************
 	// attributes
