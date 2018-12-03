@@ -47,7 +47,6 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	private static final int maxJuggleObjectCount = 6;
 	
 	private AnimationTimer gameLoop;
-	private Image tempJuggleImage = new Image( "https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png?attachment" );
     private Image tempPaddleImage = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
 
 	public GamePane(ScreenManager screens) {
@@ -90,7 +89,7 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
     	paddlePosX = userMouse.getX();         
     	
     	// check if enough time has passed or if the max item count is reached
-    	if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < maxJuggleObjectCount) )
+    	if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < maxJuggleObjectCount && ScreenManager.getThemeManager().getActiveTheme().hasNextImage()))
     	{
     		juggleObjects.add(createRandomJuggleObject());
     		juggleSpawnTimer = 0.0;

@@ -95,10 +95,13 @@ public class Theme {
     	return headerFont;
     }
 
+    public boolean hasNextImage(){
+        return gameObjects.size() > 0;
+    }
+
     public Image getNextObject() {
         return gameObjects.remove(0);
     }
-
 
     public void resetGameObject(Image image) {
         gameObjects.add(image);
