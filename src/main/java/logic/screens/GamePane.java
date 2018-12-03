@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import logic.JuggleObject;
 import logic.ScreenManager;
 import logic.ScreenType;
+import logic.themes.ThemeManager;
 
 public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> {
 	// ratio of reflection velocity to initial velocity (the circles will bounce a little less high each time unless this is 1.0)
@@ -43,7 +44,7 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	private double paddleRadius= 250;
 	
 	// max number of juggle items allowed
-	private static final int maxJuggleObjectCount = 6;
+	private static final int maxJuggleObjectCount = 5;
 	
 	private AnimationTimer gameLoop;
 
@@ -52,7 +53,7 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 		Canvas canvas = new Canvas(frameWidth, frameHeight);
         getChildren().add( canvas );
         
-        Image tempJuggleImage = new Image( "https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png?attachment" );
+        //Image tempJuggleImage = new Image( "https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png?attachment" );
         Image tempPaddleImage = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -76,6 +77,7 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
             		
             		if (juggleObjects.get(i).getPosY() > (frameHeight * 2))
             		{
+						ScreenManager.getThemeManager().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
             			juggleObjects.remove(i);
             		}
             	}
@@ -98,11 +100,11 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
             	for (int i = 0; i < juggleObjects.size(); i++)
             	{
                     // Draw juggle object
-                    gc.drawImage( tempJuggleImage, 
+                    gc.drawImage( juggleObjects.get(i).getImage(),
                     	0,
                     	0,
-                    	tempJuggleImage.getWidth(),
-                    	tempJuggleImage.getHeight(),
+							juggleObjects.get(i).getImage().getWidth(),
+							juggleObjects.get(i).getImage().getHeight(),
                     	juggleObjects.get(i).getPosX() - juggleObjects.get(i).getRadius(),
                     	juggleObjects.get(i).getPosY() - juggleObjects.get(i).getRadius(),
                     	juggleObjects.get(i).getRadius() * 2.0,
@@ -148,8 +150,10 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
     		randMass = ( Math.PI * Math.pow(randRadius, 2.0) );
     		randSpeedX = ( randomNumberGenerator.nextDouble() * (0.001) - (0.001/2.0) );
     		randSpeedY = ( randomNumberGenerator.nextDouble() * (0.001) - (0.001/2.0) );
-    		
-    		juggleObjects.add(new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY));
+
+
+    		juggleObjects.add(new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY,ScreenManager.getThemeManager().getActiveTheme().getNextObject()));
+
     		juggleSpawnTimer = 0.0;
     	}
     }

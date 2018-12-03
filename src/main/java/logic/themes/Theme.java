@@ -6,6 +6,8 @@ import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +20,7 @@ import java.util.Map;
 public class Theme {
 
     private Map<String, Image> map = new HashMap<>();
+    private ArrayList<Image> gameObjects = new ArrayList<>();
     private Font settingsFont;
     private Font headerFont;
     /**
@@ -32,31 +35,35 @@ public class Theme {
         //Backgrounds
         map.put("bg",new Image(new FileInputStream("./"+name+"/backgrounds/"+"MenuPlainBackground"+".jpg")));
 
-        String path = "/buttons/";
-        map.put("startImage",new Image(new FileInputStream("./"+name+path+"StartButton"+".png")));
-        map.put("settingImage",new Image(new FileInputStream("./"+name+path+"SettingsButton"+".png")));
-        map.put("scoreImage",new Image(new FileInputStream("./"+name+path+"ScoreButton"+".png")));
-        map.put("quitImage",new Image(new FileInputStream("./"+name+path+"QuitButton"+".png")));
-        map.put("backImage",new Image(new FileInputStream("./"+name+path+"BackButton"+".png")));
-        map.put("creditsImage",new Image(new FileInputStream("./"+name+path+"CreditsButton"+".png")));
+        map.put("startImage",new Image(new FileInputStream("./"+name+"/buttons/"+"StartButton"+".png")));
+        map.put("settingImage",new Image(new FileInputStream("./"+name+"/buttons/"+"SettingsButton"+".png")));
+        map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/"+"ScoreButton"+".png")));
+        map.put("quitImage",new Image(new FileInputStream("./"+name+"/buttons/"+"QuitButton"+".png")));
+        map.put("backImage",new Image(new FileInputStream("./"+name+"/buttons/"+"BackButton"+".png")));
+        map.put("creditsImage",new Image(new FileInputStream("./"+name+"/buttons/"+"CreditsButton"+".png")));
 
-        path = "/images/";
-        map.put("credits", new Image(new FileInputStream("./"+name+path+"Credits"+".png")));
+        map.put("credits", new Image(new FileInputStream("./"+name+"/images/"+"Credits"+".png")));
 
-        path = "/animations/";
-        map.put("leftGif", new Image(new FileInputStream("./"+name+path+"person.gif")));
-        map.put("rightGif", new Image(new FileInputStream("./"+name+path+"Books!.gif")));
-        map.put("titleGif", new Image(new FileInputStream("./"+name+path+"Logo.gif")));
+        map.put("leftGif", new Image(new FileInputStream("./"+name+"/animations/"+"person.gif")));
+        map.put("rightGif", new Image(new FileInputStream("./"+name+"/animations/"+"Books!.gif")));
+        map.put("titleGif", new Image(new FileInputStream("./"+name+"/animations/"+"Logo.gif")));
 
-        path = "/Font/"
-;        settingsFont = Font.loadFont(
-                new FileInputStream("./"+name+path+"EraserDust.ttf"),
+        settingsFont = Font.loadFont(
+                new FileInputStream("./"+name+"/Font/"+"EraserDust.ttf"),
                 36
         );
         headerFont = Font.loadFont(
-        		new FileInputStream("./"+name+path+"EraserDust.ttf"),
+        		new FileInputStream("./"+name+"/Font/"+"EraserDust.ttf"),
                 50
         );
+
+
+        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Clements.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Falessi.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Kearns.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Mammen.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Staley.png")));
+
     }
 
     /**
@@ -86,5 +93,15 @@ public class Theme {
     }
     public Font getHeaderFont() {
     	return headerFont;
+    }
+
+    public Image getNextObject() {
+        return gameObjects.remove(0);
+    }
+
+
+    public void resetGameObject(Image image) {
+        gameObjects.add(image);
+        Collections.shuffle(gameObjects);
     }
 }

@@ -1,14 +1,17 @@
 package logic;
 
-public class JuggleObject 
+import javafx.scene.image.Image;
+
+public class JuggleObject
 {
 	// *******************************************************************************************
 	// attributes
 	private double radius, posX, posY;
 	private double mass, speedX, speedY;
+	private Image img;
 	// *******************************************************************************************
 	// constructors
-	public JuggleObject(double posX, double posY, double radius, double mass, double speedX, double speedY)
+	public JuggleObject(double posX, double posY, double radius, double mass, double speedX, double speedY,Image image)
 	{
 		this.posX = posX;
 		this.posY = posY;
@@ -16,6 +19,7 @@ public class JuggleObject
 		this.mass = mass;
 		this.speedX = speedX;
 		this.speedY = speedY;
+		this.img = image;
 	}
 	// *******************************************************************************************
 	// methods
@@ -110,6 +114,10 @@ public class JuggleObject
 	}
 	public void setSpeedY(double speedY) {
 		this.speedY = speedY;
+	}
+
+	public Image getImage() {
+		return img;
 	}
 	// *******************************************************************************************
 }
