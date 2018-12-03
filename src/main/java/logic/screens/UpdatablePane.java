@@ -9,12 +9,13 @@ import javafx.scene.layout.StackPane;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
+import logic.themes.ThemeManager;
 
 public abstract class UpdatablePane extends StackPane {
 
 	public UpdatablePane(ScreenManager screens) {
 
-        Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
+        Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
 		
 		setBackground(new Background(new BackgroundImage(currentTheme.getAsset("bg"),
 				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,

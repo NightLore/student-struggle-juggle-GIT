@@ -7,6 +7,7 @@ import javafx.scene.layout.*;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
+import logic.themes.ThemeManager;
 
 public class MainMenuPane extends UpdatablePane {
 
@@ -14,7 +15,7 @@ public class MainMenuPane extends UpdatablePane {
 		super(screens);
 		HBox leftToRight = new HBox();
 
-        Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
+        Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
 
 		ImageView leftGif = new ImageView (currentTheme.getAsset("leftGif"));
 		ImageView rightGif = new ImageView (currentTheme.getAsset("rightGif"));

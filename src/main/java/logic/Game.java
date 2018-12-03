@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.themes.ThemeManager;
 
 public class Game {
     
@@ -84,9 +85,9 @@ public class Game {
         paddle.setX(mouseX);      
         
         // check if enough time has passed or if the max item count is reached
-        if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS) && ScreenManager.getThemeManager().getActiveTheme().hasNextObject())
+        if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS) && ThemeManager.getInstance().getActiveTheme().hasNextObject())
         {
-            juggleObjects.add(JuggleObject.createRandom(FRAME_WIDTH, FRAME_HEIGHT, ScreenManager.getThemeManager().getActiveTheme().getNextObject()));
+            juggleObjects.add(JuggleObject.createRandom(FRAME_WIDTH, FRAME_HEIGHT, ThemeManager.getInstance().getActiveTheme().getNextObject()));
             juggleSpawnTimer = 0.0;
         }
     }
@@ -102,7 +103,7 @@ public class Game {
             
             if (juggleObjects.get(i).getPosY() > (FRAME_HEIGHT * 2))
             {
-                ScreenManager.getThemeManager().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
+                ThemeManager.getInstance().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
                 juggleObjects.remove(i);
             }
         }

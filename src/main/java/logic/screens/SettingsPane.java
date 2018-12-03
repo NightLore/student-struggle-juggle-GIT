@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
+import logic.themes.ThemeManager;
 
 public class SettingsPane extends UpdatablePane {
 
@@ -26,7 +27,7 @@ public class SettingsPane extends UpdatablePane {
 	public SettingsPane(ScreenManager screens) {
 		super(screens);
 		
-		Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
+		Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
 
 		Font settingsFont = currentTheme.getSettingsFont();
 		Font headerFont = currentTheme.getHeaderFont();

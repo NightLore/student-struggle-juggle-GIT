@@ -19,6 +19,12 @@ public class ThemeManager {
     private Theme currentTheme = null;
     private HashMap<Integer, Theme> themes = new HashMap<>();
 
+    private static final ThemeManager INSTANCE = new ThemeManager();
+
+    public static ThemeManager getInstance(){
+        return INSTANCE;
+    }
+
     public ThemeManager(){
         try {
             currentTheme = new Theme(defaultTheme);

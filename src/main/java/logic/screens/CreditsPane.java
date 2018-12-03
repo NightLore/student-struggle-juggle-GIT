@@ -10,12 +10,13 @@ import javafx.scene.text.Text;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
+import logic.themes.ThemeManager;
 
 public class CreditsPane extends UpdatablePane {
 
 	public CreditsPane(ScreenManager screens) {
 		super(screens);
-		Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
+		Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
 		
 		Font headerFont = currentTheme.getHeaderFont();
 		
