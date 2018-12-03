@@ -137,8 +137,8 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
             gc.drawImage( j.getImage(),
                 0,
                 0,
-					j.getImage().getWidth(),
-					j.getImage().getHeight(),
+				j.getImage().getWidth(),
+				j.getImage().getHeight(),
                 j.getPosX() - j.getRadius(),
                 j.getPosY() - j.getRadius(),
                 j.getRadius() * 2.0,
@@ -180,7 +180,7 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
     	}
     }
     
-    public void circleCollisions(List<JuggleObject> juggleObjects, int currentIndex, double frametime_seconds)
+    public void circleCollisions(List<JuggleObject> juggleObjects, int currentIndex, double frameDiffMilliseconds)
     {
     	JuggleObject current = juggleObjects.get(currentIndex); 
     	double radius1 = current.getRadius();
@@ -220,11 +220,11 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
     	    		object.setSpeedX(newSpeedX2);
     	    		object.setSpeedY(newSpeedY2);
     	    		
-    	    		current.setPosX(posX1 + (newSpeedX1 * frametime_seconds));
-    	    		current.setPosY(posY1 + (newSpeedY1 * frametime_seconds));
+    	    		current.setPosX(posX1 + (newSpeedX1 * frameDiffMilliseconds));
+    	    		current.setPosY(posY1 + (newSpeedY1 * frameDiffMilliseconds));
     	    		
-    	    		object.setPosX(posX2 + (newSpeedX2 * frametime_seconds));
-    	    		object.setPosY(posY2 + (newSpeedY2 * frametime_seconds));
+    	    		object.setPosX(posX2 + (newSpeedX2 * frameDiffMilliseconds));
+    	    		object.setPosY(posY2 + (newSpeedY2 * frameDiffMilliseconds));
     	    	}
     		}
     	}
