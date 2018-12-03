@@ -2,24 +2,37 @@ package logic.screens;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import logic.ScreenManager;
 import logic.ScreenType;
+import logic.themes.Theme;
 
 public class CreditsPane extends UpdatablePane {
 
 	public CreditsPane(ScreenManager screens) {
 		super(screens);
+		Theme currentTheme = ScreenManager.getThemeManager().getActiveTheme();
 		
-		Label label = new Label("Credits");
+		Font headerFont = currentTheme.getHeaderFont();
 		
-		Button backButton = new Button("Back");
+		Text header = new Text("Credits");
+		header.setFill(Color.WHITESMOKE);
+		header.setFont(headerFont);
+		
+		ImageView credits = new ImageView(currentTheme.getAsset("credits"));
+		ImageView backImage = new ImageView(currentTheme.getAsset("backImage"));
+		Button backButton = new Button("",backImage);
 		backButton.setOnAction(e -> screens.switchTo(ScreenType.SETTINGS));
+		
 		VBox layout = new VBox();
 		layout.setAlignment(Pos.CENTER);
 		layout.setSpacing(10);
-		layout.getChildren().addAll(label, backButton);
+		layout.getChildren().addAll(header, credits, backButton);
 		
 		getChildren().add(layout);
 	}

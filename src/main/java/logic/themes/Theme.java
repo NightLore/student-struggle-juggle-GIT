@@ -2,6 +2,7 @@ package logic.themes;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +18,8 @@ import java.util.Map;
 public class Theme {
 
     private Map<String, Image> map = new HashMap<>();
-
+    private Font settingsFont;
+    private Font headerFont;
     /**
      * Constructs a Theme object
      *
@@ -35,11 +37,26 @@ public class Theme {
         map.put("settingImage",new Image(new FileInputStream("./"+name+path+"SettingsButton"+".png")));
         map.put("scoreImage",new Image(new FileInputStream("./"+name+path+"ScoreButton"+".png")));
         map.put("quitImage",new Image(new FileInputStream("./"+name+path+"QuitButton"+".png")));
+        map.put("backImage",new Image(new FileInputStream("./"+name+path+"BackButton"+".png")));
+        map.put("creditsImage",new Image(new FileInputStream("./"+name+path+"CreditsButton"+".png")));
+
+        path = "/images/";
+        map.put("credits", new Image(new FileInputStream("./"+name+path+"Credits"+".png")));
 
         path = "/animations/";
         map.put("leftGif", new Image(new FileInputStream("./"+name+path+"person.gif")));
         map.put("rightGif", new Image(new FileInputStream("./"+name+path+"Books!.gif")));
         map.put("titleGif", new Image(new FileInputStream("./"+name+path+"Logo.gif")));
+
+        path = "/Font/"
+;        settingsFont = Font.loadFont(
+                new FileInputStream("./"+name+path+"EraserDust.ttf"),
+                36
+        );
+        headerFont = Font.loadFont(
+        		new FileInputStream("./"+name+path+"EraserDust.ttf"),
+                50
+        );
     }
 
     /**
@@ -63,5 +80,11 @@ public class Theme {
 
     public Image getAsset(String str) {
         return map.get(str);
+    }
+    public Font getSettingsFont(){
+        return settingsFont;
+    }
+    public Font getHeaderFont() {
+    	return headerFont;
     }
 }
