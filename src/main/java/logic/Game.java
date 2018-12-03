@@ -80,7 +80,7 @@ public class Game {
         paddle.setX(mouseX);      
         
         // check if enough time has passed or if the max item count is reached
-        if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS))
+        if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS) && ScreenManager.getThemeManager().getActiveTheme().hasNextObject())
         {
             juggleObjects.add(createRandomJuggleObject());
             juggleSpawnTimer = 0.0;

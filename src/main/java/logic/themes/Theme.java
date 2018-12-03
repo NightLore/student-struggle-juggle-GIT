@@ -99,9 +99,11 @@ public class Theme {
     	return headerFont;
     }
 
+    public boolean hasNextObject(){
+        return gameObjects.size() > 0;
+    }
     public Image getNextObject() {
         Image next = gameObjects.remove(0);
-        gameObjects.add(next);
         return next;
     }
 
