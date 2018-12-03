@@ -18,6 +18,9 @@ import java.util.Map;
  * @version student-struggle-juggle-GIT
  */
 public class Theme {
+    private static final String BUTTON_PATH = "/buttons/";
+    private static final String ANIMATIONS_PATH = "/animations/";
+    private static final String GAME_PATH = "/gameObjects/";
 
     private Map<String, Image> map = new HashMap<>();
     private ArrayList<Image> gameObjects = new ArrayList<>();
@@ -29,24 +32,24 @@ public class Theme {
      * @param name - Takes in string representing path to folder of themes.
      *             Folders should be formatted as such:
      */
-    Theme(String name) throws FileNotFoundException {
+    public Theme(String name) throws FileNotFoundException {
         //TODO optimize importing
 
         //Backgrounds
         map.put("bg",new Image(new FileInputStream("./"+name+"/backgrounds/"+"MenuPlainBackground"+".jpg")));
 
-        map.put("startImage",new Image(new FileInputStream("./"+name+"/buttons/"+"StartButton"+".png")));
-        map.put("settingImage",new Image(new FileInputStream("./"+name+"/buttons/"+"SettingsButton"+".png")));
-        map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/"+"ScoreButton"+".png")));
-        map.put("quitImage",new Image(new FileInputStream("./"+name+"/buttons/"+"QuitButton"+".png")));
-        map.put("backImage",new Image(new FileInputStream("./"+name+"/buttons/"+"BackButton"+".png")));
-        map.put("creditsImage",new Image(new FileInputStream("./"+name+"/buttons/"+"CreditsButton"+".png")));
+        map.put("startImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"StartButton"+".png")));
+        map.put("settingImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"SettingsButton"+".png")));
+        map.put("scoreImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"ScoreButton"+".png")));
+        map.put("quitImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"QuitButton"+".png")));
+        map.put("backImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"BackButton"+".png")));
+        map.put("creditsImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"CreditsButton"+".png")));
 
         map.put("credits", new Image(new FileInputStream("./"+name+"/images/"+"Credits"+".png")));
 
-        map.put("leftGif", new Image(new FileInputStream("./"+name+"/animations/"+"person.gif")));
-        map.put("rightGif", new Image(new FileInputStream("./"+name+"/animations/"+"Books!.gif")));
-        map.put("titleGif", new Image(new FileInputStream("./"+name+"/animations/"+"Logo.gif")));
+        map.put("leftGif", new Image(new FileInputStream("./"+name+ANIMATIONS_PATH+"person.gif")));
+        map.put("rightGif", new Image(new FileInputStream("./"+name+ANIMATIONS_PATH+"Books!.gif")));
+        map.put("titleGif", new Image(new FileInputStream("./"+name+ANIMATIONS_PATH+"Logo.gif")));
 
         settingsFont = Font.loadFont(
                 new FileInputStream("./"+name+"/Font/"+"EraserDust.ttf"),
@@ -58,11 +61,11 @@ public class Theme {
         );
 
 
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Clements.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Falessi.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Kearns.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Mammen.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/"+"Staley.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Clements.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Falessi.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Kearns.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Mammen.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Staley.png")));
 
     }
 
@@ -96,7 +99,7 @@ public class Theme {
     }
 
     public boolean hasNextImage(){
-        return gameObjects.size() > 0;
+        return gameObjects.isEmpty();
     }
 
     public Image getNextObject() {
