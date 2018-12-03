@@ -6,8 +6,12 @@ public class JuggleObject
 {
 	// *******************************************************************************************
 	// attributes
-	private double radius, posX, posY;
-	private double mass, speedX, speedY;
+	private double radius;
+	private double posX;
+	private double posY;
+	private double mass;
+    private double speedX;
+    private double speedY;
 	private Image img;
 	// *******************************************************************************************
 	// constructors
@@ -23,13 +27,13 @@ public class JuggleObject
 	}
 	// *******************************************************************************************
 	// methods
-	public void update(double frametime_seconds, double forceOfGravity)
+	public void update(double frameDiffMilliseconds, double forceOfGravity)
 	{
 		double accelerationY = (forceOfGravity / mass);
     	double accelerationX = 0.0;
     	
-    	updateSpeed(accelerationX, accelerationY, frametime_seconds);
-    	updatePosition(frametime_seconds);
+    	updateSpeed(accelerationX, accelerationY, frameDiffMilliseconds);
+    	updatePosition(frameDiffMilliseconds);
     	
 	}
 	public void updateSpeed(double accelerationX, double accelerationY, double frametime)
@@ -41,14 +45,13 @@ public class JuggleObject
 	
 	public void updatePosition(double frametime)
 	{
-        System.out.println(speedX + "," + speedY + "," + frametime);
 		// currentPosition = initialPosition + (speed * time)
 		posX = posX + (speedX * frametime);
 		posY = posY + (speedY * frametime);
 	}
 	
 	// reflect off the floor of the scene
-	public void checkReflection_floor(int frameHeight, double energyLossRatio)
+	public void checkReflectionFloor(int frameHeight, double energyLossRatio)
 	{
     	if ( (posY + radius >= frameHeight) && (posY - radius <= frameHeight) )
     	{
@@ -60,7 +63,7 @@ public class JuggleObject
 	}
 	
 	// reflect off the walls of the scene
-	public void checkReflection_walls(int frameWidth, double energyLossRatio)
+	public void checkReflectionWalls(int frameWidth, double energyLossRatio)
 	{
 		if (posX + radius >= frameWidth)
     	{
