@@ -1,5 +1,8 @@
 package logic;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 public class GameInfo {
     
     private static final int[] DEFAULT_LIVES = {10, 5, 1};
@@ -7,6 +10,7 @@ public class GameInfo {
     private int score;
     private int numLives;
     private int difficulty;
+    private Set<Score> scoreList;
 
     public GameInfo() {
         difficulty = 1;
@@ -17,6 +21,7 @@ public class GameInfo {
     {
         score = 0;
         numLives = DEFAULT_LIVES[difficulty];
+        scoreList = new TreeSet<>();
     }
     public int getScore()
     {
@@ -41,6 +46,10 @@ public class GameInfo {
     public void setDifficulty(int difficulty)
     {
         this.difficulty = difficulty;
+    }
+
+    public Set<Score> getScores() {
+        return scoreList;
     }
 
 }
