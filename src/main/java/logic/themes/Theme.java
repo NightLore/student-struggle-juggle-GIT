@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +23,7 @@ public class Theme {
     private static final String GAME_PATH = "/gameObjects/";
 
     private Map<String, Image> map = new HashMap<>();
-    private List<Image> gameObjects = new LinkedList<>();
+    private LinkedList<Image> gameObjects = new LinkedList<>();
     private Font settingsFont;
     private Font headerFont;
     /**
@@ -100,15 +99,14 @@ public class Theme {
     }
 
     public boolean hasNextObject(){
-        return gameObjects.size() > 0;
+        return !gameObjects.isEmpty();
     }
     public Image getNextObject() {
-        Image next = gameObjects.remove(0);
-        return next;
+        return gameObjects.removeFirst();
     }
 
     public void resetGameObject(Image image) {
-        gameObjects.add(image);
+        gameObjects.addLast(image);
         Collections.shuffle(gameObjects);
     }
 }

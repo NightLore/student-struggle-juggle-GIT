@@ -32,6 +32,11 @@ public class GameInfo {
     {
         return numLives;
     }
+
+    public int decrementLives()
+    {
+        return numLives;
+    }
     
     public void setDifficulty(int difficulty)
     {
