@@ -1,7 +1,8 @@
 package logic.screens;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Vector;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -27,15 +28,15 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	
 	// frametime keeps track of the time between draw calls (basically how long has it been since I drew the last frame)
 	private long frametime_nanoSeconds = 0;
-	private double frametime_seconds = 0;
+	private double frametime_milliseconds = 0;
 	
 	// counts time passed since newest juggle item was created
-	private double juggleSpawnTimer = 0.0;
+	private double juggleSpawnTimer;
 
     // extendible list to hold juggle objects
-    private Vector<JuggleObject> juggleObjects;
+    private List<JuggleObject> juggleObjects;
     
-    private Random randomNumberGenerator = new Random();
+    private Random random = new Random();
  
 	
 	// paddle position
@@ -46,89 +47,40 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 	private static final int maxJuggleObjectCount = 6;
 	
 	private AnimationTimer gameLoop;
+	private Image tempJuggleImage = new Image( "https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png?attachment" );
+    private Image tempPaddleImage = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
 
 	public GamePane(ScreenManager screens) {
 		super(screens);
 		Canvas canvas = new Canvas(frameWidth, frameHeight);
         getChildren().add( canvas );
         
-        Image tempJuggleImage = new Image( "https://cdn.pixabay.com/photo/2016/04/24/04/53/globe-1348777_640.png?attachment" );
-        Image tempPaddleImage = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         gameLoop = new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
             	// Get frametime
-            	frametime_nanoSeconds = currentNanoTime - frametime_nanoSeconds;
-            	frametime_seconds = (frametime_nanoSeconds / 1000000000);
+                long frameDiff = currentNanoTime - frametime_nanoSeconds;
+            	frametime_milliseconds = (frameDiff / 1000);
+            	frametime_nanoSeconds = currentNanoTime;
             	
             	// update spawn timer
-            	juggleSpawnTimer += frametime_seconds;
+            	juggleSpawnTimer += frametime_milliseconds;
             	
-            	// for each juggle object update it's position and speed
-            	for (int i = 0; i < juggleObjects.size(); i++)
-            	{
-            		//**********************************************************************************
-                	// Update positions, speeds, etc... using physics
-            		juggleObjects.get(i).update(frametime_seconds, forceOfGravity);
-            		
-            		if (juggleObjects.get(i).getPosY() > (frameHeight * 2))
-            		{
-            			juggleObjects.remove(i);
-            		}
-            	}
+            	updateAll();
+            	checkCollisions();
             	
-            	// for each juggle object compute collisions
-            	for (int i = 0; i < juggleObjects.size(); i++)
-            	{
-            		circleCollisions(juggleObjects, i, frametime_seconds);
-            		paddleCollisions(juggleObjects.get(i), paddlePosX, paddleRadius);
-//            		juggleObjects.get(i).checkReflection_floor(frameHeight, energyLossRatio);
-            		juggleObjects.get(i).checkReflection_walls(frameWidth, energyLossRatio);
-            	}
-            	
-            	//**********************************************************************************
-                // Clear the canvas
-                gc.setFill( new Color(0.85, 0.85, 1.0, 1.0) );
-                gc.fillRect(0,0, frameWidth, frameHeight);
-                
-            	// for each juggle object draw
-            	for (int i = 0; i < juggleObjects.size(); i++)
-            	{
-                    // Draw juggle object
-                    gc.drawImage( tempJuggleImage, 
-                    	0,
-                    	0,
-                    	tempJuggleImage.getWidth(),
-                    	tempJuggleImage.getHeight(),
-                    	juggleObjects.get(i).getPosX() - juggleObjects.get(i).getRadius(),
-                    	juggleObjects.get(i).getPosY() - juggleObjects.get(i).getRadius(),
-                    	juggleObjects.get(i).getRadius() * 2.0,
-                    	juggleObjects.get(i).getRadius() * 2.0 );
-            	}
-            	
-            	// Draw paddle object
-                gc.drawImage( tempPaddleImage, 
-                	0,
-                	0,
-                	tempPaddleImage.getWidth(),
-                	tempPaddleImage.getHeight(),
-                	paddlePosX - paddleRadius,
-                	frameHeight - 5,
-                	paddleRadius * 2.0,
-                	10 );
-            	
-            	//draw background color
-                gc.setFill( Color.BLUE );
+            	drawCanvas(canvas.getGraphicsContext2D());
             }
         };
 	}
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
-	    juggleObjects = new Vector<JuggleObject>();
+        juggleObjects = new ArrayList<JuggleObject>();
+        frametime_nanoSeconds = 0;
+        frametime_milliseconds = 0;
+        juggleSpawnTimer = 0.0;
         gameLoop.start();
 	}
 
@@ -140,19 +92,88 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
     	// check if enough time has passed or if the max item count is reached
     	if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < maxJuggleObjectCount) )
     	{
-    		double randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY;
-    		
-    		randPosX = ( randomNumberGenerator.nextDouble() * (frameWidth/2.0) + (frameWidth/4.0) );
-    		randPosY = ( randomNumberGenerator.nextDouble() * (frameHeight/2.0) + (frameHeight/4.0) );
-    		randRadius = ( randomNumberGenerator.nextDouble() * (75.0) + (25.0) );
-    		randMass = ( Math.PI * Math.pow(randRadius, 2.0) );
-    		randSpeedX = ( randomNumberGenerator.nextDouble() * (0.001) - (0.001/2.0) );
-    		randSpeedY = ( randomNumberGenerator.nextDouble() * (0.001) - (0.001/2.0) );
-    		
-    		juggleObjects.add(new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY));
+    		juggleObjects.add(createRandomJuggleObject());
     		juggleSpawnTimer = 0.0;
     	}
     }
+	
+	public void updateAll()
+	{
+        // for each juggle object update it's position and speed
+        for (int i = 0; i < juggleObjects.size(); i++)
+        {
+            //**********************************************************************************
+            // Update positions, speeds, etc... using physics
+            juggleObjects.get(i).update(frametime_milliseconds, forceOfGravity);
+            
+            if (juggleObjects.get(i).getPosY() > (frameHeight * 2))
+            {
+                juggleObjects.remove(i);
+            }
+        }
+	}
+	
+	public void checkCollisions()
+	{
+        // for each juggle object compute collisions
+        for (int i = 0; i < juggleObjects.size(); i++)
+        {
+            circleCollisions(juggleObjects, i, frametime_milliseconds);
+            paddleCollisions(juggleObjects.get(i), paddlePosX, paddleRadius);
+//          juggleObjects.get(i).checkReflection_floor(frameHeight, energyLossRatio);
+            juggleObjects.get(i).checkReflection_walls(frameWidth, energyLossRatio);
+        }
+	}
+	
+	public void drawCanvas(GraphicsContext gc)
+	{
+        // Clear the canvas
+        gc.setFill( new Color(0.85, 0.85, 1.0, 1.0) );
+        gc.fillRect(0,0, frameWidth, frameHeight);
+        
+        // for each juggle object draw
+        for (JuggleObject j : juggleObjects)
+        {
+            // Draw juggle object
+            gc.drawImage( tempJuggleImage, 
+                0,
+                0,
+                tempJuggleImage.getWidth(),
+                tempJuggleImage.getHeight(),
+                j.getPosX() - j.getRadius(),
+                j.getPosY() - j.getRadius(),
+                j.getRadius() * 2.0,
+                j.getRadius() * 2.0 );
+        }
+        
+        // Draw paddle object
+        gc.drawImage( tempPaddleImage, 
+            0,
+            0,
+            tempPaddleImage.getWidth(),
+            tempPaddleImage.getHeight(),
+            paddlePosX - paddleRadius,
+            frameHeight - 5,
+            paddleRadius * 2.0,
+            10 );
+        
+        //draw background color
+        gc.setFill( Color.BLUE );
+	}
+	
+	public JuggleObject createRandomJuggleObject()
+	{
+        double randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY;
+        
+        randPosX = ( random.nextDouble() * (frameWidth/2.0) + (frameWidth/4.0) );
+        randPosY = ( random.nextDouble() * (frameHeight/2.0) + (frameHeight/4.0) );
+        randRadius = ( random.nextDouble() * (75.0) + (25.0) );
+        randMass = ( Math.PI * Math.pow(randRadius, 2.0) );
+        randSpeedX = ( random.nextDouble() * (0.001) - (0.001/2.0) );
+        randSpeedY = ( random.nextDouble() * (0.001) - (0.001/2.0) );
+        
+        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY);
+	}
     
     public void paddleCollisions(JuggleObject currentJuggleObject, double paddlePosX, double paddleRadius)
     {
@@ -162,30 +183,32 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
     	}
     }
     
-    public void circleCollisions(Vector<JuggleObject> juggleObjects, int currentIndex, double frametime_seconds)
+    public void circleCollisions(List<JuggleObject> juggleObjects, int currentIndex, double frametime_seconds)
     {
     	double radius1, radius2, posX1, posX2, posY1, posY2;
     	double mass1, mass2, speedX1, speedX2, speedY1, speedY2, newSpeedX1, newSpeedX2, newSpeedY1, newSpeedY2;
     	double radiusSumSquare, distance;
     	
-    	radius1 = juggleObjects.get(currentIndex).getRadius();
-    	posX1 = juggleObjects.get(currentIndex).getPosX();
-    	posY1 = juggleObjects.get(currentIndex).getPosY();
-    	mass1 = juggleObjects.get(currentIndex).getMass();
-    	speedX1 = juggleObjects.get(currentIndex).getSpeedX();
-    	speedY1 = juggleObjects.get(currentIndex).getSpeedY();
+    	JuggleObject current = juggleObjects.get(currentIndex); 
+    	radius1 = current.getRadius();
+    	posX1 = current.getPosX();
+    	posY1 = current.getPosY();
+    	mass1 = current.getMass();
+    	speedX1 = current.getSpeedX();
+    	speedY1 = current.getSpeedY();
     	
     	for (int i = 0; i < juggleObjects.size(); i++)
     	{
+    	    JuggleObject object = juggleObjects.get(i);
     		// skip check for collisions with ourself
     		if (i != currentIndex)
     		{
-    			radius2 = juggleObjects.get(i).getRadius();
-    	    	posX2 = juggleObjects.get(i).getPosX();
-    	    	posY2 = juggleObjects.get(i).getPosY();
-    	    	mass2 = juggleObjects.get(i).getMass();
-    	    	speedX2 = juggleObjects.get(i).getSpeedX();
-    	    	speedY2 = juggleObjects.get(i).getSpeedY();
+    			radius2 = object.getRadius();
+    	    	posX2 = object.getPosX();
+    	    	posY2 = object.getPosY();
+    	    	mass2 = object.getMass();
+    	    	speedX2 = object.getSpeedX();
+    	    	speedY2 = object.getSpeedY();
     	    	
     	    	radiusSumSquare = Math.pow((radius1 + radius2), 2.0);
     	    	distance = (Math.pow((posX2 - posX1), 2.0) + Math.pow((posY2 - posY1), 2.0));
@@ -198,17 +221,17 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
     	    		newSpeedX2 = (speedX2 * (mass2 - mass1) + (2.0 * mass1 * speedX1)) / (mass1 + mass2);
     	    		newSpeedY2 = (speedY2 * (mass2 - mass1) + (2.0 * mass1 * speedY1)) / (mass1 + mass2);
     				
-    	    		juggleObjects.get(currentIndex).setSpeedX(newSpeedX1);
-    	    		juggleObjects.get(currentIndex).setSpeedY(newSpeedY1);
+    	    		current.setSpeedX(newSpeedX1);
+    	    		current.setSpeedY(newSpeedY1);
     	    		
-    	    		juggleObjects.get(i).setSpeedX(newSpeedX2);
-    	    		juggleObjects.get(i).setSpeedY(newSpeedY2);
+    	    		object.setSpeedX(newSpeedX2);
+    	    		object.setSpeedY(newSpeedY2);
     	    		
-    	    		juggleObjects.get(currentIndex).setPosX(posX1 + (newSpeedX1 * frametime_seconds));
-    	    		juggleObjects.get(currentIndex).setPosY(posY1 + (newSpeedY1 * frametime_seconds));
+    	    		current.setPosX(posX1 + (newSpeedX1 * frametime_seconds));
+    	    		current.setPosY(posY1 + (newSpeedY1 * frametime_seconds));
     	    		
-    	    		juggleObjects.get(i).setPosX(posX2 + (newSpeedX2 * frametime_seconds));
-    	    		juggleObjects.get(i).setPosY(posY2 + (newSpeedY2 * frametime_seconds));
+    	    		object.setPosX(posX2 + (newSpeedX2 * frametime_seconds));
+    	    		object.setPosY(posY2 + (newSpeedY2 * frametime_seconds));
     	    	}
     		}
     	}
