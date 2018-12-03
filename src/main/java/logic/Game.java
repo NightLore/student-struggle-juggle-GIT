@@ -37,7 +37,7 @@ public class Game {
 
     public Game(Canvas canvas) {
         paddle = new Paddle(250, FRAME_HEIGHT - 5, 10);
-        info = new GameInfo();
+        info = GameInfo.getInstance();
         
         gameLoop = new AnimationTimer()
         {

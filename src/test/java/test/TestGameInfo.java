@@ -17,7 +17,7 @@ public class TestGameInfo {
 	@Test
 	public void testIncrementScore()
 	{
-	    GameInfo g = new GameInfo();
+	    GameInfo g = GameInfo.getInstance();
 	    
 	    int oldScore = g.getScore();
 	    g.incrementScore();
@@ -30,7 +30,7 @@ public class TestGameInfo {
 	@Test
 	public void testDecrementLives()
 	{
-        GameInfo g = new GameInfo();
+        GameInfo g = GameInfo.getInstance();
         g.decrementLives();
 		assertEquals(g.getNumLives(), 4);
 	}

@@ -7,12 +7,18 @@ public class GameInfo {
     
     private static final int[] DEFAULT_LIVES = {10, 5, 1};
     
+    private static final GameInfo INSTANCE = new GameInfo();
+    public static GameInfo getInstance()
+    {
+        return INSTANCE;
+    }
+    
     private int score;
     private int numLives;
     private int difficulty;
     private Set<Score> scoreList;
 
-    public GameInfo() {
+    private GameInfo() {
         difficulty = 1;
         reset();
     }
@@ -23,9 +29,15 @@ public class GameInfo {
         numLives = DEFAULT_LIVES[difficulty];
         scoreList = new TreeSet<>();
     }
+    
     public int getScore()
     {
         return score;
+    }
+    
+    public void setScore(int s)
+    {
+        this.score = s;
     }
     
     public void incrementScore()
@@ -36,6 +48,11 @@ public class GameInfo {
     public int getNumLives()
     {
         return numLives;
+    }
+
+    public void setNumLives(int numLives)
+    {
+        this.numLives = numLives;
     }
 
     public void decrementLives()
