@@ -16,7 +16,10 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 		super(screens);
 		Canvas canvas = new Canvas(Game.FRAME_WIDTH, Game.FRAME_HEIGHT);
 		Button pauseButton = new Button("PAUSE");
-		pauseButton.setOnAction(e -> screens.switchTo(ScreenType.PAUSE));
+		pauseButton.setOnAction(e -> {
+            game.pause();
+		    screens.switchTo(ScreenType.PAUSE);
+		});
         getChildren().addAll( canvas, pauseButton );
         game = new Game(canvas);
 	}

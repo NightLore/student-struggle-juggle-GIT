@@ -34,12 +34,13 @@ public class Game {
 
     private List<JuggleObject> juggleObjects;
     private Paddle paddle;
-    private int score;
+    private GameInfo info;
 
     private AnimationTimer gameLoop;
 
     public Game(Canvas canvas) {
         paddle = new Paddle(250, FRAME_HEIGHT - 5, 10);
+        info = new GameInfo();
         
         gameLoop = new AnimationTimer()
         {
@@ -59,6 +60,7 @@ public class Game {
                 drawCanvas(canvas.getGraphicsContext2D());
             }
         };
+        reset();
     }
     
     public void reset()
@@ -67,14 +69,17 @@ public class Game {
         frametimeNanoSeconds = 0;
         frameDiffMilliseconds = 0;
         juggleSpawnTimer = 0.0;
-        score = 0;
+        info.reset();
     }
     
     public void start()
     {
-        gameLoop.stop();
-        reset();
         gameLoop.start();
+    }
+    
+    public void pause()
+    {
+        gameLoop.stop();
     }
     
     public void updatePaddle(double mouseX)
@@ -134,7 +139,7 @@ public class Game {
         if ( (currentJuggleObject.getPosX() >= (paddlePosX - paddleRadius)) && (currentJuggleObject.getPosX() <= (paddlePosX + paddleRadius)) )
         {
             currentJuggleObject.checkReflectionFloor(FRAME_HEIGHT, ENERGY_LOSS_RATIO);
-            score++;
+            info.incrementScore();
         }
     }
     
@@ -168,11 +173,6 @@ public class Game {
         
         //draw background color
         gc.setFill( Color.BLUE );
-    }
-    
-    public int getScore()
-    {
-        return score;
     }
 
 }
