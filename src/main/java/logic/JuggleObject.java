@@ -41,6 +41,7 @@ public class JuggleObject
 	
 	public void updatePosition(double frametime)
 	{
+        System.out.println(speedX + "," + speedY + "," + frametime);
 		// currentPosition = initialPosition + (speed * time)
 		posX = posX + (speedX * frametime);
 		posY = posY + (speedY * frametime);
