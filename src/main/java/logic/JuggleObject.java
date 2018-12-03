@@ -1,5 +1,6 @@
 package logic;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class JuggleObject
@@ -12,7 +13,7 @@ public class JuggleObject
 	private double mass;
     private double speedX;
     private double speedY;
-	private Image img;
+	private Image image;
 	// *******************************************************************************************
 	// constructors
 	public JuggleObject(double posX, double posY, double radius, double mass, double speedX, double speedY,Image image)
@@ -23,7 +24,7 @@ public class JuggleObject
 		this.mass = mass;
 		this.speedX = speedX;
 		this.speedY = speedY;
-		this.img = image;
+		this.image = image;
 	}
 	// *******************************************************************************************
 	// methods
@@ -81,6 +82,20 @@ public class JuggleObject
     	}
 	}
 	
+	public void draw(GraphicsContext gc)
+	{
+        // Draw juggle object
+        gc.drawImage( image,
+            0,
+            0,
+            image.getWidth(),
+            image.getHeight(),
+            getPosX() - getRadius(),
+            getPosY() - getRadius(),
+            getRadius() * 2.0,
+            getRadius() * 2.0 );
+	}
+	
 	// *******************************************************************************************
 	// getters & setters
 	public double getRadius() {
@@ -120,10 +135,9 @@ public class JuggleObject
 		this.speedY = speedY;
 	}
 
-	public Image getImage() {
-		return img;
-	}
-	// *******************************************************************************************
+    public Image getImage() {
+        return image;
+    }
 }
 
 

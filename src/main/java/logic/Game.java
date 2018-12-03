@@ -194,16 +194,7 @@ public class Game {
         // for each juggle object draw
         for (JuggleObject j : this.juggleObjects)
         {
-            // Draw juggle object
-            gc.drawImage( j.getImage(),
-                0,
-                0,
-                j.getImage().getWidth(),
-                j.getImage().getHeight(),
-                j.getPosX() - j.getRadius(),
-                j.getPosY() - j.getRadius(),
-                j.getRadius() * 2.0,
-                j.getRadius() * 2.0 );
+            j.draw(gc);
         }
         
         paddle.draw(gc);
