@@ -101,8 +101,7 @@ public class Game {
             // Update positions, speeds, etc... using physics
             juggleObjects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
             
-            if (juggleObjects.get(i).getPosY() > (FRAME_HEIGHT * 2))
-            {
+            if (juggleObjects.get(i).getPosY() > (FRAME_HEIGHT * 2)) {
                 ThemeManager.getInstance().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
                 juggleObjects.remove(i);
                 info.decrementLives();
@@ -149,8 +148,7 @@ public class Game {
         gc.fillRect(0,0, Game.FRAME_WIDTH, Game.FRAME_HEIGHT);
         
         // for each juggle object draw
-        for (JuggleObject j : this.juggleObjects)
-        {
+        for (JuggleObject j : this.juggleObjects) {
             j.draw(gc);
         }
         
