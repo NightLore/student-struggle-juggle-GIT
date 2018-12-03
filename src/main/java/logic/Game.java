@@ -2,7 +2,6 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -23,8 +22,6 @@ public class Game {
     
     // max number of juggle items allowed
     private static final int MAX_NUM_JUGGLE_OBJECTS = 6;
-    
-    private static final Random RANDOM = new Random();
     
     // frametime keeps track of the time between draw calls (basically how long has it been since I drew the last frame)
     private long frametimeNanoSeconds = 0;
@@ -89,7 +86,7 @@ public class Game {
         // check if enough time has passed or if the max item count is reached
         if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS) && ScreenManager.getThemeManager().getActiveTheme().hasNextObject())
         {
-            juggleObjects.add(createRandomJuggleObject());
+            juggleObjects.add(JuggleObject.createRandom(FRAME_WIDTH, FRAME_HEIGHT, ScreenManager.getThemeManager().getActiveTheme().getNextObject()));
             juggleSpawnTimer = 0.0;
         }
     }
@@ -120,18 +117,6 @@ public class Game {
             paddleCollisions(juggleObjects.get(i), paddle.getX(), paddle.getRadius());
             juggleObjects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
         }
-    }
-    
-    public JuggleObject createRandomJuggleObject()
-    {
-        double randPosX = ( RANDOM.nextDouble() * (FRAME_WIDTH/2.0) + (FRAME_WIDTH/4.0) );
-        double randPosY = ( RANDOM.nextDouble() * (FRAME_HEIGHT/2.0) + (FRAME_HEIGHT/4.0) );
-        double randRadius = ( RANDOM.nextDouble() * (75.0) + (25.0) );
-        double randMass = ( Math.PI * Math.pow(randRadius, 2.0) );
-        double randSpeedX = ( RANDOM.nextDouble() * (0.001) - (0.001/2.0) );
-        double randSpeedY = ( RANDOM.nextDouble() * (0.001) - (0.001/2.0) );
-        
-        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY,ScreenManager.getThemeManager().getActiveTheme().getNextObject());
     }
     
     public void paddleCollisions(JuggleObject currentJuggleObject, double paddlePosX, double paddleRadius)

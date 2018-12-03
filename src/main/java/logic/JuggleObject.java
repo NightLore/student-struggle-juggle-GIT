@@ -1,10 +1,24 @@
 package logic;
 
+import java.util.Random;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class JuggleObject
 {
+    private static final Random RANDOM = new Random();
+    public static JuggleObject createRandom(int maxWidth, int maxHeight, Image image)
+    {
+        double randPosX = RANDOM.nextDouble() * (maxWidth/2.0) + (maxWidth/4.0);
+        double randPosY = RANDOM.nextDouble() * (maxHeight/2.0) + (maxHeight/4.0);
+        double randRadius = RANDOM.nextDouble() * (75.0) + (25.0);
+        double randMass = Math.PI * Math.pow(randRadius, 2.0);
+        double randSpeedX = RANDOM.nextDouble() * (0.001) - (0.001/2.0);
+        double randSpeedY = RANDOM.nextDouble() * (0.001) - (0.001/2.0);
+        
+        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY,ScreenManager.getThemeManager().getActiveTheme().getNextObject());
+    }
 	// *******************************************************************************************
 	// attributes
 	private double radius;
