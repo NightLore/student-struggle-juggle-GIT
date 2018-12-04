@@ -8,8 +8,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -24,7 +27,7 @@ import logic.themes.ThemeManager;
 
 public class ScoreboardPane extends UpdatablePane {
 	
-	public static final int MAXSCORES = 10;
+	public static final int MAXSCORES = 8;
 	
 	private Label[][] labels;
 
@@ -45,9 +48,14 @@ public class ScoreboardPane extends UpdatablePane {
 		table.setStyle("-fx-background-color: #FFFFFF; -fx-grid-lines-visible: true");
 		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 		center.setCenter(table);
+		
+        Pane row0 = new Pane();
+        table.add(row0, 0, 0, 3, 1);
+        // GridPane.setRowSpan(row0, 3);
+        row0.setBackground(new Background(new BackgroundFill(new Color(0.9, 0.9, 0.9, 0.9), null, null)));
 
-		labels = new Label[3][MAXSCORES];
-		for (int i = 0; i < MAXSCORES; i++)
+		labels = new Label[3][MAXSCORES+1];
+		for (int i = 0; i < MAXSCORES+1; i++)
 		{
 			labels[0][i] = new Label();
 			labels[1][i] = new Label();
@@ -56,6 +64,9 @@ public class ScoreboardPane extends UpdatablePane {
             table.add(setDefaults(labels[1][i]), 1, i);
 			table.add(setDefaults(labels[2][i]), 2, i);
 		}
+		labels[0][0].setText("Name");
+        labels[1][0].setText("Difficulty");
+        labels[2][0].setText("Score");
 		
 		ImageView backToMenuImage = new ImageView(currentTheme.getAsset("backToMenuImage"));
         Button backButton = new Button("",backToMenuImage);
@@ -77,7 +88,7 @@ public class ScoreboardPane extends UpdatablePane {
 	
 	private void updateTable(Collection<Score> scores) {
 		Iterator<Score> iterator = scores.iterator();
-		for (int i = 0; i < MAXSCORES && iterator.hasNext(); i++)
+		for (int i = 1; i <= MAXSCORES && iterator.hasNext(); i++)
 		{
 			Score score = iterator.next();
 			labels[0][i].setText(score.getName());

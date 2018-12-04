@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import logic.JuggleObject;
 
 /**
- * @author
+ * @author Natalie Miller
  */
 public class TestJuggleObject {
 
     /**
-     * @author
+     * @author Natalie Miller
      */
     @Test
     public void testUpdateSpeed()
@@ -23,7 +23,7 @@ public class TestJuggleObject {
     }
 
     /**
-     * @author
+     * @author Natalie Miller
      */
     @Test
     public void testUpdatePosition()

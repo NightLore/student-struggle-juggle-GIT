@@ -10,6 +10,7 @@ public class Score implements Comparable<Score> {
 
 	public Score(String name, int difficulty, int value) {
 		this.name = name;
+        this.difficulty = difficulty;
 		this.value = value;
 	}
 

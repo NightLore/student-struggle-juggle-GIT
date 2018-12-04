@@ -9,12 +9,12 @@ import logic.JuggleObject;
 import logic.Paddle;
 
 /**
- * @author
+ * @author Henry Luengas
  */
 public class TestPaddle {
     
     /**
-     * @author
+     * @author Henry Luengas
      */
     @Test
     public void testCollidesWithTrue()
@@ -25,7 +25,7 @@ public class TestPaddle {
     }
 
     /**
-     * @author
+     * @author Henry Luengas
      */
     @Test
     public void testCollidesWithFalse()
