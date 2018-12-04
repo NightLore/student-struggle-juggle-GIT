@@ -104,17 +104,22 @@ public class JuggleObject
 	public boolean checkCollision(JuggleObject j, double frameDiffMilliseconds)
 	{
         double radiusSumSquare = Math.pow((radius + j.radius), 2.0);
-        double distance = Math.pow((j.x - x), 2.0) + Math.pow((j.y - y), 2.0);
+        double distance = (Math.pow((j.x - x), 2.0) + Math.pow((j.y - y), 2.0));
         
         if (distance <= radiusSumSquare)
         {
             double totalMass = mass + j.mass;
+            double newSpeedX1 = (speedX * (mass - j.mass) + (2.0 * j.mass * j.speedX)) / totalMass;
+            double newSpeedY1 = (speedY * (mass - j.mass) + (2.0 * j.mass * j.speedY)) / totalMass;
             
-            speedX = (speedX * (mass - j.mass) + (2.0 * j.mass * j.speedX)) / totalMass;
-            speedY = (speedY * (mass - j.mass) + (2.0 * j.mass * j.speedY)) / totalMass;
+            double newSpeedX2 = (j.speedX * (j.mass - mass) + (2.0 * mass * speedX)) / totalMass;
+            double newSpeedY2 = (j.speedY * (j.mass - mass) + (2.0 * mass * speedY)) / totalMass;
             
-            j.speedX = (j.speedX * (j.mass - mass) + (2.0 * mass * speedX)) / totalMass;
-            j.speedY = (j.speedY * (j.mass - mass) + (2.0 * mass * speedY)) / totalMass;
+            speedX = newSpeedX1;
+            speedY = newSpeedY1;
+            
+            j.speedX = newSpeedX2;
+            j.speedY = newSpeedY2;
             
             updatePosition(frameDiffMilliseconds);
             j.updatePosition(frameDiffMilliseconds);
