@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class GameInfo {
     
-    private static final int[] DEFAULT_LIVES = {10, 5, 1};
+    private static final int[] DEFAULT_LIVES = {11, 6, 2};
     
     private static final GameInfo INSTANCE = new GameInfo();
     public static GameInfo getInstance()

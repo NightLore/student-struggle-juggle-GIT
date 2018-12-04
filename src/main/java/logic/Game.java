@@ -91,7 +91,7 @@ public class Game {
         // check if enough time has passed or if the max item count is reached
         if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS) && ThemeManager.getInstance().getActiveTheme().hasNextObject())
         {
-            juggleObjects.add(JuggleObject.createRandom(FRAME_WIDTH, FRAME_HEIGHT, ThemeManager.getInstance().getActiveTheme().getNextObject()));
+            juggleObjects.add(JuggleObject.createRandom(FRAME_WIDTH, FRAME_HEIGHT / 2, ThemeManager.getInstance().getActiveTheme().getNextObject()));
             juggleSpawnTimer = 0.0;
         }
     }
@@ -151,7 +151,17 @@ public class Game {
     {
         // Clear the canvas
         gc.setFill( new Color(0.85, 0.85, 1.0, 1.0) );
-        gc.fillRect(0,0, Game.FRAME_WIDTH, Game.FRAME_HEIGHT);
+        gc.fillRect(0,0, FRAME_WIDTH, FRAME_HEIGHT);
+        
+        // draw score
+        gc.setFont(ThemeManager.getInstance().getActiveTheme().getSettingsFont());
+        gc.setFill(new Color(0.0, 0.0, 0.0, 1.0));
+        gc.fillText("Score: " + GameInfo.getInstance().getScore(), 5.0, FRAME_HEIGHT - 5.0);
+        
+        // draw lives
+        gc.setFont(ThemeManager.getInstance().getActiveTheme().getSettingsFont());
+        gc.setFill(new Color(1.0, 0.3, 0.3, 1.0));
+        gc.fillText("Lives: " + GameInfo.getInstance().getNumLives(), 5.0, FRAME_HEIGHT - 40.0);
         
         // for each juggle object draw
         for (JuggleObject j : this.juggleObjects) {
