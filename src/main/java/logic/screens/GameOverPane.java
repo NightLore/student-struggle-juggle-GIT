@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -57,7 +58,9 @@ public class GameOverPane extends UpdatablePane {
         buttonBox.setSpacing(10);
         Button saveButton = new Button("Save score");
         saveButton.setOnAction(e -> setScoreAndSwitch(name.getText()));
-        Button backButton = new Button("Back to Main Menu");
+        
+        ImageView backToMenuImage = new ImageView(currentTheme.getAsset("backToMenuImage"));
+        Button backButton = new Button("",backToMenuImage);
         backButton.setOnAction(e -> screens.switchTo(ScreenType.MAINMENU));
         buttonBox.getChildren().addAll(saveButton, backButton);
         

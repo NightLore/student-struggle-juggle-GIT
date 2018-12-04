@@ -33,6 +33,7 @@ public class Theme {
         //Backgrounds
         map.put("bg",new Image(new FileInputStream("./"+name+"/backgrounds/"+"MenuPlainBackground"+".jpg")));
 
+        map.put("resumeImage",new Image(new FileInputStream("./"+name+"/buttons/ResumeButton"+".png")));
         map.put("startImage",new Image(new FileInputStream("./"+name+"/buttons/StartButton"+".png")));
         map.put("settingImage",new Image(new FileInputStream("./"+name+"/buttons/SettingsButton"+".png")));
         map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/ScoreButton"+".png")));
