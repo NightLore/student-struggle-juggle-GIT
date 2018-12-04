@@ -31,8 +31,6 @@ public class ScoreboardPane extends UpdatablePane {
 	public ScoreboardPane(ScreenManager screens) {
 		super(screens);
 		Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
-
-		//Font settingsFont = currentTheme.getSettingsFont();
 		
 		Font headerFont = currentTheme.getHeaderFont();
 		Text header = new Text("Scores");
@@ -47,7 +45,7 @@ public class ScoreboardPane extends UpdatablePane {
 		table.setStyle("-fx-background-color: #FFFFFF; -fx-grid-lines-visible: true");
 		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 		center.setCenter(table);
-		
+
 		labels = new Label[2][MAXSCORES];
 		for (int i = 0; i < MAXSCORES; i++)
 		{
@@ -89,6 +87,7 @@ public class ScoreboardPane extends UpdatablePane {
 		label.setPadding(new Insets(10, 10, 10, 10));
 		GridPane.setHgrow(label, Priority.ALWAYS);
 		GridPane.setVgrow(label, Priority.ALWAYS);
+        label.setFont(ThemeManager.getInstance().getActiveTheme().getSettingsFont());
 		return label;
 	}
 
