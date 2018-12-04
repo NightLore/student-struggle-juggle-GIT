@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
+import javafx.scene.image.Image;
+
 
 /**
  * ThemeManager implements the package for Theme Manager, this enables other parts of the program to quickly and easily
@@ -13,6 +15,7 @@ import java.util.NoSuchElementException;
  * @version student-struggle-juggle-GIT
  */
 public class ThemeManager {
+    public static final Image DEFAULT_PADDLE_IMAGE = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
 
     private String defaultTheme = "Default";
 

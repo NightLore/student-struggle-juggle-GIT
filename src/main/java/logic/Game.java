@@ -52,8 +52,9 @@ public class Game {
                 // update spawn timer
                 juggleSpawnTimer += frameDiffMilliseconds;
                 
-                updateAll();
-                checkCollisions();
+                checkSpawn();
+                updateAll(juggleObjects);
+                checkCollisions(juggleObjects);
                 
                 drawCanvas(canvas.getGraphicsContext2D());
             }
@@ -82,48 +83,53 @@ public class Game {
     
     public void updatePaddle(double mouseX)
     {
-        paddle.setX(mouseX);      
-        
+        paddle.setX(mouseX);
+    }
+    
+    private void checkSpawn()
+    {
         // check if enough time has passed or if the max item count is reached
         if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS) && ThemeManager.getInstance().getActiveTheme().hasNextObject())
         {
-            juggleObjects.add(JuggleObject.createRandom(FRAME_WIDTH, FRAME_HEIGHT, ThemeManager.getInstance().getActiveTheme().getNextObject()));
+            juggleObjects.add(JuggleObject.createRandom(FRAME_WIDTH, FRAME_HEIGHT / 2, ThemeManager.getInstance().getActiveTheme().getNextObject()));
             juggleSpawnTimer = 0.0;
         }
     }
     
-    public void updateAll()
+    public void updateAll(List<JuggleObject> objects)
     {
         // for each juggle object update it's position and speed
-        for (int i = 0; i < juggleObjects.size(); i++)
+        for (int i = 0; i < objects.size(); i++)
         {
             //**********************************************************************************
             // Update positions, speeds, etc... using physics
-            juggleObjects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
+            objects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
             
-            if (juggleObjects.get(i).getPosY() > (FRAME_HEIGHT * 2)) {
-                ThemeManager.getInstance().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
-                juggleObjects.remove(i);
+            if (objects.get(i).getY() > (FRAME_HEIGHT * 2))
+            {
+                ThemeManager.getInstance().getActiveTheme().resetGameObject(objects.get(i).getImage());
+                objects.remove(i);
                 info.decrementLives();
                 if (info.getNumLives() <= 0)
                 {
-                    
+                    pause();
+                    ScreenManager.getInstance().switchTo(ScreenType.GAMEOVER);
                 }
             }
         }
     }
     
-    public void checkCollisions()
+    public void checkCollisions(List<JuggleObject> objects)
     {
         // for each juggle object compute collisions
-        for (int i = 0; i < juggleObjects.size(); i++)
+        for (int i = 0; i < objects.size(); i++)
         {
-            circleCollisions(juggleObjects, i, frameDiffMilliseconds);
-            if (paddle.collidesWith(juggleObjects.get(i), FRAME_HEIGHT, ENERGY_LOSS_RATIO))
+            circleCollisions(objects, i, frameDiffMilliseconds);
+            if (paddle.collidesWith(objects.get(i), FRAME_HEIGHT, ENERGY_LOSS_RATIO))
             {
                 info.incrementScore();
             }
-            juggleObjects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
+            objects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
         }
     }
     
@@ -145,7 +151,17 @@ public class Game {
     {
         // Clear the canvas
         gc.setFill( new Color(0.85, 0.85, 1.0, 1.0) );
-        gc.fillRect(0,0, Game.FRAME_WIDTH, Game.FRAME_HEIGHT);
+        gc.fillRect(0,0, FRAME_WIDTH, FRAME_HEIGHT);
+        
+        // draw score
+        gc.setFont(ThemeManager.getInstance().getActiveTheme().getSettingsFont());
+        gc.setFill(new Color(0.0, 0.0, 0.0, 1.0));
+        gc.fillText("Score: " + GameInfo.getInstance().getScore(), 5.0, FRAME_HEIGHT - 5.0);
+        
+        // draw lives
+        gc.setFont(ThemeManager.getInstance().getActiveTheme().getSettingsFont());
+        gc.setFill(new Color(1.0, 0.3, 0.3, 1.0));
+        gc.fillText("Lives: " + GameInfo.getInstance().getNumLives(), 5.0, FRAME_HEIGHT - 40.0);
         
         // for each juggle object draw
         for (JuggleObject j : this.juggleObjects) {

@@ -10,30 +10,30 @@ public class JuggleObject
     private static final Random RANDOM = new Random();
     public static JuggleObject createRandom(int maxWidth, int maxHeight, Image image)
     {
-        double randPosX = RANDOM.nextDouble() * (maxWidth/2.0) + (maxWidth/4.0);
-        double randPosY = RANDOM.nextDouble() * (maxHeight/2.0) + (maxHeight/4.0);
+        double randX = RANDOM.nextDouble() * (maxWidth/2.0) + (maxWidth/4.0);
+        double randY = RANDOM.nextDouble() * (maxHeight/2.0) + (maxHeight/4.0);
         double randRadius = RANDOM.nextDouble() * (75.0) + (25.0);
         double randMass = Math.PI * Math.pow(randRadius, 2.0);
         double randSpeedX = RANDOM.nextDouble() * (0.001) - (0.001/2.0);
         double randSpeedY = RANDOM.nextDouble() * (0.001) - (0.001/2.0);
         
-        return new JuggleObject(randPosX, randPosY, randRadius, randMass, randSpeedX, randSpeedY, image);
+        return new JuggleObject(randX, randY, randRadius, randMass, randSpeedX, randSpeedY, image);
     }
 	// *******************************************************************************************
 	// attributes
 	private double radius;
-	private double posX;
-	private double posY;
+	private double x;
+	private double y;
 	private double mass;
     private double speedX;
     private double speedY;
 	private Image image;
 	// *******************************************************************************************
 	// constructors
-	public JuggleObject(double posX, double posY, double radius, double mass, double speedX, double speedY,Image image)
+	public JuggleObject(double x, double y, double radius, double mass, double speedX, double speedY,Image image)
 	{
-		this.posX = posX;
-		this.posY = posY;
+		this.x = x;
+		this.y = y;
 		this.radius = radius;
 		this.mass = mass;
 		this.speedX = speedX;
@@ -54,24 +54,24 @@ public class JuggleObject
 	public void updateSpeed(double accelerationX, double accelerationY, double frametime)
 	{
 		// currentSpeed = initialSpeed + (acceleration * time)
-		speedX = speedX + (accelerationX * frametime);
-		speedY = speedY + (accelerationY * frametime);
+		speedX += (accelerationX * frametime);
+		speedY += (accelerationY * frametime);
 	}
 	
 	public void updatePosition(double frametime)
 	{
 		// currentPosition = initialPosition + (speed * time)
-		posX = posX + (speedX * frametime);
-		posY = posY + (speedY * frametime);
+		x += (speedX * frametime);
+		y += (speedY * frametime);
 	}
 	
 	// reflect off the floor of the scene
 	public boolean checkReflectionFloor(int frameHeight, double energyLossRatio)
 	{
-    	if ( (posY + radius >= frameHeight) && (posY - radius <= frameHeight) )
+    	if ( (y + radius >= frameHeight) && (y - radius <= frameHeight) )
     	{
     		// ensure the object is not trapped in or past a reflection surface
-    		posY = (frameHeight - radius);
+    		y = (frameHeight - radius);
     		// reflect speed, reducing it by a constant factor
     		speedY = (0.0 - Math.abs(energyLossRatio * speedY));
     		return true;
@@ -82,18 +82,18 @@ public class JuggleObject
 	// reflect off the walls of the scene
 	public boolean checkReflectionWalls(int frameWidth, double energyLossRatio)
 	{
-		if (posX + radius >= frameWidth)
+		if (x + radius >= frameWidth)
     	{
     		// ensure the object is not trapped in or past a reflection surface
-    		posX = (frameWidth - radius);
+    		x = (frameWidth - radius);
     		// reflect speed, reducing it by a constant factor
     		speedX = (0.0 - Math.abs(energyLossRatio * speedX));
     		return true;
     	}
-    	if (posX - radius <= 0)
+    	if (x - radius <= 0)
     	{
     		// ensure the object is not trapped in or past a reflection surface
-    		posX = (0 + radius);
+    		x = (0 + radius);
     		// reflect speed, reducing it by a constant factor
     		speedX = (0.0 + Math.abs(energyLossRatio * speedX));
             return true;
@@ -103,35 +103,27 @@ public class JuggleObject
 	
 	public boolean checkCollision(JuggleObject j, double frameDiffMilliseconds)
 	{
-        double radius2 = j.getRadius();
-        double posX2 = j.getPosX();
-        double posY2 = j.getPosY();
-        double mass2 = j.getMass();
-        double speedX2 = j.getSpeedX();
-        double speedY2 = j.getSpeedY();
-        
-        double radiusSumSquare = Math.pow((radius + radius2), 2.0);
-        double distance = (Math.pow((posX2 - posX), 2.0) + Math.pow((posY2 - posY), 2.0));
+        double radiusSumSquare = Math.pow((radius + j.radius), 2.0);
+        double distance = (Math.pow((j.x - x), 2.0) + Math.pow((j.y - y), 2.0));
         
         if (distance <= radiusSumSquare)
         {
-            double newSpeedX1 = (speedX * (mass - mass2) + (2.0 * mass2 * speedX2)) / (mass + mass2);
-            double newSpeedY1 = (speedY * (mass - mass2) + (2.0 * mass2 * speedY2)) / (mass + mass2);
+            double totalMass = mass + j.mass;
+            double newSpeedX1 = (speedX * (mass - j.mass) + (2.0 * j.mass * j.speedX)) / totalMass;
+            double newSpeedY1 = (speedY * (mass - j.mass) + (2.0 * j.mass * j.speedY)) / totalMass;
             
-            double newSpeedX2 = (speedX2 * (mass2 - mass) + (2.0 * mass * speedX)) / (mass + mass2);
-            double newSpeedY2 = (speedY2 * (mass2 - mass) + (2.0 * mass * speedY)) / (mass + mass2);
+            double newSpeedX2 = (j.speedX * (j.mass - mass) + (2.0 * mass * speedX)) / totalMass;
+            double newSpeedY2 = (j.speedY * (j.mass - mass) + (2.0 * mass * speedY)) / totalMass;
             
-            setSpeedX(newSpeedX1);
-            setSpeedY(newSpeedY1);
+            speedX = newSpeedX1;
+            speedY = newSpeedY1;
             
-            j.setSpeedX(newSpeedX2);
-            j.setSpeedY(newSpeedY2);
+            j.speedX = newSpeedX2;
+            j.speedY = newSpeedY2;
             
-            setPosX(posX + (newSpeedX1 * frameDiffMilliseconds));
-            setPosY(posY + (newSpeedY1 * frameDiffMilliseconds));
-            
-            j.setPosX(posX2 + (newSpeedX2 * frameDiffMilliseconds));
-            j.setPosY(posY2 + (newSpeedY2 * frameDiffMilliseconds));
+            updatePosition(frameDiffMilliseconds);
+            j.updatePosition(frameDiffMilliseconds);
+            return true;
         }
 	    return false;
 	}
@@ -144,10 +136,10 @@ public class JuggleObject
             0,
             image.getWidth(),
             image.getHeight(),
-            getPosX() - getRadius(),
-            getPosY() - getRadius(),
-            getRadius() * 2.0,
-            getRadius() * 2.0 );
+            x - radius,
+            y - radius,
+            radius * 2.0,
+            radius * 2.0 );
 	}
 	
 	// *******************************************************************************************
@@ -155,38 +147,17 @@ public class JuggleObject
 	public double getRadius() {
 		return radius;
 	}
-	public void setRadius(double radius) {
-		this.radius = radius;
+	public double getX() {
+		return x;
 	}
-	public double getPosX() {
-		return posX;
-	}
-	public void setPosX(double posX) {
-		this.posX = posX;
-	}
-	public double getPosY() {
-		return posY;
-	}
-	public void setPosY(double posY) {
-		this.posY = posY;
-	}
-	public double getMass() {
-		return mass;
-	}
-	public void setMass(double mass) {
-		this.mass = mass;
+	public double getY() {
+		return y;
 	}
 	public double getSpeedX() {
 		return speedX;
 	}
-	public void setSpeedX(double speedX) {
-		this.speedX = speedX;
-	}
 	public double getSpeedY() {
 		return speedY;
-	}
-	public void setSpeedY(double speedY) {
-		this.speedY = speedY;
 	}
 
     public Image getImage() {

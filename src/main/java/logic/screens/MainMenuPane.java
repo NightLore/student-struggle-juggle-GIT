@@ -50,7 +50,7 @@ public class MainMenuPane extends UpdatablePane {
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
-		// Empty as this screen does not need to update any elements when shown
+	    // Empty as this screen does not need to update any elements when shown
 	}
 
 }

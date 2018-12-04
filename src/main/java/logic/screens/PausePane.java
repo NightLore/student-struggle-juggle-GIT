@@ -2,27 +2,41 @@ package logic.screens;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import logic.ScreenManager;
 import logic.ScreenType;
+import logic.themes.Theme;
+import logic.themes.ThemeManager;
 
 public class PausePane extends UpdatablePane {
 
     public PausePane(ScreenManager screens) {
         super(screens);
+        Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
+        Font headerFont = currentTheme.getHeaderFont();
         
-        Label label = new Label("PAUSED");
-        
-        Button resumeButton = new Button("Resume");
+        Text header = new Text("Game Paused");
+        header.setFill(Color.WHITESMOKE);
+		header.setFont(headerFont);
+		
+		ImageView resumeImage = new ImageView(currentTheme.getAsset("resumeImage"));
+        Button resumeButton = new Button("",resumeImage);
         resumeButton.setOnAction(e -> screens.switchTo(ScreenType.GAME));
-        Button settingsButton = new Button("Settings");
+        
+        ImageView settingImage = new ImageView(currentTheme.getAsset("settingImage"));
+        Button settingsButton = new Button("", settingImage);
         settingsButton.setOnAction(e -> screens.switchTo(ScreenType.SETTINGS));
-        Button backButton = new Button("Back to Main Menu");
+        
+        ImageView backToMenuImage = new ImageView(currentTheme.getAsset("backToMenuImage"));
+        Button backButton = new Button("",backToMenuImage);
         backButton.setOnAction(e -> screens.switchTo(ScreenType.MAINMENU));
         
         VBox box = new VBox();
-        box.getChildren().addAll(label, resumeButton, settingsButton, backButton);
+        box.getChildren().addAll(header, resumeButton, settingsButton, backButton);
         box.setAlignment(Pos.CENTER);
         box.setSpacing(10);
         

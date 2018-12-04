@@ -2,9 +2,9 @@ package logic;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import logic.themes.ThemeManager;
 
 public class Paddle {
-    private static final Image DEFAULT_IMAGE = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
     
     // paddle position
     private double x;
@@ -21,13 +21,13 @@ public class Paddle {
     
     public void draw(GraphicsContext gc)
     {
-        
+        Image image = ThemeManager.DEFAULT_PADDLE_IMAGE;
         // Draw paddle object
-        gc.drawImage( DEFAULT_IMAGE, 
+        gc.drawImage( image, 
             0,
             0,
-            DEFAULT_IMAGE.getWidth(),
-            DEFAULT_IMAGE.getHeight(),
+            image.getWidth(),
+            image.getHeight(),
             x - radius,
             y,
             radius * 2.0,
@@ -36,14 +36,7 @@ public class Paddle {
     
     public boolean collidesWith(JuggleObject j, int frameHeight, double energyLossRatio)
     {
-        if ( (j.getPosX() >= (x - radius)) && (j.getPosX() <= (x + radius)) )
-        {
-            if (j.checkReflectionFloor(frameHeight, energyLossRatio))
-            {
-                return true;
-            }
-        }
-        return false;
+        return j.getX() >= (x - radius) && j.getX() <= (x + radius) && j.checkReflectionFloor(frameHeight, energyLossRatio);
     }
 
     public double getX() {
@@ -56,10 +49,6 @@ public class Paddle {
 
     public double getRadius() {
         return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
     }
 
 }

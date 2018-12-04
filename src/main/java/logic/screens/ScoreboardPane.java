@@ -7,14 +7,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import logic.GameInfo;
 import logic.Score;
 import logic.ScreenManager;
 import logic.ScreenType;
+import logic.themes.Theme;
+import logic.themes.ThemeManager;
 
 public class ScoreboardPane extends UpdatablePane {
 	
@@ -24,14 +30,13 @@ public class ScoreboardPane extends UpdatablePane {
 
 	public ScoreboardPane(ScreenManager screens) {
 		super(screens);
-		VBox labelPane = new VBox();
-		labelPane.setAlignment(Pos.CENTER);
-		labelPane.setPadding(new Insets(10));
-		labelPane.getChildren().add(new Label("Scoreboard"));
+		Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
 		
-		VBox buttonPane = new VBox();
-		buttonPane.setAlignment(Pos.CENTER);
-		buttonPane.setPadding(new Insets(10));
+		Font headerFont = currentTheme.getHeaderFont();
+		Text header = new Text("Scores");
+		header.setFill(Color.WHITESMOKE);
+		header.setFont(headerFont);
+		
 		
 		BorderPane center = new BorderPane();
 		center.setPadding(new Insets(10, 50, 10, 50));
@@ -40,26 +45,29 @@ public class ScoreboardPane extends UpdatablePane {
 		table.setStyle("-fx-background-color: #FFFFFF; -fx-grid-lines-visible: true");
 		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 		center.setCenter(table);
-		
-		labels = new Label[2][MAXSCORES];
+
+		labels = new Label[3][MAXSCORES];
 		for (int i = 0; i < MAXSCORES; i++)
 		{
 			labels[0][i] = new Label();
 			labels[1][i] = new Label();
+            labels[2][i] = new Label();
 			table.add(setDefaults(labels[0][i]), 0, i);
-			table.add(setDefaults(labels[1][i]), 1, i);
+            table.add(setDefaults(labels[1][i]), 1, i);
+			table.add(setDefaults(labels[2][i]), 2, i);
 		}
+		
+		ImageView backToMenuImage = new ImageView(currentTheme.getAsset("backToMenuImage"));
+        Button backButton = new Button("",backToMenuImage);
+        backButton.setOnAction(e -> screens.switchTo(ScreenType.MAINMENU));
+        
+		
+		VBox layout = new VBox();
+		layout.setAlignment(Pos.CENTER);
+		layout.getChildren().addAll(header, center, backButton);
 
-		Button back = new Button("Back to Main Menu");
-		back.setOnAction(e -> screens.switchTo(ScreenType.MAINMENU));
-		buttonPane.getChildren().add(back);
-		
-		BorderPane layout = new BorderPane();
-		layout.setTop(labelPane);
-		layout.setCenter(center);
-		layout.setBottom(buttonPane);
-		
 		getChildren().add(layout);
+		
 	}
 
 	@Override
@@ -73,7 +81,8 @@ public class ScoreboardPane extends UpdatablePane {
 		{
 			Score score = iterator.next();
 			labels[0][i].setText(score.getName());
-			labels[1][i].setText("" + score.value());
+			labels[1][i].setText(score.getDifficulty());
+            labels[2][i].setText("" + score.value());
 		}
 	}
 	
@@ -81,6 +90,7 @@ public class ScoreboardPane extends UpdatablePane {
 		label.setPadding(new Insets(10, 10, 10, 10));
 		GridPane.setHgrow(label, Priority.ALWAYS);
 		GridPane.setVgrow(label, Priority.ALWAYS);
+        label.setFont(ThemeManager.getInstance().getActiveTheme().getSettingsFont());
 		return label;
 	}
 

@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class GameInfo {
     
-    private static final int[] DEFAULT_LIVES = {10, 5, 1};
+    private static final int[] DEFAULT_LIVES = {11, 6, 2};
     
     private static final GameInfo INSTANCE = new GameInfo();
     public static GameInfo getInstance()
@@ -20,6 +20,7 @@ public class GameInfo {
 
     private GameInfo() {
         difficulty = 1;
+        scoreList = new TreeSet<>();
         reset();
     }
     
@@ -27,7 +28,6 @@ public class GameInfo {
     {
         score = 0;
         numLives = DEFAULT_LIVES[difficulty];
-        scoreList = new TreeSet<>();
     }
     
     public int getScore()
@@ -58,6 +58,11 @@ public class GameInfo {
     public void decrementLives()
     {
         numLives--;
+    }
+    
+    public int getDifficulty()
+    {
+        return this.difficulty;
     }
     
     public void setDifficulty(int difficulty)

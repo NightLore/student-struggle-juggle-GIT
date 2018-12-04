@@ -19,8 +19,8 @@ public class TestScore {
 	@Test
 	public void testCompareTo()
 	{
-		Score score1 = new Score("test", 5);
-		Score score2 = new Score("test2", 3);
+		Score score1 = new Score("test", 0, 5);
+		Score score2 = new Score("test2", 0, 3);
 		assertTrue(score1.compareTo(score2) < 0);
 	}
 	
@@ -30,8 +30,8 @@ public class TestScore {
 	@Test
 	public void testEquals()
 	{
-		Score score1 = new Score("test", 4);
-		Score score2 = new Score("test", 4);
+		Score score1 = new Score("test", 0, 4);
+		Score score2 = new Score("test", 0, 4);
 		assertEquals(score1, score2);
 	}
 }
