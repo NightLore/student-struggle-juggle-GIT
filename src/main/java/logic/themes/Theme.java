@@ -18,7 +18,10 @@ import java.util.Map;
  * @version student-struggle-juggle-GIT
  */
 public class Theme {
-
+	private static final String BUTTON_PATH = "/buttons/";
+    private static final String ANIMATIONS_PATH = "/animations/";
+    private static final String GAME_PATH = "/gameObjects/";
+    
     private Map<String, Image> map = new HashMap<>();
     private LinkedList<Image> gameObjects = new LinkedList<>();
     private Font settingsFont;
@@ -44,9 +47,9 @@ public class Theme {
         
         map.put("credits", new Image(new FileInputStream("./"+name+"/images/"+"Credits"+".png")));
 
-        map.put("leftGif", new Image(new FileInputStream("./"+name+"/animations/person.gif")));
-        map.put("rightGif", new Image(new FileInputStream("./"+name+"/animations/Books!.gif")));
-        map.put("titleGif", new Image(new FileInputStream("./"+name+"/animations/Logo.gif")));
+        map.put("leftGif", new Image(new FileInputStream("./"+name+ANIMATIONS_PATH+"person.gif")));
+        map.put("rightGif", new Image(new FileInputStream("./"+name+ANIMATIONS_PATH+"Books!.gif")));
+        map.put("titleGif", new Image(new FileInputStream("./"+name+ANIMATIONS_PATH+"Logo.gif")));
 
         settingsFont = Font.loadFont(
                 new FileInputStream("./"+name+"/Font/EraserDust.ttf"),
@@ -58,11 +61,11 @@ public class Theme {
         );
 
 
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Clements.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Falessi.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Kearns.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Mammen.png")));
-        gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Staley.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Clements.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Falessi.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Kearns.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Mammen.png")));
+        gameObjects.add(new Image(new FileInputStream("./"+name+GAME_PATH+"Staley.png")));
 
     }
 
