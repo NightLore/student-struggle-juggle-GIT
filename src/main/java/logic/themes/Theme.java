@@ -105,4 +105,8 @@ public class Theme {
         gameObjects.addLast(image);
         Collections.shuffle(gameObjects);
     }
+
+    public int getObjectSize(){
+        return map.size();
+    }
 }
