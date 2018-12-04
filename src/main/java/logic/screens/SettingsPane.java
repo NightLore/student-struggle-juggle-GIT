@@ -1,9 +1,12 @@
 package logic.screens;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.*;
@@ -12,17 +15,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import logic.GameInfo;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
 import logic.themes.ThemeManager;
 
 public class SettingsPane extends UpdatablePane {
+    private static final String EASY = "Easy";
+    private static final String NORMAL = "Normal";
+    private static final String HARD = "Hard";
 
 	private ScreenType prevScreen;
-	private ToggleButton easyButton;
-	private ToggleButton normalButton;
-	private ToggleButton hardButton;
+	private ToggleButton[] difficultyButtons;
 	
 	public SettingsPane(ScreenManager screens) {
 		super(screens);
@@ -56,16 +61,45 @@ public class SettingsPane extends UpdatablePane {
 		diffLabel.setFont(settingsFont);
 		diffLabel.setFill(Color.WHITE);
 		
-		easyButton = new ToggleButton("Easy");
-		normalButton = new ToggleButton("Normal");
-		hardButton = new ToggleButton("Hard");
+		ToggleButton easyButton = new ToggleButton(EASY);
+		ToggleButton normalButton = new ToggleButton(NORMAL);
+		ToggleButton hardButton = new ToggleButton(HARD);
+		difficultyButtons = new ToggleButton[] { easyButton, normalButton, hardButton };
+
+        easyButton.setUserData(EASY);
+        normalButton.setUserData(NORMAL);
+        hardButton.setUserData(HARD);
 		
-		ToggleGroup diffGroup = new ToggleGroup();
-		easyButton.setToggleGroup(diffGroup);
-		normalButton.setToggleGroup(diffGroup);
-		hardButton.setToggleGroup(diffGroup);
+		ToggleGroup group = new ToggleGroup();
+		easyButton.setToggleGroup(group);
+		normalButton.setToggleGroup(group);
+		hardButton.setToggleGroup(group);
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+		    public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+		        if (newToggle == null)
+		        {
+		            oldToggle.setSelected(true);
+		            return;
+		        }
+		        String choice = newToggle.getUserData().toString();
+		        int difficulty = GameInfo.getInstance().getDifficulty();
+		        if (choice.equals(EASY))
+		        {
+		            difficulty = 0;
+		        }
+		        else if (choice.equals(NORMAL))
+		        {
+                    difficulty = 1;
+		        }
+                else if (choice.equals(HARD))
+                {
+                    difficulty = 2;
+                }
+                GameInfo.getInstance().setDifficulty(difficulty);
+		    }
+		});
 		
-		HBox diffButtons = new HBox(easyButton,normalButton,hardButton);
+		HBox diffButtons = new HBox(easyButton, normalButton, hardButton);
 		
 		VBox labelBox = new VBox();
 		labelBox.setSpacing(20);
@@ -116,8 +150,7 @@ public class SettingsPane extends UpdatablePane {
 			this.prevScreen = prevScreen;
 		//TODO: Get the current difficult level and set the corresponding button to
 		// be selected when the screen shows up
-		normalButton.setSelected(true);
-		
+		difficultyButtons[GameInfo.getInstance().getDifficulty()].setSelected(true);
 	}
 
 }

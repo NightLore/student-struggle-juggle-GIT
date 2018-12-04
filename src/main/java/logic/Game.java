@@ -52,6 +52,7 @@ public class Game {
                 // update spawn timer
                 juggleSpawnTimer += frameDiffMilliseconds;
                 
+                checkSpawn();
                 updateAll(juggleObjects);
                 checkCollisions(juggleObjects);
                 
@@ -82,8 +83,11 @@ public class Game {
     
     public void updatePaddle(double mouseX)
     {
-        paddle.setX(mouseX);      
-        
+        paddle.setX(mouseX);
+    }
+    
+    private void checkSpawn()
+    {
         // check if enough time has passed or if the max item count is reached
         if ( (juggleSpawnTimer > 1500000.0) && (juggleObjects.size() < MAX_NUM_JUGGLE_OBJECTS) && ThemeManager.getInstance().getActiveTheme().hasNextObject())
         {

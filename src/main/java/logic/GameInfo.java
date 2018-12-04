@@ -60,9 +60,13 @@ public class GameInfo {
         numLives--;
     }
     
+    public int getDifficulty()
+    {
+        return this.difficulty;
+    }
+    
     public void setDifficulty(int difficulty)
     {
-
         this.difficulty = difficulty;
     }
 

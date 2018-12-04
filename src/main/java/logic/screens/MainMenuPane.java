@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import logic.GameInfo;
 import logic.ScreenManager;
 import logic.ScreenType;
 import logic.themes.Theme;
@@ -50,7 +51,7 @@ public class MainMenuPane extends UpdatablePane {
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
-		// Empty as this screen does not need to update any elements when shown
+	    GameInfo.getInstance().reset();
 	}
 
 }
