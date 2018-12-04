@@ -62,6 +62,7 @@ public class GameInfo {
     
     public void setDifficulty(int difficulty)
     {
+
         this.difficulty = difficulty;
     }
 
