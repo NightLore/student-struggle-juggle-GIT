@@ -9,9 +9,14 @@ public class ScreenManager {
 	private Stage window;
 	private EnumMap<ScreenType, Screen> screens;
 	private ScreenType currentScreen;
+	
+	private static final ScreenManager INSTANCE = new ScreenManager(1366, 768);
+	public static ScreenManager getInstance()
+	{
+	    return INSTANCE;
+	}
 
-    public ScreenManager(Stage primaryStage, double width, double height) {
-		this.window = primaryStage;
+    public ScreenManager(double width, double height) {
 
 		screens = new EnumMap<>(ScreenType.class);
 		ScreenFactory factory = new ScreenFactory(this, width, height);
@@ -21,9 +26,16 @@ public class ScreenManager {
 		}
 	}
 
-	public void switchTo(ScreenType type) {
+	public void switchTo(ScreenType type) 
+	{
 		screens.get(type).displayOn(window, currentScreen);
 		currentScreen = type;
+	}
+	
+	public ScreenManager setStage(Stage primaryStage)
+	{
+        this.window = primaryStage;
+        return this;
 	}
 
 }
