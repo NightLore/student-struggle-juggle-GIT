@@ -148,8 +148,6 @@ public class SettingsPane extends UpdatablePane {
 	public void onShow(ScreenType prevScreen) {
 		if (prevScreen != ScreenType.CREDITS)
 			this.prevScreen = prevScreen;
-		//TODO: Get the current difficult level and set the corresponding button to
-		// be selected when the screen shows up
 		difficultyButtons[GameInfo.getInstance().getDifficulty()].setSelected(true);
 	}
 

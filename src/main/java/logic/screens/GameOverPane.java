@@ -7,25 +7,39 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameInfo;
 import logic.Score;
 import logic.ScreenManager;
 import logic.ScreenType;
+import logic.themes.Theme;
+import logic.themes.ThemeManager;
 
 public class GameOverPane extends UpdatablePane {
 
-    private Label score;
+    private Label scoreLabel;
+    private Label difficultyLabel;
     public GameOverPane(ScreenManager screens) {
         super(screens);
+        Theme currentTheme = ThemeManager.getInstance().getActiveTheme();
+        Font headerFont = currentTheme.getHeaderFont();
+        Font settingsFont = currentTheme.getSettingsFont();
         
-        Label label = new Label("Game Over");
-        Label scoreLabel = new Label("Your score is:");
-        score = new Label();
+        Label header = new Label("Game Over");
+        header.setTextFill(Color.WHITESMOKE);
+        header.setFont(headerFont);
+        scoreLabel = new Label();
+        scoreLabel.setTextFill(Color.WHITESMOKE);
+        scoreLabel.setFont(settingsFont);
         
         HBox nameBox = new HBox();
         nameBox.setAlignment(Pos.CENTER);
         Label nameLabel = new Label("Enter your name: ");
+        nameLabel.setTextFill(Color.WHITESMOKE);
+        nameLabel.setFont(settingsFont);
         TextField name = new TextField();
+        name.setFont(settingsFont);
         name.setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.ENTER))
             {
@@ -33,6 +47,10 @@ public class GameOverPane extends UpdatablePane {
             }
         });
         nameBox.getChildren().addAll(nameLabel, name);
+        
+        difficultyLabel = new Label("");
+        difficultyLabel.setTextFill(Color.WHITESMOKE);
+        difficultyLabel.setFont(settingsFont);
 
         HBox buttonBox = new HBox();
         buttonBox.setAlignment(Pos.CENTER);
@@ -44,8 +62,8 @@ public class GameOverPane extends UpdatablePane {
         buttonBox.getChildren().addAll(saveButton, backButton);
         
         VBox layout = new VBox();
-        layout.setSpacing(10);
-        layout.getChildren().addAll(label, scoreLabel, score, nameBox, buttonBox);
+        layout.setSpacing(20);
+        layout.getChildren().addAll(header, scoreLabel, difficultyLabel, nameBox, buttonBox);
         layout.setAlignment(Pos.CENTER);
         
         getChildren().add(layout);
@@ -53,14 +71,29 @@ public class GameOverPane extends UpdatablePane {
 
     @Override
     public void onShow(ScreenType prevScreen) {
-        score.setText("" + GameInfo.getInstance().getScore());
+        scoreLabel.setText("Your score is: " + GameInfo.getInstance().getScore());
+        difficultyLabel.setText(difficulty(GameInfo.getInstance().getDifficulty()));
+    }
+    
+    private String difficulty(int difficulty)
+    {
+        switch (difficulty)
+        {
+            case 0:
+                return "EASY";
+            case 1:
+                return "NORMAL";
+            case 2:
+                return "HARD";
+            default:
+                return "";
+        }
     }
     
     private void setScoreAndSwitch(String name)
     {
         GameInfo.getInstance().getScores().add(new Score(name, GameInfo.getInstance().getScore()));
         ScreenManager.getInstance().switchTo(ScreenType.SCOREBOARD);
-        GameInfo.getInstance().reset();
     }
 
 }

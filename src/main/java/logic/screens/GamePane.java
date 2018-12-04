@@ -38,6 +38,8 @@ public class GamePane extends UpdatablePane implements EventHandler<MouseEvent> 
 
 	@Override
 	public void onShow(ScreenType prevScreen) {
+	    if (prevScreen != ScreenType.PAUSE)
+	        game.reset();
         game.start();
 	}
 
