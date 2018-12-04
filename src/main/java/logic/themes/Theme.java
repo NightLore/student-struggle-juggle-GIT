@@ -44,7 +44,9 @@ public class Theme {
         map.put("quitImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"QuitButton"+".png")));
         map.put("backImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"BackButton"+".png")));
         map.put("creditsImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"CreditsButton"+".png")));
-
+        map.put("backToMenuImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"BackToMainMenu"+".png")));
+        map.put("resumeImage",new Image(new FileInputStream("./"+name+BUTTON_PATH+"ResumeButton"+".png")));
+        
         map.put("credits", new Image(new FileInputStream("./"+name+"/images/"+"Credits"+".png")));
 
         map.put("leftGif", new Image(new FileInputStream("./"+name+ANIMATIONS_PATH+"person.gif")));
@@ -57,7 +59,7 @@ public class Theme {
         );
         headerFont = Font.loadFont(
         		new FileInputStream("./"+name+"/Font/"+"EraserDust.ttf"),
-                50
+                75
         );
 
 
