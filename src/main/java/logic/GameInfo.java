@@ -20,6 +20,7 @@ public class GameInfo {
 
     private GameInfo() {
         difficulty = 1;
+        scoreList = new TreeSet<>();
         reset();
     }
     
@@ -27,7 +28,6 @@ public class GameInfo {
     {
         score = 0;
         numLives = DEFAULT_LIVES[difficulty];
-        scoreList = new TreeSet<>();
     }
     
     public int getScore()

@@ -60,6 +60,7 @@ public class GameOverPane extends UpdatablePane {
     {
         GameInfo.getInstance().getScores().add(new Score(name, GameInfo.getInstance().getScore()));
         ScreenManager.getInstance().switchTo(ScreenType.SCOREBOARD);
+        GameInfo.getInstance().reset();
     }
 
 }
