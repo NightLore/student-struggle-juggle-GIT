@@ -101,7 +101,7 @@ public class Game {
             // Update positions, speeds, etc... using physics
             objects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
             
-            if (objects.get(i).getPosY() > (FRAME_HEIGHT * 2))
+            if (objects.get(i).getY() > (FRAME_HEIGHT * 2))
             {
                 ThemeManager.getInstance().getActiveTheme().resetGameObject(objects.get(i).getImage());
                 objects.remove(i);
