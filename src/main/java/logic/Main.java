@@ -10,9 +10,8 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		ScreenManager sceneManager = new ScreenManager(primaryStage, 1366, 768);
-		sceneManager.switchTo(ScreenType.MAINMENU);
-		primaryStage.setTitle("Struggle Juggle");
+	    ScreenManager.getInstance().setStage(primaryStage).switchTo(ScreenType.MAINMENU);
+		primaryStage.setTitle("The Student Struggle Juggle");
 		primaryStage.show();
 	}
 	

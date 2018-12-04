@@ -52,8 +52,8 @@ public class Game {
                 // update spawn timer
                 juggleSpawnTimer += frameDiffMilliseconds;
                 
-                updateAll();
-                checkCollisions();
+                updateAll(juggleObjects);
+                checkCollisions(juggleObjects);
                 
                 drawCanvas(canvas.getGraphicsContext2D());
             }
@@ -92,43 +92,40 @@ public class Game {
         }
     }
     
-    public void updateAll()
+    public void updateAll(List<JuggleObject> objects)
     {
         // for each juggle object update it's position and speed
-        for (int i = 0; i < juggleObjects.size(); i++)
+        for (int i = 0; i < objects.size(); i++)
         {
             //**********************************************************************************
             // Update positions, speeds, etc... using physics
-            juggleObjects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
+            objects.get(i).update(frameDiffMilliseconds, FORCE_OF_GRAVITY);
             
-            if (juggleObjects.get(i).getPosY() > (FRAME_HEIGHT * 2))
+            if (objects.get(i).getPosY() > (FRAME_HEIGHT * 2))
             {
-                ThemeManager.getInstance().getActiveTheme().resetGameObject(juggleObjects.get(i).getImage());
-                juggleObjects.remove(i);
+                ThemeManager.getInstance().getActiveTheme().resetGameObject(objects.get(i).getImage());
+                objects.remove(i);
                 info.decrementLives();
+                if (info.getNumLives() <= 0)
+                {
+                    pause();
+                    ScreenManager.getInstance().switchTo(ScreenType.GAMEOVER);
+                }
             }
         }
     }
     
-    public void checkCollisions()
+    public void checkCollisions(List<JuggleObject> objects)
     {
         // for each juggle object compute collisions
-        for (int i = 0; i < juggleObjects.size(); i++)
+        for (int i = 0; i < objects.size(); i++)
         {
-            circleCollisions(juggleObjects, i, frameDiffMilliseconds);
-            paddleCollisions(juggleObjects.get(i), paddle.getX(), paddle.getRadius());
-            juggleObjects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
-        }
-    }
-    
-    public void paddleCollisions(JuggleObject currentJuggleObject, double paddlePosX, double paddleRadius)
-    {
-        if ( (currentJuggleObject.getPosX() >= (paddlePosX - paddleRadius)) && (currentJuggleObject.getPosX() <= (paddlePosX + paddleRadius)) )
-        {
-            if (currentJuggleObject.checkReflectionFloor(FRAME_HEIGHT, ENERGY_LOSS_RATIO))
+            circleCollisions(objects, i, frameDiffMilliseconds);
+            if (paddle.collidesWith(objects.get(i), FRAME_HEIGHT, ENERGY_LOSS_RATIO))
             {
                 info.incrementScore();
             }
+            objects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
         }
     }
     
@@ -153,8 +150,7 @@ public class Game {
         gc.fillRect(0,0, Game.FRAME_WIDTH, Game.FRAME_HEIGHT);
         
         // for each juggle object draw
-        for (JuggleObject j : this.juggleObjects)
-        {
+        for (JuggleObject j : this.juggleObjects) {
             j.draw(gc);
         }
         
