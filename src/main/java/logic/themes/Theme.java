@@ -69,7 +69,6 @@ public class Theme {
     /**
      * gets the requested icon, should be processed using alternative methods outside of this class
      * Suggestion: https://stackoverflow.com/questions/42116313/how-to-set-an-image-in-a-circle
-     * TODO create method which renders icons
      * @param i ith image in list to get
      * @return image object
      */

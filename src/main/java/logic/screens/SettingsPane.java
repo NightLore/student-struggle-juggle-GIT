@@ -25,6 +25,7 @@ public class SettingsPane extends UpdatablePane {
     private static final String EASY = "Easy";
     private static final String NORMAL = "Normal";
     private static final String HARD = "Hard";
+    private static final String alternative = "alternative";
 
 	private ScreenType prevScreen;
 	private ToggleButton[] difficultyButtons;
@@ -145,13 +146,11 @@ public class SettingsPane extends UpdatablePane {
 	}
 
 	private void changeTheme() {
-		if (ThemeManager.getInstance().checkTheme("alternative")) {
-			ThemeManager.getInstance().setTheme("alternative");
+		if (!ThemeManager.getInstance().checkTheme(alternative)) {
+			ThemeManager.getInstance().addTheme(alternative);
 		}
-		else {
-			ThemeManager.getInstance().addTheme("alternative");
-			ThemeManager.getInstance().setTheme("alternative");
-		}
+		ThemeManager.getInstance().setTheme(alternative);
+
 	}
 
 	@Override
