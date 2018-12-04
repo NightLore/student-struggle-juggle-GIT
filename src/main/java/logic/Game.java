@@ -108,7 +108,8 @@ public class Game {
                 info.decrementLives();
                 if (info.getNumLives() <= 0)
                 {
-                    
+                    pause();
+                    ScreenManager.getInstance().switchTo(ScreenType.GAMEOVER);
                 }
             }
         }
