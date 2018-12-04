@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import logic.GameInfo;
 
 /**
- * @author 
+ * @author Ellen Liu
  */
 public class TestGameInfo {
 	
 	/**
-	 * @author 
+	 * @author Ellen Liu
 	 */
 	@Test
 	public void testIncrementScore()
@@ -25,7 +25,7 @@ public class TestGameInfo {
 	}
 	
 	/**
-	 * @author 
+	 * @author Ellen Liu
 	 */
 	@Test
 	public void testDecrementLives()
