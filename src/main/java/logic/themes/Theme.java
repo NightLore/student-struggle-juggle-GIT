@@ -41,7 +41,8 @@ public class Theme {
         map.put("backImage",new Image(new FileInputStream("./"+name+"/buttons/BackButton.png")));
         map.put("backToMenuImage",new Image(new FileInputStream("./"+name+"/buttons/BacktoMainMenu.png")));
         map.put("creditsImage",new Image(new FileInputStream("./"+name+"/buttons/CreditsButton.png")));
-
+        map.put("saveScoreImage",new Image(new FileInputStream("./"+name+"/buttons/SaveScoreButton.png")));
+        
         map.put("credits", new Image(new FileInputStream("./"+name+"/images/"+"Credits"+".png")));
 
         map.put("leftGif", new Image(new FileInputStream("./"+name+"/animations/person.gif")));
