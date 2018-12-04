@@ -118,7 +118,7 @@ public class SettingsPane extends UpdatablePane {
 		leftToRight.getChildren().addAll(labelBox, controlsBox);
 		
 		Button themeButton = new Button("Change Theme");
-		themeButton.setOnAction(e -> System.out.println("themeButton clicked"));
+		themeButton.setOnAction(e -> changeTheme());
 		
 		ImageView backImage = new ImageView(currentTheme.getAsset("backImage"));
 		ImageView creditsImage = new ImageView(currentTheme.getAsset("creditsImage"));
@@ -142,6 +142,16 @@ public class SettingsPane extends UpdatablePane {
 		layout.getChildren().addAll(header, leftToRight, themeButton, buttonBox);
 		
 		getChildren().add(layout);
+	}
+
+	private void changeTheme() {
+		if (ThemeManager.getInstance().checkTheme("alternative")) {
+			ThemeManager.getInstance().setTheme("alternative");
+		}
+		else {
+			ThemeManager.getInstance().addTheme("alternative");
+			ThemeManager.getInstance().setTheme("alternative");
+		}
 	}
 
 	@Override

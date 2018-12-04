@@ -43,8 +43,11 @@ public class ThemeManager {
             themes.put(name.hashCode(),new Theme(name));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            //TODO alert user that theme was not found
         }
+    }
+
+    public boolean checkTheme(String name){
+        return themes.containsKey(name.hashCode());
     }
 
     public Theme setTheme(String name){
