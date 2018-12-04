@@ -22,7 +22,7 @@ public class Game {
     private static final double FORCE_OF_GRAVITY = (9.8 / 1000000l);
     
     // max number of juggle items allowed
-    private static final int MAX_NUM_JUGGLE_OBJECTS = 6;
+    public static final int MAX_NUM_JUGGLE_OBJECTS = 6;
     
     // frametime keeps track of the time between draw calls (basically how long has it been since I drew the last frame)
     private long frametimeNanoSeconds = 0;
@@ -119,32 +119,36 @@ public class Game {
         }
     }
     
-    public void checkCollisions(List<JuggleObject> objects)
+    public boolean checkCollisions(List<JuggleObject> objects)
     {
-        // for each juggle object compute collisions
+        boolean hasCollided = false;
         for (int i = 0; i < objects.size(); i++)
         {
-            circleCollisions(objects, i, frameDiffMilliseconds);
+            hasCollided = circleCollisions(objects, i, frameDiffMilliseconds) || hasCollided;
             if (paddle.collidesWith(objects.get(i), FRAME_HEIGHT, ENERGY_LOSS_RATIO))
             {
                 info.incrementScore();
+                hasCollided = true;
             }
-            objects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO);
+            hasCollided = objects.get(i).checkReflectionWalls(FRAME_WIDTH, ENERGY_LOSS_RATIO) || hasCollided;
         }
+        return hasCollided;
     }
     
-    public void circleCollisions(List<JuggleObject> juggleObjects, int currentIndex, double frameDiffMilliseconds)
+    public boolean circleCollisions(List<JuggleObject> juggleObjects, int currentIndex, double frameDiffMilliseconds)
     {
         JuggleObject current = juggleObjects.get(currentIndex);
         
+        boolean hasCollided = false;
         for (int i = 0; i < juggleObjects.size(); i++)
         {
             // skip check for collisions with ourself
             if (i != currentIndex)
             {
-                current.checkCollision(juggleObjects.get(i), frameDiffMilliseconds);
+                hasCollided = current.checkCollision(juggleObjects.get(i), frameDiffMilliseconds) || hasCollided;
             }
         }
+        return hasCollided;
     }
     
     public void drawCanvas(GraphicsContext gc)
