@@ -38,6 +38,7 @@ public class Theme {
         map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/ScoreButton"+".png")));
         map.put("quitImage",new Image(new FileInputStream("./"+name+"/buttons/QuitButton"+".png")));
         map.put("backImage",new Image(new FileInputStream("./"+name+"/buttons/BackButton"+".png")));
+        map.put("backToMenuImage",new Image(new FileInputStream("./"+name+"/buttons/BacktoMainMenu"+".png")));
         map.put("creditsImage",new Image(new FileInputStream("./"+name+"/buttons/CreditsButton"+".png")));
 
         map.put("credits", new Image(new FileInputStream("./"+name+"/images/"+"Credits"+".png")));
