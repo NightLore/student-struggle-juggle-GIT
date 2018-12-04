@@ -46,13 +46,15 @@ public class ScoreboardPane extends UpdatablePane {
 		table.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 		center.setCenter(table);
 
-		labels = new Label[2][MAXSCORES];
+		labels = new Label[3][MAXSCORES];
 		for (int i = 0; i < MAXSCORES; i++)
 		{
 			labels[0][i] = new Label();
 			labels[1][i] = new Label();
+            labels[2][i] = new Label();
 			table.add(setDefaults(labels[0][i]), 0, i);
-			table.add(setDefaults(labels[1][i]), 1, i);
+            table.add(setDefaults(labels[1][i]), 1, i);
+			table.add(setDefaults(labels[2][i]), 2, i);
 		}
 		
 		ImageView backToMenuImage = new ImageView(currentTheme.getAsset("backToMenuImage"));
@@ -79,7 +81,8 @@ public class ScoreboardPane extends UpdatablePane {
 		{
 			Score score = iterator.next();
 			labels[0][i].setText(score.getName());
-			labels[1][i].setText("" + score.value());
+			labels[1][i].setText(score.getDifficulty());
+            labels[2][i].setText("" + score.value());
 		}
 	}
 	

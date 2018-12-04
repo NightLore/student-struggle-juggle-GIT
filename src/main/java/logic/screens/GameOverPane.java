@@ -92,7 +92,8 @@ public class GameOverPane extends UpdatablePane {
     
     private void setScoreAndSwitch(String name)
     {
-        GameInfo.getInstance().getScores().add(new Score(name, GameInfo.getInstance().getScore()));
+        GameInfo info = GameInfo.getInstance();
+        info.getScores().add(new Score(name, info.getDifficulty(), info.getScore()));
         ScreenManager.getInstance().switchTo(ScreenType.SCOREBOARD);
     }
 

@@ -5,24 +5,45 @@ import java.util.Objects;
 public class Score implements Comparable<Score> {
 
 	private String name;
+	private int difficulty;
 	private int value;
 
-	public Score(String name, int value) {
+	public Score(String name, int difficulty, int value) {
 		this.name = name;
 		this.value = value;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
+	
+	public String getDifficulty()
+	{
+        switch (difficulty)
+        {
+            case 0:
+                return "EASY";
+            case 1:
+                return "NORMAL";
+            case 2:
+                return "HARD";
+            default:
+                return "";
+        }
+	}
 
-	public int value() {
+	public int value()
+	{
 		return value;
 	}
 
 	@Override
-	public int compareTo(Score score) {
+	public int compareTo(Score score)
+	{
 		int comparison = Integer.compare(score.value(), this.value());
+		if (comparison == 0)
+		    comparison = Integer.compare(score.difficulty, this.difficulty);
 		if (comparison == 0)
 			comparison = this.getName().compareTo(score.getName());
 		return comparison;
@@ -41,7 +62,7 @@ public class Score implements Comparable<Score> {
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(this.getName(), this.value());
+		return Objects.hash(this.getName(), this.getDifficulty(), this.value());
 	}
 
 }
