@@ -39,7 +39,7 @@ public class MainMenuPane extends UpdatablePane {
 
 		VBox buttonBox = new VBox();
 		buttonBox.setAlignment(Pos.CENTER);
-		buttonBox.setSpacing(10);
+		buttonBox.setSpacing(0);
 		buttonBox.getChildren().addAll(titleGif, buttonStart, buttonSettings,buttonScores,buttonQuit);
 
 		leftToRight.setAlignment(Pos.CENTER);

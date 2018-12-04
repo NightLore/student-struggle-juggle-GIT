@@ -27,7 +27,7 @@ import logic.themes.ThemeManager;
 
 public class ScoreboardPane extends UpdatablePane {
 	
-	public static final int MAXSCORES = 8;
+	public static final int MAXSCORES = 5;
 	
 	private Label[][] labels;
 	

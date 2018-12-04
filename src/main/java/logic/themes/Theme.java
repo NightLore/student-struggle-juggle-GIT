@@ -33,15 +33,16 @@ public class Theme {
         //Backgrounds
         map.put("bg",new Image(new FileInputStream("./"+name+"/backgrounds/"+"MenuPlainBackground"+".jpg")));
 
-        map.put("resumeImage",new Image(new FileInputStream("./"+name+"/buttons/ResumeButton"+".png")));
-        map.put("startImage",new Image(new FileInputStream("./"+name+"/buttons/StartButton"+".png")));
-        map.put("settingImage",new Image(new FileInputStream("./"+name+"/buttons/SettingsButton"+".png")));
-        map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/ScoreButton"+".png")));
-        map.put("quitImage",new Image(new FileInputStream("./"+name+"/buttons/QuitButton"+".png")));
-        map.put("backImage",new Image(new FileInputStream("./"+name+"/buttons/BackButton"+".png")));
-        map.put("backToMenuImage",new Image(new FileInputStream("./"+name+"/buttons/BacktoMainMenu"+".png")));
-        map.put("creditsImage",new Image(new FileInputStream("./"+name+"/buttons/CreditsButton"+".png")));
-
+        map.put("resumeImage",new Image(new FileInputStream("./"+name+"/buttons/ResumeButton.png")));
+        map.put("startImage",new Image(new FileInputStream("./"+name+"/buttons/StartButton.png")));
+        map.put("settingImage",new Image(new FileInputStream("./"+name+"/buttons/SettingsButton.png")));
+        map.put("scoreImage",new Image(new FileInputStream("./"+name+"/buttons/ScoreButton.png")));
+        map.put("quitImage",new Image(new FileInputStream("./"+name+"/buttons/QuitButton.png")));
+        map.put("backImage",new Image(new FileInputStream("./"+name+"/buttons/BackButton.png")));
+        map.put("backToMenuImage",new Image(new FileInputStream("./"+name+"/buttons/BacktoMainMenu.png")));
+        map.put("creditsImage",new Image(new FileInputStream("./"+name+"/buttons/CreditsButton.png")));
+        map.put("saveScoreImage",new Image(new FileInputStream("./"+name+"/buttons/SaveScoreButton.png")));
+        
         map.put("credits", new Image(new FileInputStream("./"+name+"/images/"+"Credits"+".png")));
 
         map.put("leftGif", new Image(new FileInputStream("./"+name+"/animations/person.gif")));
@@ -56,7 +57,6 @@ public class Theme {
         		new FileInputStream("./"+name+"/Font/"+"EraserDust.ttf"),
                 50
         );
-
 
         gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Clements.png")));
         gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Falessi.png")));
@@ -105,5 +105,9 @@ public class Theme {
     public void resetGameObject(Image image) {
         gameObjects.addLast(image);
         Collections.shuffle(gameObjects);
+    }
+
+    public int getObjectSize(){
+        return map.size();
     }
 }

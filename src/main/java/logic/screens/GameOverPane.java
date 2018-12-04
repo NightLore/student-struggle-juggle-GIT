@@ -56,7 +56,9 @@ public class GameOverPane extends UpdatablePane {
         HBox buttonBox = new HBox();
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(10);
-        Button saveButton = new Button("Save score");
+        
+        ImageView saveScoreImage = new ImageView(currentTheme.getAsset("saveScoreImage"));
+        Button saveButton = new Button("", saveScoreImage);
         saveButton.setOnAction(e -> setScoreAndSwitch(name.getText()));
         
         ImageView backToMenuImage = new ImageView(currentTheme.getAsset("backToMenuImage"));
