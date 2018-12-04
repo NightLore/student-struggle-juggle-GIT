@@ -56,7 +56,6 @@ public class ScoreboardPane extends UpdatablePane {
 		
         Pane row0 = new Pane();
         table.add(row0, 0, 0, 3, 1);
-        // GridPane.setRowSpan(row0, 3);
         row0.setBackground(new Background(new BackgroundFill(new Color(0.9, 0.9, 0.9, 0.9), null, null)));
 
 		labels = new Label[3][MAXSCORES+1];
