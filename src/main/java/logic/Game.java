@@ -134,10 +134,13 @@ public class Game {
         }
         return hasCollided;
     }
-    
+
     public boolean circleCollisions(List<JuggleObject> juggleObjects, int currentIndex, double frameDiffMilliseconds)
     {
-        JuggleObject current = juggleObjects.get(currentIndex);
+        JuggleObject current;
+        if (juggleObjects.isEmpty())
+            return false;
+        current = juggleObjects.get(currentIndex);
         
         boolean hasCollided = false;
         for (int i = 0; i < juggleObjects.size(); i++)
