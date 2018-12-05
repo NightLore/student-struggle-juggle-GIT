@@ -2,7 +2,7 @@ package test.unit;
 
 import logic.themes.Theme;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
 
@@ -18,7 +18,7 @@ public class TestThemes {
     @Test
     public void testValidUIElements() throws FileNotFoundException {
         Theme test = new Theme("default");
-        assertTrue(test.getObjectSize() == 13);
+        assertEquals(test.getObjectSize(), 14);
     }
 
     /**
@@ -31,6 +31,6 @@ public class TestThemes {
         for(i = 0; test.hasNextObject(); i++){
             test.getNextObject();
         }
-        assertTrue(i == 5);
+        assertEquals(i, 5);
     }
 }

@@ -32,6 +32,6 @@ public class TestGameInfo {
 	{
         GameInfo g = GameInfo.getInstance();
         g.decrementLives();
-		assertEquals(g.getNumLives(), 4);
+		assertEquals(g.getNumLives(), 5);
 	}
 }
