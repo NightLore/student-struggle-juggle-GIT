@@ -36,7 +36,15 @@ public class Game {
     private Paddle paddle;
     private GameInfo info;
 
-    private AnimationTimer gameLoop;
+    public GameInfo getInfo() {
+		return info;
+	}
+
+	public Paddle getPaddle() {
+		return paddle;
+	}
+
+	private AnimationTimer gameLoop;
 
     public Game(Canvas canvas) {
         paddle = new Paddle(PADDLE_WIDTH, FRAME_HEIGHT - PADDLE_HEIGHT / 2, PADDLE_HEIGHT);
