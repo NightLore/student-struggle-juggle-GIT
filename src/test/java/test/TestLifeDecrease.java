@@ -12,7 +12,7 @@ import logic.JuggleObject;
 /**
  * @author Henry Luengas
  */
-public class LifeDecrease {
+public class TestLifeDecrease {
 
     /**
      * @author Henry Luengas

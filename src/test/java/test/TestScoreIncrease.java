@@ -13,7 +13,7 @@ import logic.JuggleObject;
 /**
  * @author Henry Luengas
  */
-public class ScoreIncrease {
+public class TestScoreIncrease {
 
     /**
      * @author Henry Luengas
