@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
-import javafx.scene.image.Image;
-
 
 /**
  * ThemeManager implements the package for Theme Manager, this enables other parts of the program to quickly and easily

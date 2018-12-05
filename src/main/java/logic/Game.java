@@ -36,10 +36,6 @@ public class Game {
     private Paddle paddle;
     private GameInfo info;
 
-    public GameInfo getInfo() {
-		return info;
-	}
-
 	public Paddle getPaddle() {
 		return paddle;
 	}

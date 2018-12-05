@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import logic.Game;
+import logic.GameInfo;
 import logic.JuggleObject;
 
 /**
@@ -28,7 +29,7 @@ public class TestScoreIncrease {
         });
         game.checkCollisions(objects);
         
-        int score = game.getInfo().getScore();
+        int score = GameInfo.getInstance().getScore();
         
         assertEquals(1, score);
     }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import logic.Game;
+import logic.GameInfo;
 import logic.JuggleObject;
 
 /**
@@ -24,11 +25,13 @@ public class TestLifeDecrease {
         
         ArrayList<JuggleObject> objects = new ArrayList<JuggleObject>();
         
+        int livesBefore = GameInfo.getInstance().getNumLives();
+        
         objects.add(new JuggleObject(game.getPaddle().getX(), (Game.FRAME_HEIGHT * 3), 25, 1.0, 0, 0, null));
         game.updateAll(objects);
         
-        int lives = game.getInfo().getNumLives();
+        int lives = GameInfo.getInstance().getNumLives();
         
-        assertEquals(5, lives);
+        assertEquals(livesBefore - 1, lives);
     }
 }
