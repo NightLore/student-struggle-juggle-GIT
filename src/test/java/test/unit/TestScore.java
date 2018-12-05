@@ -1,9 +1,9 @@
-package test;
+package test.unit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import logic.Score;
 
@@ -16,7 +16,7 @@ public class TestScore {
 	/**
 	 * @author Nathan Lui
 	 */
-	@Test
+    @Test
 	public void testCompareTo()
 	{
 		Score score1 = new Score("test", 0, 5);
