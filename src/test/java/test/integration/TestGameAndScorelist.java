@@ -1,4 +1,4 @@
-package test;
+package test.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,12 +9,12 @@ import logic.GameInfo;
 import logic.Score;
 
 /**
- * @author
+ * @author Natalie Miller
  */
 public class TestGameAndScorelist {
 
     /**
-     * @author
+     * @author Natalie Miller
      */
     @Test
     public void testGameResetDoesNotClearScores()

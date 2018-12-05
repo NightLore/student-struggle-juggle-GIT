@@ -1,4 +1,4 @@
-package test;
+package test.integration;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,12 +9,12 @@ import logic.JuggleObject;
 import logic.Paddle;
 
 /**
- * @author
+ * @author Ellen Liu
  */
 public class TestObjectAndPaddle {
     
     /**
-     * @author
+     * @author Ellen Liu
      */
     @Test
     public void testObjectMovingIntoPaddle()

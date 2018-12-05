@@ -1,4 +1,4 @@
-package test;
+package test.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,12 +8,12 @@ import logic.Game;
 import logic.GameInfo;
 
 /**
- * @author
+ * @author Natalie Miller
  */
 public class TestGameAndDifficulty {
 
     /**
-     * @author
+     * @author Natalie Miller
      */
     @Test
     public void testGameResetsNumLivesBasedOnDifficulty()

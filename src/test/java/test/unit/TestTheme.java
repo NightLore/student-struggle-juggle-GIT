@@ -11,7 +11,7 @@ import org.junit.Test;
 /**
  * Created by Andrew Sulistio on 12/3/18.
  */
-public class TestThemes {
+public class TestTheme {
     /**
      * @author Andrew Sulistio
      */
