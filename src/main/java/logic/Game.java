@@ -16,10 +16,10 @@ public class Game {
     public static final int FRAME_HEIGHT = 768;
     
     // ratio of reflection velocity to initial velocity (the circles will bounce a little less high each time unless this is 1.0)
-    private static final double ENERGY_LOSS_RATIO = 1.0; 
+    public static final double ENERGY_LOSS_RATIO = 1.0; 
     
     // defines the force of gravity in the gameplay scene (tweaking this a little can have a huge affect on the scene)
-    private static final double FORCE_OF_GRAVITY = (9.8 / 1000000l);
+    public static final double FORCE_OF_GRAVITY = (9.8 / 1000000l);
     
     // max number of juggle items allowed
     public static final int MAX_NUM_JUGGLE_OBJECTS = 6;
