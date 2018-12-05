@@ -110,9 +110,9 @@ public class Game {
                 ThemeManager.getInstance().getActiveTheme().resetGameObject(objects.get(i).getImage());
                 objects.remove(i);
                 info.decrementLives();
-                if (info.getNumLives() <= 0)
-                {
+                if (info.getNumLives() <= 0) {
                     pause();
+                    ThemeManager.getInstance().getActiveTheme().resetGameObjects();
                     ScreenManager.getInstance().switchTo(ScreenType.GAMEOVER);
                 }
             }

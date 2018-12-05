@@ -6,6 +6,7 @@ import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -23,8 +24,11 @@ public class Theme {
 
     private Map<String, Image> map = new HashMap<>();
     private LinkedList<Image> gameObjects = new LinkedList<>();
+    private LinkedList<Image> gameObjects2 = new LinkedList<>();
+
     private Font settingsFont;
     private Font headerFont;
+
     /**
      * Constructs a Theme object
      *
@@ -100,11 +104,17 @@ public class Theme {
         return !gameObjects.isEmpty();
     }
     public Image getNextObject() {
-        return gameObjects.removeFirst();
+        gameObjects2.add(gameObjects.removeFirst());
+        return gameObjects2.getLast();
+    }
+
+    public void resetGameObjects(){
+        gameObjects.addAll(gameObjects2);
     }
 
     public void resetGameObject(Image image) {
         gameObjects.addLast(image);
+        gameObjects2.remove(image);
         Collections.shuffle(gameObjects);
     }
 
