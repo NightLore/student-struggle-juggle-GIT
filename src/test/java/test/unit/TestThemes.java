@@ -17,7 +17,7 @@ public class TestThemes {
      */
     @Test
     public void testValidUIElements() throws FileNotFoundException {
-        Theme test = new Theme("default");
+        Theme test = new Theme(Theme.DEFAULT);
         assertEquals(test.getObjectSize(), 14);
     }
 
@@ -26,7 +26,7 @@ public class TestThemes {
      */
     @Test
     public void testValidGameObjects() throws FileNotFoundException {
-        Theme test = new Theme("default");
+        Theme test = new Theme(Theme.DEFAULT);
         int i;
         for(i = 0; test.hasNextObject(); i++){
             test.getNextObject();

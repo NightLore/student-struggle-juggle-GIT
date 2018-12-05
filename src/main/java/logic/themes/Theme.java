@@ -19,6 +19,8 @@ import java.util.Map;
  */
 public class Theme {
 
+    public static final String DEFAULT = "Default";
+
     private Map<String, Image> map = new HashMap<>();
     private LinkedList<Image> gameObjects = new LinkedList<>();
     private Font settingsFont;
