@@ -35,8 +35,14 @@ public class TestThemeManager {
         test.addTheme("alternative");
         test.addTheme("alternative");
         test.removetheme("alternative");
-        assertTrue(test.getNumThemes() == 1);
+        test.removetheme("Default");
+        test.addTheme("alternative");
+        test.setTheme("alternative");
+        String activeTheme = test.getActiveTheme().getName();
+        assertTrue(test.getNumThemes() == 1 && activeTheme.equals("alternative"));
     }
+
+
 
     private int testValidGameObjects(Theme input) {
         int i;
