@@ -1,11 +1,12 @@
 package test.unit;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import logic.themes.Theme;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+
+import org.junit.Test;
 
 /**
  * Created by Andrew Sulistio on 12/3/18.
