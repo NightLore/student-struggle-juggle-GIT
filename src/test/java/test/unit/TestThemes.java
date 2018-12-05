@@ -18,7 +18,7 @@ public class TestThemes {
     @Test
     public void testValidUIElements() throws FileNotFoundException {
         Theme test = new Theme(Theme.DEFAULT);
-        assertEquals(test.getObjectSize(), 14);
+        assertEquals(14, test.getObjectSize());
     }
 
     /**
@@ -31,6 +31,6 @@ public class TestThemes {
         for(i = 0; test.hasNextObject(); i++){
             test.getNextObject();
         }
-        assertEquals(i, 5);
+        assertEquals(5, i);
     }
 }

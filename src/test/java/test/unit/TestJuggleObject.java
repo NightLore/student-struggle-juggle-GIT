@@ -19,7 +19,7 @@ public class TestJuggleObject {
     {
         JuggleObject j = new JuggleObject(5, 10, 2, 3, 0, 0, null);
         j.updateSpeed(1, 1, 1);
-        assertEquals(j.getSpeedY(), 1, 0.01);
+        assertEquals(1, j.getSpeedY(), 0.01);
     }
 
     /**
@@ -30,6 +30,6 @@ public class TestJuggleObject {
     {
         JuggleObject j = new JuggleObject(2, 10, 4, 1, 1, 1, null);
         j.updatePosition(1);
-        assertEquals(j.getY(), 11, 0.01);
+        assertEquals(11, j.getY(), 0.01);
     }
 }
