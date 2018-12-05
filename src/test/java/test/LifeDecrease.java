@@ -3,14 +3,11 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Test;
 
 import logic.Game;
 import logic.JuggleObject;
-import logic.themes.ThemeManager;
 
 /**
  * @author Henry Luengas
@@ -19,13 +16,11 @@ public class LifeDecrease {
 
     /**
      * @author Henry Luengas
-     * @throws FileNotFoundException 
      */
     @Test
     public void testLivesDecrementOnFailedJuggle()
     {
         Game game = new Game(null);
-        ThemeManager themeMan = new ThemeManager();
         
         ArrayList<JuggleObject> objects = new ArrayList<JuggleObject>();
         
