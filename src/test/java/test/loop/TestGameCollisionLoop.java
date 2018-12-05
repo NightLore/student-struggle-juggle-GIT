@@ -1,7 +1,7 @@
-package test;
+package test.loop;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
@@ -10,12 +10,12 @@ import org.junit.Test;
 import logic.Game;
 import logic.JuggleObject;
 
-public class TestGameCircleCollisionLoop {
+public class TestGameCollisionLoop {
     
     @Test
     public void testNotExecuted()
     {
-        assertFalse(new Game(null).circleCollisions(Arrays.asList(new JuggleObject[] {}), 0, 1.0));
+        assertFalse(new Game(null).checkCollisions(Arrays.asList(new JuggleObject[] {})));
     }
     
     @Test
@@ -24,7 +24,7 @@ public class TestGameCircleCollisionLoop {
         JuggleObject[] juggleObject = {
                 new JuggleObject(50, 50, 0, 0, 0, 0, null)
         };
-        assertFalse(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
+        assertFalse(new Game(null).checkCollisions(Arrays.asList(juggleObject)));
     }
     
     @Test
@@ -34,7 +34,7 @@ public class TestGameCircleCollisionLoop {
                 new JuggleObject(50, 50, 0, 0, 0, 0, null),
                 new JuggleObject(50, 50, 0, 0, 0, 0, null)
         };
-        assertTrue(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
+        assertTrue(new Game(null).checkCollisions(Arrays.asList(juggleObject)));
     }
     
     @Test
@@ -46,7 +46,7 @@ public class TestGameCircleCollisionLoop {
                 new JuggleObject(50, 100, 0, 0, 0, 0, null),
                 new JuggleObject(100, 100, 0, 0, 0, 0, null)
         };
-        assertFalse(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
+        assertFalse(new Game(null).checkCollisions(Arrays.asList(juggleObject)));
     }
     
     @Test
@@ -58,7 +58,7 @@ public class TestGameCircleCollisionLoop {
         {
             juggleObject[i] = new JuggleObject((i+1) * 25, 50, 0, 0, 0, 0, null);
         }
-        assertFalse(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
+        assertFalse(new Game(null).checkCollisions(Arrays.asList(juggleObject)));
     }
     
     @Test
@@ -70,7 +70,7 @@ public class TestGameCircleCollisionLoop {
         {
             juggleObject[i] = new JuggleObject((i+1) * 25, 50, 0, 0, 0, 0, null);
         }
-        assertFalse(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
+        assertFalse(new Game(null).checkCollisions(Arrays.asList(juggleObject)));
     }
     
     @Test
@@ -82,7 +82,7 @@ public class TestGameCircleCollisionLoop {
         {
             juggleObject[i] = new JuggleObject((i+1) * 25, 50, 0, 0, 0, 0, null);
         }
-        assertFalse(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
+        assertFalse(new Game(null).checkCollisions(Arrays.asList(juggleObject)));
     }
 
 }

@@ -1,4 +1,4 @@
-package test;
+package test.loop;
 
 import org.junit.Test;
 
