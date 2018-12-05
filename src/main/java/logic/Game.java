@@ -23,6 +23,8 @@ public class Game {
     
     // max number of juggle items allowed
     public static final int MAX_NUM_JUGGLE_OBJECTS = 6;
+    public static final int PADDLE_WIDTH = 250;
+    public static final int PADDLE_HEIGHT = 10;
     
     // frametime keeps track of the time between draw calls (basically how long has it been since I drew the last frame)
     private long frametimeNanoSeconds = 0;
@@ -37,7 +39,7 @@ public class Game {
     private AnimationTimer gameLoop;
 
     public Game(Canvas canvas) {
-        paddle = new Paddle(250, FRAME_HEIGHT - 5, 10);
+        paddle = new Paddle(PADDLE_WIDTH, FRAME_HEIGHT - PADDLE_HEIGHT / 2, PADDLE_HEIGHT);
         info = GameInfo.getInstance();
         
         gameLoop = new AnimationTimer()
