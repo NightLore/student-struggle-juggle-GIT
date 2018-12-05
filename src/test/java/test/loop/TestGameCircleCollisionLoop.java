@@ -1,7 +1,6 @@
 package test.loop;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 
@@ -32,9 +31,9 @@ public class TestGameCircleCollisionLoop {
     {
         JuggleObject[] juggleObject = {
                 new JuggleObject(50, 50, 0, 0, 0, 0, null),
-                new JuggleObject(50, 50, 0, 0, 0, 0, null)
+                new JuggleObject(100, 50, 0, 0, 0, 0, null)
         };
-        assertTrue(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
+        assertFalse(new Game(null).circleCollisions(Arrays.asList(juggleObject), 0, 1.0));
     }
     
     @Test
