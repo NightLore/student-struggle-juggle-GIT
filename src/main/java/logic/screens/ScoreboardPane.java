@@ -30,11 +30,6 @@ public class ScoreboardPane extends UpdatablePane {
 	public static final int MAXSCORES = 5;
 	
 	private Label[][] labels;
-	
-	public ScoreboardPane()
-	{
-	    this(ScreenManager.getInstance());
-	}
 
 	public ScoreboardPane(ScreenManager screens) {
 		super(screens);
