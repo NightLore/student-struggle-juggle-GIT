@@ -15,8 +15,6 @@ import javafx.scene.image.Image;
  * @version student-struggle-juggle-GIT
  */
 public class ThemeManager {
-    public static final Image DEFAULT_PADDLE_IMAGE = new Image( "http://www.clker.com/cliparts/x/J/K/A/R/K/paddle-light-red.svg.hi.png" );
-
     private Theme currentTheme = null;
     private HashMap<Integer, Theme> themes = new HashMap<>();
 
@@ -69,5 +67,9 @@ public class ThemeManager {
      */
     public Theme getActiveTheme(){
         return currentTheme;
+    }
+
+    public int getNumThemes(){
+        return themes.size();
     }
 }

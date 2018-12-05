@@ -18,7 +18,7 @@ public class TestThemes {
     @Test
     public void testValidUIElements() throws FileNotFoundException {
         Theme test = new Theme(Theme.DEFAULT);
-        assertEquals(14, test.getObjectSize());
+        assertEquals(15, test.getObjectSize());
     }
 
     /**

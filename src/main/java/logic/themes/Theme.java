@@ -24,6 +24,7 @@ public class Theme {
     private Map<String, Image> map = new HashMap<>();
     private LinkedList<Image> gameObjects = new LinkedList<>();
     private LinkedList<Image> gameObjects2 = new LinkedList<>();
+    private String name;
 
     private Font settingsFont;
     private Font headerFont;
@@ -69,6 +70,9 @@ public class Theme {
         gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Mammen.png")));
         gameObjects.add(new Image(new FileInputStream("./"+name+"/gameObjects/Staley.png")));
 
+        map.put("Paddle",new Image( new FileInputStream("./Default/paddle.png") ));
+
+        this.name = name;
     }
 
     /**
@@ -86,7 +90,7 @@ public class Theme {
     }
 
     public String getName(){
-        return null;
+        return name;
     }
 
     public Image getAsset(String str) {

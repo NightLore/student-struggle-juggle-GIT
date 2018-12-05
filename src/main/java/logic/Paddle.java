@@ -21,7 +21,7 @@ public class Paddle {
     
     public void draw(GraphicsContext gc)
     {
-        Image image = ThemeManager.DEFAULT_PADDLE_IMAGE;
+        Image image = ThemeManager.getInstance().getActiveTheme().getAsset("Paddle");
         // Draw paddle object
         gc.drawImage( image, 
             0,
