@@ -15,11 +15,11 @@ public class TestThemeManager {
     @Test
     public void testLoadingAlternativeTheme() {
         ThemeManager test = new ThemeManager();
-        test.addTheme("alternative");
-        test.setTheme("alternative");
+        test.addTheme("Alternative");
+        test.setTheme("Alternative");
         assertTrue((test.getActiveTheme().getObjectSize() == 15) &&
                 (testValidGameObjects(test.getActiveTheme()) == 5) &&
-                test.getActiveTheme().getName().equals("alternative"));
+                test.getActiveTheme().getName().equals("Alternative"));
     }
 
     /**
@@ -32,14 +32,14 @@ public class TestThemeManager {
         test.addTheme("Default");
         test.addTheme("Default");
         test.getActiveTheme().resetGameObjects();
-        test.addTheme("alternative");
-        test.addTheme("alternative");
-        test.removetheme("alternative");
+        test.addTheme("Alternative");
+        test.addTheme("Alternative");
+        test.removetheme("Alternative");
         test.removetheme("Default");
-        test.addTheme("alternative");
-        test.setTheme("alternative");
+        test.addTheme("Alternative");
+        test.setTheme("Alternative");
         String activeTheme = test.getActiveTheme().getName();
-        assertTrue(test.getNumThemes() == 1 && activeTheme.equals("alternative"));
+        assertTrue(test.getNumThemes() == 1 && activeTheme.equals("Alternative"));
     }
 
 
